@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  /* navbar */
+  .navbar{
+    height: 130px;
+  }
+
+  .navbar-brand{
+    font-size: 3em;
+    padding-left: 40px;
+  }
+
+  .nav-item{
+    font-size: 1.3em;
+    padding: 5px;
+  }
+  .nav-link{
+    color: white;
+  }
+
+  .nav-link:hover{
+    color: gray;
+  }
+
+  .top-bg {
+    background-image: url('images/FrontBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* Adjust the height as needed */
+    width: 105%;
+  }
+
+  .offcanvas{
+    background-color: rgb(41, 41, 41, 0.75);
+  }
+
+
+  /* content area */
+  .content-box {
+    background-color: white;
+    height: 100px;
+  }
+
+  /* menu buttons */
+  .menu-card{
+    margin: 15px;
+    margin-top: 30px;
+    width: 92%;
+    border-radius: 8px 8px 30px 30px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+  .menu-card:hover{
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.45);
+  }
+
+  .catagoryActive{
+    margin-top: 10px;
+  }
+
+  .menu-card img{
+    height: 300px;
+  }
+
+  .card-title{
+    text-align: center;
+  }
+
+  /* menu collapse */
+  .collapse-btn{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px 8px 30px 30px;
+  }
+
+
+/* order button */
+  .orderbutton{
+    margin-top: 20px;
+    width: 100%; 
+    text-align:center;
+    padding-bottom: 50px;
+  }
+  .order-btn{
+    padding: 10px;
+    border-radius: 15px;
+    width: 250px;
+    font-size: 0.6cm;
+    background-color: #daab1d;
+    color: white;
+  }
+
+  .order-btn:hover{
+    background-color: lightgray;
+  }
