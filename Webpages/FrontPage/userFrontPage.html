@@ -21,7 +21,7 @@
     </head>
     <body class="vh-100">
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: rgb(41, 41, 41, 0.85);">
+        <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Horizon Restaurant</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -68,45 +68,41 @@
                 <div class="content-box">
                       <div class="row">
                         <!-- Menu Items -->
-                        <div class="col-md-3">
-                          <div class="card mb-3 menu-card" id="catagory-Starters" onclick="riseCatagory(this.id)">
+                        <!-- Starters -->
+                        <div class="col-md-12">
+                          <div class="card menu-card">
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#starterCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                            <img src="images/Starters.jpg" class="card-img-top" alt="Starters">
-                            <div class="card-body">
-                              <h5 class="card-title">Starters</h5>
+                            <div class="row">
+                              <div class="menu-column-img">
+                                <img src="images/Starters.jpg" class="card-img" alt="Starters">
+                              </div>
+                              <div class="menu-column-content">
+                                <div class="card-body">
+                                  <h5 class="card-title align-left">Starters</h5>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card mb-3 menu-card" id="catagory-Mains" onclick="riseCatagory(this.id)">
+                        <div class="collapse" id="starterCollapse">
+                          <div class="card card-body">
+                            Starters
+                          </div>
+                        </div>
+                        <!-- Mains -->
+                        <div class="col-md-12">
+                            <div class="card menu-card">
                               <a class="btn collapse-btn" data-bs-toggle="collapse" href="#mainsCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                              <img src="images/Mains.jpg" class="card-img-top" alt="Mains">
-                              <div class="card-body">
-                                <h5 class="card-title">Mains</h5>
+                              <div class="row">
+                                <div class="menu-column-img">
+                                  <img src="images/Mains.jpg" class="card-img" alt="Mains">
+                                </div>
+                                <div class="menu-column-content">
+                                  <div class="card-body">
+                                    <h5 class="card-title align-left">Mains</h5>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <div class="card mb-3 menu-card" id="catagory-Dessert" onclick="riseCatagory(this.id)">
-                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#dessertCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                              <img src="images/Desert.jpg" class="card-img-top" alt="Desserts">
-                              <div class="card-body">
-                                <h5 class="card-title">Desserts</h5>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card mb-3 menu-card" id="catagory-Drinks" onclick="riseCatagory(this.id)">
-                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#drinksCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
-                              <img src="images/Drinks.jpg" class="card-img-top" alt="Drinks">
-                              <div class="card-body">
-                                <h5 class="card-title">Drinks</h5>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="collapse" id="starterCollapse">
-                            <div class="card card-body">
-                              Starters
                             </div>
                           </div>
                           <div class="collapse" id="mainsCollapse">
@@ -114,9 +110,41 @@
                               Mains
                             </div>
                           </div>
+                          <!-- Desserts -->
+                          <div class="col-md-12">
+                            <div class="card menu-card">
+                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#dessertCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                              <div class="row">
+                                <div class="menu-column-img">
+                                  <img src="images/Desert.jpg" class="card-img" alt="Desserts">
+                                </div>
+                                <div class="menu-column-content">
+                                  <div class="card-body">
+                                    <h5 class="card-title align-left">Desserts</h5>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="collapse" id="dessertCollapse">
                             <div class="card card-body">
                               Desserts
+                            </div>
+                          </div>
+                          <!-- Drinks -->
+                          <div class="col-md-12">
+                            <div class="card menu-card">
+                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#drinksCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                              <div class="row">
+                                <div class="menu-column-img">
+                                  <img src="images/Drinks.jpg" class="card-img" alt="Drinks">
+                                </div>
+                                <div class="menu-column-content">
+                                  <div class="card-body">
+                                    <h5 class="card-title align-left">Drinks</h5>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <div class="collapse" id="drinksCollapse">

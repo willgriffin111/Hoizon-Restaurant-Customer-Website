@@ -3,13 +3,15 @@ body {
     padding: 0;
     height: 100%;
     position: relative;
-    text-align: center;
     overflow-x: hidden;
   }
 
   /* navbar */
   .navbar{
-    height: 130px;
+    height: 250px;
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: white;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
   }
 
   .navbar-brand{
@@ -34,7 +36,8 @@ body {
     background-size: cover;
     background-position: center;
     height: 400px; /* Adjust the height as needed */
-    width: 105%;
+    width: 100%;
+    display: none;
   }
 
   .offcanvas{
@@ -44,6 +47,7 @@ body {
 
   /* content area */
   .content-box {
+    margin-top: 250px;
     background-color: white;
     height: 100px;
   }
@@ -52,13 +56,29 @@ body {
   .menu-card{
     margin: 15px;
     margin-top: 30px;
-    width: 92%;
+    width: 90%;
+    margin-left: 5%;
     border-radius: 8px 8px 30px 30px;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
     cursor: pointer;
   }
   .menu-card:hover{
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.45);
+  }
+  .menu-column-img{
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  .menu-column-content{
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+
+  .card-title{
+    margin-top: 15%;
+    font-size: 80px;
+    text-align: left;
   }
 
   .catagoryActive{
@@ -67,11 +87,9 @@ body {
 
   .menu-card img{
     height: 300px;
+
   }
 
-  .card-title{
-    text-align: center;
-  }
 
   /* menu collapse */
   .collapse-btn{
