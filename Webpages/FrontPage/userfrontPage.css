@@ -8,19 +8,21 @@ body {
 
   /* navbar */
   .navbar{
-    height: 250px;
+    height: 300px;
     /* background-color: rgb(41, 41, 41, 0.85) */
     background-color: white;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
   }
 
   .navbar-brand{
-    font-size: 3em;
+    font-size: 70px;
     padding-left: 40px;
+    font-weight: bold;
+    
   }
 
   .nav-item{
-    font-size: 1.3em;
+    font-size: 40px;
     padding: 5px;
   }
   .nav-link{
@@ -47,7 +49,7 @@ body {
 
   /* content area */
   .content-box {
-    margin-top: 250px;
+    margin-top: 100px;
     background-color: white;
     height: 100px;
   }
@@ -55,7 +57,7 @@ body {
   /* menu buttons */
   .menu-card{
     margin: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     width: 90%;
     margin-left: 5%;
     border-radius: 8px 8px 30px 30px;
@@ -77,8 +79,9 @@ body {
 
   .card-title{
     margin-top: 15%;
-    font-size: 80px;
+    font-size: 65px;
     text-align: left;
+    font-weight: 300;
   }
 
   .catagoryActive{
@@ -104,22 +107,53 @@ body {
 
 /* order button */
   .orderbutton{
-    margin-top: 20px;
+    margin-top: 40px;
     width: 100%; 
-    text-align:center;
+    padding: 10px;
     padding-bottom: 50px;
   }
   .order-btn{
-    padding: 10px;
+    padding: 100px;
     border-radius: 15px;
-    width: 250px;
-    font-size: 0.6cm;
+    width: 100%;
+    font-size: 60px;
     background-color: #daab1d;
     color: white;
   }
 
   .order-btn:hover{
-    background-color: lightgray;
+    background-color:#daab1d ;
   }
 
+.navbar-toggler{
+  border: none;
+  color: black;
+}
 
+.navbar-toggler-icon{
+  font-size: 60px;
+}
+.nav-btn{
+  font-size: 60px;
+  color: black;
+  position: relative;
+  text-align: right;
+  display:flex ;
+  text-decoration: none;
+}
+
+button{
+  border: none;
+  background-color: white;
+}
+
+.footer-display{
+  display: none;
+}
+
+.order-counter{
+  font-size: 35px;
+  padding: 0px;
+  font-weight: bold;
+  color: rgb(51, 51, 51);
+}
