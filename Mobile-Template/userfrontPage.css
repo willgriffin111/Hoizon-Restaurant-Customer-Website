@@ -6,13 +6,11 @@ body {
     overflow-x: hidden;
   }
 
-  /* navbar */
-  .navbar{
-    height: 300px;
+   /* navbar */
+   .navbar{
     /* background-color: rgb(41, 41, 41, 0.85) */
     background-color: white;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
-    z-index: 1050;
   }
 
   .navbar-brand{
@@ -27,16 +25,28 @@ body {
     padding: 5px;
   }
   .nav-link{
-    color: white;
+    color: black;
   }
 
   .nav-link:hover{
     color: gray;
   }
-  .offcanvas.offcanvas-top{
-    background-color: rgb(41, 41, 41, 0.75);
-    height: 500px;
-    z-index: 1000;
+  
+  .navbar-toggler{
+    border: none;
+    color: black;
+  }
+  
+  .navbar-toggler-icon{
+    font-size: 60px;
+  }
+  .nav-btn{
+    font-size: 60px;
+    color: black;
+    position: relative;
+    text-align: right;
+    display:flex ;
+    text-decoration: none;
   }
   .top-bg {
     background-image: url('images/FrontBackground.jpg');
@@ -46,7 +56,6 @@ body {
     width: 100%;
     display: none;
   }
-
 
 
 
@@ -80,22 +89,7 @@ body {
     background-color:#daab1d ;
   }
 
-.navbar-toggler{
-  border: none;
-  color: black;
-}
 
-.navbar-toggler-icon{
-  font-size: 60px;
-}
-.nav-btn{
-  font-size: 60px;
-  color: black;
-  position: relative;
-  text-align: right;
-  display:flex ;
-  text-decoration: none;
-}
 
 button{
   border: none;

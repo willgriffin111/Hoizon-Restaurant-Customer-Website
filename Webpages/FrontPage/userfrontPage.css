@@ -6,9 +6,8 @@ body {
     overflow-x: hidden;
   }
 
-  /* navbar */
-  .navbar{
-    height: 300px;
+   /* navbar */
+   .navbar{
     /* background-color: rgb(41, 41, 41, 0.85) */
     background-color: white;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
@@ -26,13 +25,29 @@ body {
     padding: 5px;
   }
   .nav-link{
-    color: white;
+    color: black;
   }
 
   .nav-link:hover{
     color: gray;
   }
-
+  
+  .navbar-toggler{
+    border: none;
+    color: black;
+  }
+  
+  .navbar-toggler-icon{
+    font-size: 60px;
+  }
+  .nav-btn{
+    font-size: 60px;
+    color: black;
+    position: relative;
+    text-align: right;
+    display:flex ;
+    text-decoration: none;
+  }
   .top-bg {
     background-image: url('images/FrontBackground.jpg');
     background-size: cover;
@@ -42,9 +57,8 @@ body {
     display: none;
   }
 
-  .offcanvas{
-    background-color: rgb(41, 41, 41, 0.75);
-  }
+
+
 
 
   /* content area */
@@ -105,50 +119,37 @@ body {
   }
 
 
+
 /* order button */
-  .orderbutton{
-    margin-top: 40px;
-    width: 100%; 
-    padding: 10px;
-    padding-bottom: 50px;
-  }
-  .order-btn{
-    padding: 100px;
-    border-radius: 15px;
-    width: 100%;
-    font-size: 60px;
-    background-color: #daab1d;
-    color: white;
-  }
+.orderbutton{
+  width: 100%; 
 
-  .order-btn:hover{
-    background-color:#daab1d ;
-  }
-
-.navbar-toggler{
-  border: none;
-  color: black;
 }
-
-.navbar-toggler-icon{
+.order-btn{
+  padding: 100px;
+  width: 100%;
   font-size: 60px;
+  background-color: #daab1d;
+  color: white;
 }
-.nav-btn{
-  font-size: 60px;
-  color: black;
-  position: relative;
-  text-align: right;
-  display:flex ;
-  text-decoration: none;
+
+.order-btn:hover{
+  background-color:#daab1d ;
 }
+
+
 
 button{
   border: none;
   background-color: white;
 }
 
-.footer-display{
-  display: none;
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  text-align: center;
 }
 
 .order-counter{
