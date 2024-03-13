@@ -52,24 +52,54 @@ body {
     background-image: url('images/FrontBackground.jpg');
     background-size: cover;
     background-position: center;
-    height: 400px; /* Adjust the height as needed */
+    height: 400px;
     width: 100%;
     display: none;
   }
 
-
-
-  
-
-  /* menu collapse */
-  .collapse-btn{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 8px 8px 30px 30px;
+  .container-fluid{
+    text-align: center;
   }
+
+.user-image{
+  font-size: 200px;
+  border-radius: 300px;
+  background-color: #daab1d;
+  padding: 45px 65px 60px 65px;
+  margin-top: 80px;
+  color: white;
+}
+
+.user-name{
+  margin-top: 40px;
+  font-size:  80px;
+}
+
+.user-options{
+  font-size: 60px;
+  margin-top: 10%;
+}
+.user-options-list{
+list-style-type: none;
+ text-align: left;
+ display: inline-block;
+}
+
+.user-options-element{
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  margin-top: 40px;
+}
+
+.user-options-link {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
 
 
 /* order button */
