@@ -6,56 +6,76 @@ body {
     overflow-x: hidden;
   }
 
-   /* navbar */
-   .navbar{
-    /* background-color: rgb(41, 41, 41, 0.85) */
-    background-color: white;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
-  }
-
-  .navbar-brand{
-    font-size: 70px;
-    padding-left: 40px;
-    font-weight: bold;
+    /* navbar */
+    .navbar{
+      /* background-color: rgb(41, 41, 41, 0.85) */
+      background-color: white;
+      box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+      z-index: 10;
+      position: absolute;
+      width: 100%;
+    }
+  
+    .navbar-brand{
+      font-size: 70px;
+      padding-left: 40px;
+      font-weight: bold;
+      
+    }
+  
+    .navbar-nav{
+      padding-left: 2%;
+    }
+  
+    .nav-item{
+      font-size: 40px;
+      padding: 5px;
+      border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+      padding-bottom: 5px; /* Adjust the space between the text and the line */
+      width: 95%;
+    }
+  
+    .nav-item:last-child{
+  
+      border-bottom: none;
+    }
     
-  }
-
-  .nav-item{
-    font-size: 40px;
-    padding: 5px;
-  }
-  .nav-link{
-    color: black;
-  }
-
-  .nav-link:hover{
-    color: gray;
-  }
+    .nav-link{
+      color: black;
+    }
   
-  .navbar-toggler{
-    border: none;
-    color: black;
-  }
+    .nav-link:hover{
+      color: gray;
+    }
+    
+    .navbar-toggler{
+      border: none;
+      color: black;
+    }
+    
+    .navbar-toggler-icon{
+      font-size: 60px;
+    }
+    .nav-btn{
+      font-size: 60px;
+      color: black;
+      position: relative;
+      text-align: right;
+      display:flex ;
+      text-decoration: none;
+    }
   
-  .navbar-toggler-icon{
-    font-size: 60px;
-  }
-  .nav-btn{
-    font-size: 60px;
-    color: black;
-    position: relative;
-    text-align: right;
-    display:flex ;
-    text-decoration: none;
-  }
-  .top-bg {
-    background-image: url('images/FrontBackground.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 400px; /* Adjust the height as needed */
-    width: 100%;
-    display: none;
-  }
+    .navbar-collapse{
+      background: rgb(228, 228, 228);
+    }
+    .top-bg {
+      background-image: url('images/FrontBackground.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      width: 100%;
+      display: none;
+    }
 
 
 
