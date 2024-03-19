@@ -65,7 +65,7 @@ body {
   /* content area */
   .content-box {
     margin-top: 100px;
-    background-color: white;
+    background-color: rgb(241, 241, 241);
     height: 100px;
   }
 
