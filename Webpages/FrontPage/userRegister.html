@@ -37,19 +37,14 @@
         </style>
 
 
-        <link rel="stylesheet" href="CSS_files/userfrontPage.css">
+        <link rel="stylesheet" href="CSS_files/userRegister.css">
         <title>NavBar</title>
     </head>
+   
     <body class="vh-100">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
         <a class="navbar-brand" href="#">Horizon <br>Restaurant</a>
-            <!--- Search icon --->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            </button>
             <!--- User icon --->
             <button>
                 <a class="nav-btn" aria-current="page" href="#">
@@ -77,54 +72,36 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Reservations</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Privacy Policy</a>
+            </li>
           </ul>
         </div>
       </nav>
 
-<div id="app" class="container registration-container">
-    <div class="row justify-content-center mt-5"></div>
-        <div class="col-md-12">
-            <div class="card registration-card">
-                <div class="card-header registration-card-header">Registration</div>
-                <div class="card-body registration-card-body">
-                    <form @submit.prevent="register">
-                        <div class="form-group registration-form-group">
-                            <label for="fullname">Full Name</label>
-                            <input type="text" class="form-control form-control-lg" id="fullname" v-model="fullname" required>
-                        </div>
-                        <div class="form-group registration-form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control form-control-lg" id="email" v-model="email" required>
-                        </div>
-                        <div class="form-group registration-form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control form-control-lg" id="password" v-model="password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block registration-btn">Register</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <!-- Content starts -->
+    <div class="container-fluid p-0">
+      <div class="reset-box">
+        <h1 class="reset-title">Register</h1>
+        <div class="line"></div>
+        <form>
+          <div class="form-group">
+            <input type="password" class="form-control input-box" id="username" placeholder="Username">
+            <input type="password" class="form-control input-box" id="email" placeholder="Email">
+            <input type="password" class="form-control input-box" id="password" placeholder="Password">
+            <input type="password" class="form-control input-box" id="password2" placeholder="Re-enter Password">
+          </div>
+        </p>
+      </div>
     </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            fullname: '',
-            email: '',
-            password: ''
-        },
-        methods: {
-            register() {
-                console.log('Full Name:', this.fullname);
-                console.log('Email:', this.email);
-                console.log('Password:', this.password);
-            }
-        }
-    });
-</script>
-</body>
+    
+  </body>
+  <!-- Footer -->
+  <footer>
+    <!-- Order Button -->
+    <div class="orderbutton">
+      <button type="submit" class="btn order-btn">Next</button>
+    </div>
+  </form>
+  </footer>
 </html>

@@ -28,14 +28,9 @@
           }
         </style>
         
-        <link rel="stylesheet" href="CSS_files/userfrontPage.css">
+        <link rel="stylesheet" href="CSS_files/userLogin.css">
         <title>NavBar</title>
     </head>
-
-
-
-
-
 
 
 
@@ -43,12 +38,6 @@
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
         <a class="navbar-brand" href="#">Horizon <br>Restaurant</a>
-            <!--- Search icon --->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            </button>
             <!--- User icon --->
             <button>
                 <a class="nav-btn" aria-current="page" href="#">
@@ -76,32 +65,34 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Reservations</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Privacy Policy</a>
+            </li>
           </ul>
         </div>
       </nav>
 
-<!-- Move the login container below the navbar -->
-<div class="container mt-5">
-  <div class="d-flex align-items-center">
-      <div class="col-md-8 offset-md-2">
-          <div class="card border-0 shadow-sm p-5">
-              <h1 class="text-center mb-4">Login</h1>
-              <form>
-                  <div class="mb-3">
-                      <label for="email" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                      <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Login</button>
-              </form>
+    <!-- Content starts -->
+    <div class="container-fluid p-0">
+      <div class="reset-box">
+        <h1 class="reset-title">Login</h1>
+        <div class="line"></div>
+        <form>
+          <div class="form-group">
+            <input type="password" class="form-control input-box" id="username" placeholder="Username">
+            <input type="password" class="form-control input-box" id="password" placeholder="Password">
           </div>
+        </p>
       </div>
-  </div>
-</div>
-
-</body>
+    </div>
+    
+  </body>
+  <!-- Footer -->
+  <footer>
+    <!-- Order Button -->
+    <div class="orderbutton">
+      <button type="submit" class="btn order-btn">Next</button>
+    </div>
+  </form>
+  </footer>
 </html>

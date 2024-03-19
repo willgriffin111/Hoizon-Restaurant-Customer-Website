@@ -1,0 +1,172 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    background-color: rgb(241, 241, 241);
+  }
+
+    /* navbar */
+    .navbar{
+      /* background-color: rgb(41, 41, 41, 0.85) */
+      background-color: white;
+      box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+      z-index: 10;
+      position: absolute;
+      width: 100%;
+    }
+  
+    .navbar-brand{
+      font-size: 70px;
+      padding-left: 40px;
+      font-weight: bold;
+      
+    }
+  
+    .navbar-nav{
+      padding-left: 2%;
+    }
+  
+    .nav-item{
+      font-size: 40px;
+      padding: 5px;
+      border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+      padding-bottom: 5px; /* Adjust the space between the text and the line */
+      width: 95%;
+    }
+  
+    .nav-item:last-child{
+  
+      border-bottom: none;
+    }
+    
+    .nav-link{
+      color: black;
+    }
+  
+    .nav-link:hover{
+      color: gray;
+    }
+    
+    .navbar-toggler{
+      border: none;
+      color: black;
+    }
+    
+    .navbar-toggler-icon{
+      font-size: 60px;
+    }
+    .nav-btn{
+      font-size: 60px;
+      color: black;
+      position: relative;
+      text-align: right;
+      display:flex ;
+      text-decoration: none;
+    }
+  
+    .navbar-collapse{
+      background: rgb(228, 228, 228);
+    }
+    .top-bg {
+      background-image: url('images/FrontBackground.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      width: 100%;
+      display: none;
+    }
+
+
+    .container-fluid{
+      text-align: center;
+      top: 400px;
+      position: relative;
+    }
+  
+    .reset-box{
+      position: relative;
+      left: 5%;
+      background: rgb(255, 255, 255);
+      box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+      width: 90%;
+      height: 800px;
+      border-radius: 30px;
+      color: black;
+    }
+
+    .reset-title{
+      padding-top: 10%;
+      font-size: 90px;
+      font-weight: 500;
+      margin-bottom: 3%;
+    }
+
+    .line{
+      position: relative;
+      background-color: black;
+      width: 90%;
+      height: 1px;
+      left: 5%;
+    }
+
+    .input-box{
+      margin-top: 15%;
+      position: relative;
+      left: 10%;
+      width: 80%;
+      border-radius: 20px;
+      background: rgb(228, 228, 228);
+      font-size: 60px;
+    }
+
+
+/* order button */
+  .orderbutton{
+    width: 100%; 
+
+  }
+  .order-btn{
+    padding: 100px;
+    width: 100%;
+    font-size: 60px;
+    background-color: #daab1d;
+    color: white;
+  }
+
+  .order-btn:hover{
+    background-color:#daab1d ;
+  }
+
+
+
+button{
+  border: none;
+  background-color: white;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.order-counter{
+  font-size: 35px;
+  padding: 0px;
+  font-weight: bold;
+  color: rgb(51, 51, 51);
+}
+
+/* media quirries */
+@media only screen and (min-width: 992px) {
+  .nav-item {
+    border-bottom: none;
+  }
+  .navbar-collapse{
+    background-color: white;
+  }
+}
