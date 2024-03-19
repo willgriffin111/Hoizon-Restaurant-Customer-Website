@@ -16,7 +16,7 @@
             }
           }
         </script>
-        <link rel="stylesheet" href="UserResetPass.css">
+        <link rel="stylesheet" href="CSS_files/UserResetPass.css">
         <title>NavBar</title>
     </head>
     <body class="vh-100">
@@ -61,12 +61,13 @@
       <div class="container-fluid p-0">
         <div class="reset-box">
           <h1 class="reset-title">Reset</h1>
+          <div class="line"></div>
           <form>
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <input type="password" class="form-control input-box" id="Passwordboxold" placeholder="Old Password">
+              <input type="password" class="form-control input-box" id="Passwordboxnew" placeholder="New Password">
+              <input type="password" class="form-control input-box" id="Passwordboxreenter" placeholder="Re-enter Password">
             </div>
-          </form>
           </p>
         </div>
       </div>
@@ -76,8 +77,8 @@
     <footer>
       <!-- Order Button -->
       <div class="orderbutton">
-        <button type="button" class="btn order-btn">ORDER NOW</button>
+        <button type="submit" class="btn order-btn">RESET</button>
       </div>
-      
+    </form>
     </footer>
 </html>
