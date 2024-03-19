@@ -4,6 +4,7 @@ body {
     height: 100%;
     position: relative;
     overflow-x: hidden;
+    background-color: rgb(241, 241, 241);
   }
 
     /* navbar */
@@ -129,4 +130,14 @@ footer {
   padding: 0px;
   font-weight: bold;
   color: rgb(51, 51, 51);
+}
+
+/* media quirries */
+@media only screen and (min-width: 992px) {
+  .nav-item {
+    border-bottom: none;
+  }
+  .navbar-collapse{
+    background-color: white;
+  }
 }

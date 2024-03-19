@@ -4,6 +4,7 @@ body {
     height: 100%;
     position: relative;
     overflow-x: hidden;
+    background-color: rgb(241, 241, 241);
   }
 
    /* navbar */
