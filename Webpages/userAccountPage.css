@@ -11,6 +11,9 @@ body {
     /* background-color: rgb(41, 41, 41, 0.85) */
     background-color: white;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    position: absolute;
+    width: 100%;
   }
 
   .navbar-brand{
@@ -20,10 +23,23 @@ body {
     
   }
 
+  .navbar-nav{
+    padding-left: 2%;
+  }
+
   .nav-item{
     font-size: 40px;
     padding: 5px;
+    border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+    padding-bottom: 5px; /* Adjust the space between the text and the line */
+    width: 95%;
   }
+
+  .nav-item:last-child{
+
+    border-bottom: none;
+  }
+  
   .nav-link{
     color: black;
   }
@@ -48,6 +64,10 @@ body {
     display:flex ;
     text-decoration: none;
   }
+
+  .navbar-collapse{
+    background: rgb(228, 228, 228);
+  }
   .top-bg {
     background-image: url('images/FrontBackground.jpg');
     background-size: cover;
@@ -57,8 +77,12 @@ body {
     display: none;
   }
 
+
+
   .container-fluid{
     text-align: center;
+    top: 300px;
+    position: relative;
   }
 
 .user-image{
