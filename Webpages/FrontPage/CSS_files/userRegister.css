@@ -81,7 +81,7 @@ body {
 
     .container-fluid{
       text-align: center;
-      top: 400px;
+      top: 300px;
       position: relative;
     }
   
@@ -91,9 +91,10 @@ body {
       background: rgb(255, 255, 255);
       box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
       width: 90%;
-      height: 1300px;
+      height: 100%;
       border-radius: 30px;
       color: black;
+      padding-bottom: 50px;
     }
 
     .reset-title{
@@ -160,6 +161,45 @@ footer {
   font-weight: bold;
   color: rgb(51, 51, 51);
 }
+
+
+
+.social-login {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+.social-login a {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.social-login a:last-child {
+  margin-right: 0;
+}
+
+.social-login svg {
+  width: 100px;
+  height: 100px;
+  color: #333;
+  transition: all 0.3s;
+}
+
+.social-login a:hover svg {
+  color: #fff;
+  background-color: #3b5998; /* For Facebook */
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.login-here{
+    margin-top: 20px;
+}
+
+
 
 /* media quirries */
 @media only screen and (min-width: 992px) {
