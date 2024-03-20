@@ -1,10 +1,10 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
     position: relative;
     overflow-x: hidden;
     background-color: rgb(241, 241, 241);
+    min-height: 1200px;
   }
 
    /* navbar */
@@ -114,11 +114,13 @@ body {
     left: 85%;
     font-size: 70px;
     font-weight: bold;
+    transform: rotate(0deg);
+    transition: 0.1s linear;
   }
 
-  .menu-card-arrow .open{
+  .open{
     transform: rotate(180deg);
-    transition: 1s linear;
+    transition: 0.1s linear;
   }
 
 
@@ -168,6 +170,12 @@ body {
     width: 17%;
     height: 50%;
     
+  }
+
+  /* empty box to make menu items not be covered by footer when scroling */
+  .bottom-box{
+    height: 400px;
+    width: 100%;
   }
 
 /* order button */
