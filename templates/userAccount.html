@@ -16,20 +16,20 @@
             }
           }
         </script>
-        <link rel="stylesheet" href="CSS_files/userAccountPage.css">
+        <link rel="stylesheet" href="../static/userAccountPage.css">
         <title>NavBar</title>
     </head>
     <body class="vh-100">
         <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="#">Horizon <br>Restaurant</a>
-            <!--- User icon --->
+        <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
+            <!-- User icon -->
             <button>
-                <a class="nav-btn" aria-current="page" href="#">
+                <a class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
                   <i class="fa-solid fa-user"></i>
               </a>
             </button>
-            <!--- Bag-counter icon --->
+            <!-- Bag-counter icon -->
             <button>
               <a class="nav-btn" aria-current="page" href="#">
                 <i class="fa-solid fa-bag-shopping"></i>
@@ -42,16 +42,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Account</a>
+              <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Orders</a>
+              <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reservations</a>
+              <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
             </li>
           </ul>
         </div>

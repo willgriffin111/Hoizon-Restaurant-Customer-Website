@@ -1,0 +1,377 @@
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+    background-color: rgb(241, 241, 241);
+    min-height: 1200px;
+  }
+
+   /* navbar */
+   .navbar{
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: white;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 11;
+    position: fixed;
+    width: 100%;
+  }
+
+  .navbar-brand{
+    font-size: 70px;
+    padding-left: 40px;
+    font-weight: bold;
+    
+  }
+
+  .navbar-nav{
+    padding-left: 2%;
+  }
+
+  .nav-item{
+    font-size: 40px;
+    padding: 5px;
+    border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+    padding-bottom: 5px; /* Adjust the space between the text and the line */
+    width: 95%;
+  }
+
+  .nav-item:last-child{
+
+    border-bottom: none;
+  }
+  
+  .nav-link{
+    color: black;
+  }
+
+  .nav-link:hover{
+    color: gray;
+  }
+  
+  .navbar-toggler{
+    border: none;
+    color: black;
+  }
+  
+  .navbar-toggler-icon{
+    font-size: 60px;
+  }
+  .nav-btn{
+    font-size: 60px;
+    color: black;
+    position: relative;
+    text-align: right;
+    display:flex ;
+    text-decoration: none;
+  }
+
+  .navbar-collapse{
+    background: rgb(228, 228, 228);
+  }
+  .top-bg {
+    background-image: url('images/FrontBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100%;
+    display: none;
+  }
+
+
+
+
+
+  /* content area */
+  .content-box {
+    margin-top: 300px;
+    background-color: rgb(241, 241, 241);
+    height: 100px;
+  }
+
+  /* menu buttons */
+  .menu-card{
+    margin: 15px;
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 8px 8px 30px 30px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+  .menu-card:hover{
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.45);
+  }
+  .menu-column-img{
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  .menu-column-content{
+    flex: 0 0 60%;
+    max-width: 60%; 
+  }
+
+  .card-title{
+    margin-top: 15%;
+    font-size: 65px;
+    text-align: left;
+    font-weight: 300;
+  }
+
+  .catagoryActive{
+    margin-top: 10px;
+  }
+
+  .menu-card img{
+    height: 300px;
+
+  }
+
+  .menu-card-arrow{
+    position: absolute;
+    top: 40%;
+    left: 85%;
+    font-size: 70px;
+    font-weight: bold;
+    transform: rotate(0deg);
+    transition: 0.1s linear;
+  }
+
+  .open{
+    transform: rotate(180deg);
+    transition: 0.1s linear;
+  }
+
+
+  /* menu collapse */
+  .collapse-btn{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px 8px 30px 30px;
+  }
+
+  .menu-item-box{
+    position: relative;
+    text-align: center;
+    margin: 15px;
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 30px 30px 30px 30px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background-color: white;
+    height: 300px;
+  }
+
+  .menu-item-name{
+    font-size: 60px;
+    text-align: left;
+    padding: 5%;
+    font-weight: 400;
+  }
+
+  .menu-item-price{
+    font-size: 60px;
+    text-align: left;
+    font-weight: 400;
+    padding-left: 5%;
+  }
+
+  .menu-item-add{
+    position: absolute;
+    top: 25%;
+    left: 80%;
+    font-size: 60px;
+    width: 17%;
+    height: 50%;
+    
+  }
+
+  /* Menu item Page */
+
+.menu-item-content-pop{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 235px;
+  left: 0;
+  z-index: 10;
+  background: white;
+}
+
+.item-img{
+  height: 775px;
+  width: 100%;
+  border-radius: 15px;
+  }
+  
+  .menu-item-header{
+    text-align: center;
+    margin: 50px;
+    font-size: 65px;
+   font-weight: 600;
+  }
+  
+  .menu-item-description{
+    font-size: 40px;
+    padding: 50px;
+  }
+  
+  .Allergies{
+    float: left;
+    margin-left: 30px;
+    padding: 20px;
+  }
+  
+  .Allergies H4{
+    font-size: 45px;
+    font-weight: 700;
+  }
+  
+  .Allergies p{
+    font-size: 40px;
+  }
+  
+  .Calories{
+    float: left;
+    padding: 20px;
+    margin-left: 100px;
+  }
+  
+  .Calories H4{
+    font-size: 45px;
+    font-weight: 700;
+  }
+  
+  .Calories p{
+    font-size: 40px;
+  }
+  
+  
+  .menu-item-qty{
+    padding: 10px;
+    
+  }
+  
+  .sum{
+    padding: 15px;
+    font-size:45px ;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    color: rgb(0, 0, 0);
+    width: 100px;
+    margin: 2px;
+    text-align: center;
+    float: left;
+  
+  }
+  
+  .add-order{
+    padding: 15px;
+    width: 300px;
+    font-size:45px ;
+    border-radius: 15px;
+    background-color: #e4b04a;
+    color: white;
+    float: right;
+    margin-right: 50px;
+  }
+
+  .menu-collapse-item-close{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 38%;
+    left: 2%;
+    font-size: 75px;
+    padding-top: 20px;
+    
+  }
+
+  /* empty box to make menu items not be covered by footer when scroling */
+  .bottom-box{
+    height: 400px;
+    width: 100%;
+  }
+
+/* order button */
+.orderbutton{
+  width: 100%; 
+
+}
+.order-btn{
+  padding: 100px;
+  width: 100%;
+  font-size: 60px;
+  background-color: #daab1d;
+  color: white;
+}
+
+.order-btn:hover{
+  background-color:#daab1d ;
+}
+
+
+button{
+  border: none;
+  background-color: white;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  text-align: center;
+  z-index: 11;
+}
+
+.order-counter{
+  font-size: 35px;
+  padding: 0px;
+  font-weight: bold;
+  color: rgb(51, 51, 51);
+}
+
+
+
+        /* Registration form styles */
+.registration-container {
+    margin-top: 50px; /* Adjust as needed */
+}
+
+.registration-card {
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+}
+.registration-card-header {
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px 8px 0 0;
+  }
+.registration-card-body {
+    padding: 20px;
+  }
+.registration-form-group {
+    margin-bottom: 20px;
+  }
+.registration-btn {
+    font-size: 20px; 
+}
+
+/* media quirries */
+@media only screen and (min-width: 992px) {
+  .nav-item {
+    border-bottom: none;
+  }
+  .navbar-collapse{
+    background-color: white;
+  }
+}

@@ -8,38 +8,29 @@
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
         <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
-        <script>
-          function riseCatagory(elementId) {
-            var element = document.getElementById(elementId);
-            if (element.classList.contains('open')) {
-                element.classList.remove('catagoryActive');
-            } else {
-                element.classList.add('catagoryActive');
-            }
-          }
-          
-        </script>
         
-        <link rel="stylesheet" href="CSS_files/userfrontPage.css">
-        <title>NavBar</title>
+        
+        <link rel="stylesheet" href="../static/userfrontPage.css">
+        <title>Horizon Restaurant</title>
     </head>
-    <body class="vh-100">
+  <body class="vh-100">
+    <div id="app">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="#">Horizon <br>Restaurant</a>
-            <!--- Search icon --->
+        <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
+            <!-- Search icon -->
             <button>
               <a class="nav-btn" aria-current="page" href="#">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </a>
             </button>
-            <!--- User icon --->
+            <!-- User icon -->
             <button>
-                <a class="nav-btn" aria-current="page" href="#">
+                <a class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
                   <i class="fa-solid fa-user"></i>
               </a>
             </button>
-            <!--- Bag-counter icon --->
+            <!-- Bag-counter icon -->
             <button>
               <a class="nav-btn" aria-current="page" href="#">
                 <i class="fa-solid fa-bag-shopping"></i>
@@ -52,13 +43,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Account</a>
+              <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Orders</a>
+              <a class="nav-link" href="orders">Orders</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Reservations</a>
+              <a class="nav-link" href="reservations">Reservations</a>
             </li>
           </ul>
         </div>
@@ -79,15 +70,15 @@
                       <!-- Starters -->
                       <div class="col-md-12">
                         <div class="card menu-card">
-                          <a class="btn collapse-btn" data-bs-toggle="collapse" href="#starterCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                          <a class="btn collapse-btn" data-bs-toggle="collapse" href="#starterCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('starter')"></a>
                           <div class="row">
                             <div class="menu-column-img">
-                              <img src="images/Starters.jpg" class="card-img" alt="Starters">
+                              <img src="../static/images/Starters.jpg" class="card-img" alt="Starters">
                             </div>
                             <div class="menu-column-content">
                               <div class="card-body">
                                 <h5 class="card-title align-left">Starters</h5>
-                                <i class='menu-card-arrow fas fa-angle-up'></i>
+                                <i class='menu-card-arrow fas fa-angle-up' :class="{'open': arrowRotationStates.starter}"></i>
                               </div>
                             </div>
                           </div>
@@ -95,25 +86,25 @@
                       </div>
                       <div class="collapse menu-content" id="starterCollapse">
                           <div class="menu-item-box">
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#Teriyaki" role="button" aria-expanded="false"></a>
                             <h5 class="menu-item-name">Teriyaki Chicken</h5>
                             <h5 class="menu-item-price">£7.99</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
                             <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                          </div>
                         </div>
                       </div>
                       <!-- Mains -->
                       <div class="col-md-12">
                           <div class="card menu-card">
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#mainsCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#mainsCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('mains')"></a>
                             <div class="row">
                               <div class="menu-column-img">
-                                <img src="images/Mains.jpg" class="card-img" alt="Mains">
+                                <img src="../static/images/Mains.jpg" class="card-img" alt="Mains">
                               </div>
                               <div class="menu-column-content">
                                 <div class="card-body">
                                   <h5 class="card-title align-left">Mains</h5>
-                                  <i class='menu-card-arrow fas fa-angle-up'></i>
+                                  <i class='menu-card-arrow fas fa-angle-up' :class="{'open': arrowRotationStates.mains}"></i>
                                 </div>
                               </div>
                             </div>
@@ -130,15 +121,15 @@
                         <!-- Desserts -->
                         <div class="col-md-12">
                           <div class="card menu-card">
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#dessertCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#dessertCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('desserts')"></a>
                             <div class="row">
                               <div class="menu-column-img">
-                                <img src="images/Desert.jpg" class="card-img" alt="Desserts">
+                                <img src="../static/images/Desert.jpg" class="card-img" alt="Desserts">
                               </div>
                               <div class="menu-column-content">
                                 <div class="card-body">
                                   <h5 class="card-title align-left">Desserts</h5>
-                                  <i class='menu-card-arrow fas fa-angle-up'></i>
+                                  <i class='menu-card-arrow fas fa-angle-up' :class="{'open': arrowRotationStates.desserts}"></i>
                                 </div>
                               </div>
                             </div>
@@ -155,15 +146,15 @@
                         <!-- Drinks -->
                         <div class="col-md-12">
                           <div class="card menu-card">
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#drinksCollapse" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#drinksCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('drinks')"></a>
                             <div class="row">
                               <div class="menu-column-img">
-                                <img src="images/Drinks.jpg" class="card-img" alt="Drinks">
+                                <img src="../static/images/Drinks.jpg" class="card-img" alt="Drinks">
                               </div>
                               <div class="menu-column-content">
                                 <div class="card-body">
                                   <h5 class="card-title align-left">Drinks</h5>
-                                  <i class='menu-card-arrow fas fa-angle-up'></i>
+                                  <i class='menu-card-arrow fas fa-angle-up' :class="{'open': arrowRotationStates.drinks}"></i>
                                 </div>
                               </div>
                             </div>
@@ -177,11 +168,97 @@
                             <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                           </div>
                         </div>
+                         <!-- empty box to make menu items not be covered by footer when scroling -->
+                        <div class="col-md-12">
+                          <div class="bottom-box"></div>
+                        </div>
                     </div>
               </div>
+
             </div>
           </div> 
+          
         </div>
+        <!-- menu item popups -->
+        <div class="collapse menu-content" id="Teriyaki">
+          <div class="menu-item-content-pop">
+            <img class="item-img" src="../static/images/mains.jpg" alt="Curry">
+              <div class="menu-item-content">
+                <a class="btn menu-collapse-item-close" data-bs-toggle="collapse" href="#Teriyaki" role="button" aria-expanded="false"><i class="fa-solid fa-arrow-left"></i></a>
+                <header class="menu-item-header">Chicken Tikka Curry</header>
+                  <p class="menu-item-description">Indulge in our Chicken Tikka Curry – succulent grilled chicken in a rich, aromatic curry. Savour tender bites, expertly spiced. </p>
+                  <div class="Allergies">
+                    <H4>Allergies</H4>
+                    <p>Nut</p>
+                    <p>Milk</p>
+                  </div>
+                  <div class="menu-item-qty">
+                    <button class="sum">-</button>
+                    <p class="sum">1</p>
+                    <button class="sum">+</button>
+                  </div>
+                  <script>
+                    // Get all the quantity selector elements
+                    const quantitySelectors = document.querySelectorAll('.menu-item-qty');
+
+                    // Loop through each quantity selector
+                    quantitySelectors.forEach(selector => {
+                      const decrementBtn = selector.querySelector('button:first-child');
+                      const incrementBtn = selector.querySelector('button:last-child');
+                      const quantityDisplay = selector.querySelector('p');
+
+                      // Add click event listener to decrement button
+                      decrementBtn.addEventListener('click', () => {
+                        let quantity = parseInt(quantityDisplay.textContent);
+                        if (quantity > 1) {
+                          quantity--;
+                          quantityDisplay.textContent = quantity;
+                        }
+                      });
+
+                      // Add click event listener to increment button
+                      incrementBtn.addEventListener('click', () => {
+                        let quantity = parseInt(quantityDisplay.textContent);
+                        quantity++;
+                        quantityDisplay.textContent = quantity;
+                      });
+                    });
+                  </script>
+
+
+                  <button class="add-order">Add Order</button>
+              </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- vue code -->
+    <script>
+      //arrow rotation code 
+      const { createApp, ref } = Vue;
+      
+      createApp({
+       setup() {
+          //variables for the buttons and their states
+          const arrowRotationStates = ref({
+            starter: false,
+            mains: false,
+            desserts: false,
+            drinks: false,
+          });
+      
+          //inverts arrow varriable allowing open class to be either used or blocked
+          const toggleArrowRotation = (menuId) => {
+            arrowRotationStates.value[menuId] = !arrowRotationStates.value[menuId];
+          };
+
+          return {
+            arrowRotationStates,
+            toggleArrowRotation,
+          };
+       }
+      }).mount('#app');
+      </script>
     </body>
     <!-- Footer -->
     <footer>

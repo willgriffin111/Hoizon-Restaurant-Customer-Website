@@ -4,7 +4,7 @@ body {
     height: 100%;
     position: relative;
     overflow-x: hidden;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(248, 248, 248);
   }
 
    /* navbar */
@@ -36,6 +36,8 @@ body {
   .navbar-toggler{
     border: none;
     color: black;
+    margin-right: 10px;
+    border: none;
   }
   
   .navbar-toggler-icon{
@@ -65,7 +67,7 @@ body {
   /* content area */
   .content-box {
     margin-top: 100px;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(248, 248, 248);
     height: 100px;
   }
 
@@ -89,7 +91,7 @@ body {
 
   .menu-column-content{
     flex: 0 0 60%;
-    max-width: 60%; 
+    max-width: 60%;
   }
 
   .card-title{
@@ -108,19 +110,6 @@ body {
 
   }
 
-  .menu-card-arrow{
-    position: absolute;
-    top: 40%;
-    left: 85%;
-    font-size: 70px;
-    font-weight: bold;
-  }
-
-  .menu-card-arrow .open{
-    transform: rotate(180deg);
-    transition: 1s linear;
-  }
-
 
   /* menu collapse */
   .collapse-btn{
@@ -132,43 +121,6 @@ body {
     border-radius: 8px 8px 30px 30px;
   }
 
-  .menu-item-box{
-    position: relative;
-    text-align: center;
-    margin: 15px;
-    margin-top: 20px;
-    width: 90%;
-    margin-left: 5%;
-    border-radius: 30px 30px 30px 30px;
-    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    background-color: white;
-    height: 300px;
-  }
-
-  .menu-item-name{
-    font-size: 60px;
-    text-align: left;
-    padding: 5%;
-    font-weight: 400;
-  }
-
-  .menu-item-price{
-    font-size: 60px;
-    text-align: left;
-    font-weight: 400;
-    padding-left: 5%;
-  }
-
-  .menu-item-add{
-    position: absolute;
-    top: 25%;
-    left: 80%;
-    font-size: 60px;
-    width: 17%;
-    height: 50%;
-    
-  }
 
 /* order button */
 .orderbutton{
@@ -179,12 +131,12 @@ body {
   padding: 100px;
   width: 100%;
   font-size: 60px;
-  background-color: #daab1d;
+  background-color: #e4b04a;
   color: white;
 }
 
 .order-btn:hover{
-  background-color:#daab1d ;
+  background-color:#e6a637 ;
 }
 
 
@@ -234,4 +186,173 @@ footer {
   }
 .registration-btn {
     font-size: 20px; 
+}
+
+        /* Privacy Policies Page */
+.Privacy-header{
+  font-size: 70px;
+  text-align: center;
+  padding: 40px;
+  margin-top: 40px;
+}
+
+.faq {
+  text-align: center;
+  font-style: 'Roboto', sans-serif;
+  font-weight: lighter;
+  margin-top: 90x;
+  font-size: 30px;
+
+}
+@media(max-width:900px){
+.faq{
+  margin-top: 40px;
+}
+}
+@media(max-width:450px){
+.sales-header{
+  margin-top: -40px;
+}
+}
+
+#accordion{
+  margin: 100px auto;
+  align-items: center;
+  margin: auto;
+  width: 850px;
+  padding-bottom:300px;
+
+  
+}
+#accordion li{
+  list-style: none;
+  margin-bottom: 10px;
+  padding: 25px;
+  border-radius: 10px;
+  vertical-align: middle;
+
+}
+#accordion li label{
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 45px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+}   
+#accordion label + input[type="radio"]{
+  display:none ;
+}
+#accordion .content{
+  padding: 0 50px;
+  line-height: 50px;
+  max-height: 0;
+  overflow: hidden;
+  transition:max-height 0.5s;
+  text-align:justify;
+  text-justify: inter-word;
+  font-size: 40px;
+  font-weight: 200;
+
+}
+#accordion label + input[type="radio"]:checked + .content{
+  max-height:  700px;
+}
+
+
+
+@media(max-width:767px){
+  #accordion{
+     width: 90%;
+     margin-bottom: 30px;
+  }
+}
+.Help{
+  margin-top: 80px;
+  padding: 5px;
+}
+
+/* Menu item Page */
+
+.item-img{
+height: 775px;
+width: 990px;
+border-radius: 15px;
+}
+
+.menu-item-header{
+  text-align: center;
+  margin: 50px;
+  font-size: 65px;
+ font-weight: 600;
+}
+
+.menu-item-description{
+  font-size: 40px;
+  padding: 50px;
+}
+
+.Allergies{
+  float: left;
+  margin-left: 30px;
+  padding: 20px;
+}
+
+.Allergies H4{
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.Allergies p{
+  font-size: 40px;
+}
+
+.Calories{
+  float: left;
+  padding: 20px;
+  margin-left: 100px;
+}
+
+.Calories H4{
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.Calories p{
+  font-size: 40px;
+}
+
+
+.menu-item-qty{
+  padding: 10px;
+  
+}
+
+.sum{
+  padding: 15px;
+  font-size:45px ;
+  border-radius: 15px;
+  background-color: #f0f0f0;
+  color: rgb(0, 0, 0);
+  width: 100px;
+  margin: 2px;
+  text-align: center;
+  float: left;
+
+}
+
+.add-order{
+  padding: 15px;
+  width: 300px;
+  font-size:45px ;
+  border-radius: 15px;
+  background-color: #e4b04a;
+  color: white;
+  float: right;
+  margin-right: 50px;
 }

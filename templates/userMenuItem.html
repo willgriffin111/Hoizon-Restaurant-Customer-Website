@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
+        </script>
+        <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
+        <script>
+          function riseCatagory(elementId) {
+            var element = document.getElementById(elementId);
+            if (element.classList.contains('catagoryActive')) {
+                element.classList.remove('catagoryActive');
+            } else {
+                element.classList.add('catagoryActive');
+            }
+          }
+        </script>
+        <link rel="stylesheet" href="../static/PoliciesPage.css">
+        <title>Menu Item Page</title>
+    </head>
+    <body class="vh-100">
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg fixed-top1">
+        <a class="navbar-brand" href="http://127.0.0.1:5501/Webpages/FrontPage/userFrontPage.html">Horizon <br>Restaurant</a>
+            <!--- Search icon --->
+            <button>
+              <a class="nav-btn" aria-current="page" href="#">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            </button>
+            <!--- User icon --->
+            <button>
+                <a class="nav-btn" aria-current="page" href="#">
+                  <i class="fa-solid fa-user"></i>
+              </a>
+            </button>
+            <!--- Bag-counter icon --->
+            <button>
+              <a class="nav-btn" aria-current="page" href="#">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <p class="order-counter">10</p>
+            </a>
+          </button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Reservations</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <!--Main Content-->
+      <img class="item-img" src="../static/images/mains.jpg" alt="Curry">
+      <div class="menu-item-content">
+        <header class="menu-item-header">Chicken Tikka Curry</header>
+          <p class="menu-item-description">Indulge in our Chicken Tikka Curry – succulent grilled chicken in a rich, aromatic curry. Savour tender bites, expertly spiced. </p>
+          <div class="Allergies">
+            <H4>Allergies</H4>
+            <p>Nut</p>
+            <p>Milk</p>
+          </div>
+          <div class="menu-item-qty">
+            <button class="sum">-</button>
+            <p class="sum">1</p>
+            <button class="sum">+</button>
+          </div>
+          <script>
+            // Get all the quantity selector elements
+            const quantitySelectors = document.querySelectorAll('.menu-item-qty');
+
+            // Loop through each quantity selector
+            quantitySelectors.forEach(selector => {
+              const decrementBtn = selector.querySelector('button:first-child');
+              const incrementBtn = selector.querySelector('button:last-child');
+              const quantityDisplay = selector.querySelector('p');
+
+              // Add click event listener to decrement button
+              decrementBtn.addEventListener('click', () => {
+                let quantity = parseInt(quantityDisplay.textContent);
+                if (quantity > 1) {
+                  quantity--;
+                  quantityDisplay.textContent = quantity;
+                }
+              });
+
+              // Add click event listener to increment button
+              incrementBtn.addEventListener('click', () => {
+                let quantity = parseInt(quantityDisplay.textContent);
+                quantity++;
+                quantityDisplay.textContent = quantity;
+              });
+            });
+          </script>
+
+
+          <button class="add-order">Add Order</button>
+      </div>
+ 
+    </body>
+    <!-- Footer -->
+    <footer>
+      <!-- Order Button -->
+      <div class="orderbutton">
+        <button type="button" class="btn order-btn">ORDER NOW</button>
+      </div>
+      
+    </footer>
+</html>
