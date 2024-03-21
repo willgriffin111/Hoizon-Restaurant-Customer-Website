@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
+        </script>
+        <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
+        <script>
+          function riseCatagory(elementId) {
+            var element = document.getElementById(elementId);
+            if (element.classList.contains('catagoryActive')) {
+                element.classList.remove('catagoryActive');
+            } else {
+                element.classList.add('catagoryActive');
+            }
+          }
+        </script>
+        <link rel="stylesheet" href="../static/PoliciesPage.css">
+        <title>NavBar</title>
+    </head>
+    <body class="vh-100">
+      <!--Navbar-->
+      <nav class="navbar navbar-expand-lg fixed-top1">
+        <a class="navbar-brand" href="http://127.0.0.1:5501/Webpages/FrontPage/userFrontPage.html">Horizon <br>Restaurant</a>
+            <!--- Search icon --->
+            <button>
+              <a class="nav-btn" aria-current="page" href="#">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            </button>
+            <!--- User icon --->
+            <button>
+                <a class="nav-btn" aria-current="page" href="#">
+                  <i class="fa-solid fa-user"></i>
+              </a>
+            </button>
+            <!--- Bag-counter icon --->
+            <button>
+              <a class="nav-btn" aria-current="page" href="#">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <p class="order-counter">10</p>
+            </a>
+          </button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Reservations</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <!--Main Content-->
+      <div class="content-box p-0">
+        <h2 class="Privacy-header">Privacy Policy</h2>
+      <div class="faq">
+        <ul id="accordion">
+          <li>
+            <label for="First"><i class="fa-solid fa-book" >&nbsp;&nbsp;&nbsp;</i>Information Collection</i></label>
+            <input type="radio" name="accordion" id="First">
+            <div class="content">
+              <p>We may collect personal information such as your name, email address, phone number, and delivery address 
+                when you place an order, make a reservation, or sign up for our newsletter. <br><br>
+
+                We also collect non-personal information such as browser type, IP address, and referring pages to improve our website and services.
+              
+              </p>
+            </div>
+          </li>
+          <li>
+            <label for="Second"><i class="fa-solid fa-info">&nbsp;&nbsp;&nbsp;</i>Information Usage</label>
+            <input type="radio" name="accordion" id="Second" >
+            <div class="content">
+              <p>We use the collected information to process your orders, manage reservations, send promotional emails, 
+                and personalize your experience on our website.<br><br>
+                
+                We may also use the information for internal analysis and to improve our menu, services, and customer satisfaction.
+              
+              </p>
+              
+              
+            </div>
+          </li>
+          <li>
+            <label for="Third"><i class="fa-solid fa-network-wired">&nbsp;&nbsp;&nbsp;</i> Information Sharing</label>
+            <input type="radio" name="accordion" id="Third">
+            <div class="content">
+              <p> We do not sell, trade, or rent your personal information to third parties without your consent. <br><br>
+                We may share your information with trusted third-party service providers who assist us in operating our website, 
+                conducting business, or providing services to you, such as payment processors and delivery partners. These parties 
+                are obligated to keep your information confidential and secure.
+              </p>
+            </div>
+          </li>
+          <li>
+            <label for="Fourth"><i class="fa-solid fa-lock">&nbsp;&nbsp;&nbsp;</i>Data Security </label>
+            <input type="radio" name="accordion" id="Fourth">
+            <div class="content">
+              <p>We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, or disclosure.<br><br>
+
+                However, please note that no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your 
+                information, we cannot guarantee its absolute security.
+
+              </p>
+
+            </div>
+          </li>
+          <li>
+            <label for="Fith"><i class="fa-solid fa-cookie">&nbsp;&nbsp;&nbsp;</i>Cookies and Tracking</label>
+            <input type="radio" name="accordion" id="Fith">
+            <div class="content">
+              <p>We use cookies and similar tracking technologies to enhance your browsing experience, analyze trends, 
+                and collect information about how you interact with our website.<br><br>
+                
+                You can choose to disable cookies in your browser settings, but please note that certain features of our
+                 website may not function properly as a result.
+              
+              </p>
+          </li>
+          <li>
+            <label for="Six"><i class="fa-solid fa-user">&nbsp;&nbsp;&nbsp;</i>User Rights</label>
+            <input type="radio" name="accordion" id="Six">
+            <div class="content">
+              <p>You have the right to access, update, or delete your personal information. If you wish to exercise any of 
+                these rights or have any questions regarding our privacy practices, please contact us using the information provided below.
+              </p>
+            </div>
+          </li>
+          <li>
+            <label for="Seven"><i class="fa-solid fa-phone">&nbsp;&nbsp;&nbsp;</i>Contact Information</label>
+            <input type="radio" name="accordion" id="Seven">
+            <div class="content">
+             <p>If you have any questions, concerns, or requests regarding our privacy policy or practices, please contact us at: [Restaurant Name] [Address] [Phone Number] [Email Address]</p>
+        </ul>
+      </div>
+    </div>
+    </body>
+    <!-- Footer -->
+    <footer>
+      <!-- Order Button -->
+      <div class="orderbutton">
+        <button type="button" class="btn order-btn">ORDER NOW</button>
+      </div>
+      
+    </footer>
+</html>
