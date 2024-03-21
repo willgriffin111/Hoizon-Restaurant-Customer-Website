@@ -192,38 +192,11 @@
                     <p>Nut</p>
                     <p>Milk</p>
                   </div>
-                  <div class="menu-item-qty">
-                    <button class="sum">-</button>
-                    <p class="sum">1</p>
-                    <button class="sum">+</button>
+                  <div id="menu-item-tikka" class="menu-item-qty">
+                    <button @click="menu_item_quantity_decrease('tikka_count')" class="sum">-</button>
+                    <p id="tikka_count" class="sum">1</p>
+                    <button @click="menu_item_quantity_increment('tikka_count')" class="sum">+</button>
                   </div>
-                  <script>
-                    // Get all the quantity selector elements
-                    const quantitySelectors = document.querySelectorAll('.menu-item-qty');
-
-                    // Loop through each quantity selector
-                    quantitySelectors.forEach(selector => {
-                      const decrementBtn = selector.querySelector('button:first-child');
-                      const incrementBtn = selector.querySelector('button:last-child');
-                      const quantityDisplay = selector.querySelector('p');
-
-                      // Add click event listener to decrement button
-                      decrementBtn.addEventListener('click', () => {
-                        let quantity = parseInt(quantityDisplay.textContent);
-                        if (quantity > 1) {
-                          quantity--;
-                          quantityDisplay.textContent = quantity;
-                        }
-                      });
-
-                      // Add click event listener to increment button
-                      incrementBtn.addEventListener('click', () => {
-                        let quantity = parseInt(quantityDisplay.textContent);
-                        quantity++;
-                        quantityDisplay.textContent = quantity;
-                      });
-                    });
-                  </script>
 
 
                   <button class="add-order">Add Order</button>
@@ -252,9 +225,33 @@
             arrowRotationStates.value[menuId] = !arrowRotationStates.value[menuId];
           };
 
+          // Define the increment function within the setup function
+          const menu_item_quantity_increment = (menuId) => {
+            // Get the element by its ID
+            var displayElement = document.getElementById(menuId);
+            // Parse the current number, increment it, and update the element's text content
+            var currentNumber = parseInt(displayElement.textContent, 10);
+            displayElement.textContent = currentNumber + 1;
+          };
+
+          // Define the increment function within the setup function
+          const menu_item_quantity_decrease = (menuId) => {
+            // Get the element by its ID
+            var displayElement = document.getElementById(menuId);
+            // Parse the current number, increment it, and update the element's text content
+            var currentNumber = parseInt(displayElement.textContent, 10);
+            if (currentNumber -1 > 0) {
+            displayElement.textContent = currentNumber - 1;
+            } else {
+              displayElement.textContent = 1
+            }
+          };
+
           return {
             arrowRotationStates,
             toggleArrowRotation,
+            menu_item_quantity_increment,
+            menu_item_quantity_decrease,
           };
        }
       }).mount('#app');
