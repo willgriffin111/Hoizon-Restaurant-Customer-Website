@@ -17,7 +17,7 @@
           }
         </script>
         <link rel="stylesheet" href="../static/userAccountPage.css">
-        <title>NavBar</title>
+        <title>Horizon Restaurant</title>
     </head>
     <body class="vh-100">
         <!--Navbar-->
@@ -71,10 +71,10 @@
             <a class="user-options-link" href="#">Reservations</a>
           </li>
           <li class="user-options-element">
-            <a class="user-options-link" href="#">Reset password</a>
+            <a class="user-options-link" href="{{ url_for('resetpasswordpage') }}">Reset password</a>
           </li>
           <li class="user-options-element">
-            <a class="user-options-link" href="#">Log out</a>
+            <a class="user-options-link" href="{{ url_for('logout') }}">Log out</a>
           </li>
         </ul>
       </div>
@@ -85,7 +85,7 @@
     <footer>
       <!-- Order Button -->
       <div class="orderbutton">
-        <a class="btn order-btn"  href="userFrontPage.html">ORDER</a>
+        <a class="btn order-btn"  href="{{ url_for('frontpage') }}">ORDER</a>
       </div>
       
     </footer>

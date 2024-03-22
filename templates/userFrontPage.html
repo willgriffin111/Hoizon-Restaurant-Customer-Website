@@ -26,8 +26,11 @@
             </button>
             <!-- User icon -->
             <button>
-                <a class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
-                  <i class="fa-solid fa-user"></i>
+              <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
+                <i class="fa-solid fa-user"></i>
+              </a>
+              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('loginpage') }}">
+                <i class="fa-solid fa-user"></i>
               </a>
             </button>
             <!-- Bag-counter icon -->
@@ -46,10 +49,13 @@
               <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="orders">Orders</a>
+              <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reservations">Reservations</a>
+              <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
             </li>
           </ul>
         </div>
@@ -212,7 +218,12 @@
       
       createApp({
        setup() {
+        //website varriables
+        const isLoggedIn = '{{ isLoggedIn|tojson }}'  
+        
           //variables for the buttons and their states
+          
+            
           const arrowRotationStates = ref({
             starter: false,
             mains: false,
@@ -223,6 +234,7 @@
           //inverts arrow varriable allowing open class to be either used or blocked
           const toggleArrowRotation = (menuId) => {
             arrowRotationStates.value[menuId] = !arrowRotationStates.value[menuId];
+            console.log(isLoggedIn)
           };
 
           // Define the increment function within the setup function
@@ -252,6 +264,7 @@
             toggleArrowRotation,
             menu_item_quantity_increment,
             menu_item_quantity_decrease,
+            isLoggedIn,
           };
        }
       }).mount('#app');
