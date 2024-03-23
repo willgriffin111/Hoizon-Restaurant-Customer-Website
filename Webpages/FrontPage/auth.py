@@ -83,7 +83,7 @@ def privacy():
 
 @auth.route("/reset", methods=['GET', 'POST'])
 def reset():
-    return render_template("reset.html")
+    return render_template("userReset.html")
 
 @auth.route("/error", methods=['GET', 'POST'])
 def error():
@@ -169,7 +169,7 @@ def login():
             error = 'Incorrect email or password, try again.'
             flash(error, 'danger')
             return redirect(url_for('auth.login'))
-    return render_template("login.html", user=current_user)
+    return render_template("userLogin.html", user=current_user)
 
 
 #LOGOUT # THIS CODE NEEDS UPDATING FOR DATABASE

@@ -17,7 +17,7 @@
     <div id="app">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
             <!-- Search icon -->
             <button>
               <a class="nav-btn" aria-current="page" href="#">
@@ -26,10 +26,10 @@
             </button>
             <!-- User icon -->
             <button>
-              <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
+              <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
                 <i class="fa-solid fa-user"></i>
               </a>
-              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('loginpage') }}">
+              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
                 <i class="fa-solid fa-user"></i>
               </a>
             </button>
@@ -46,16 +46,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
+              <a class="nav-link" href="{{ url_for('account') }}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
+              <a class="nav-link" href="{{ url_for('orders') }}">Orders</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
             </li>
           </ul>
         </div>
@@ -219,7 +219,7 @@
       createApp({
        setup() {
         //website varriables
-        const isLoggedIn = '{{ isLoggedIn|tojson }}'  
+        const isLoggedIn = '{{ isLoggedIn }}'  
         
           //variables for the buttons and their states
           
