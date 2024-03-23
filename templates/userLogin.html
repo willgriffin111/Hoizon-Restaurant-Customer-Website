@@ -14,20 +14,49 @@
                 element.classList.add('catagoryActive');
             }
           }
+                </script>
+
+        <script>
+          function riseCatagory(elementId) {
+            var element = document.getElementById(elementId);
+            if (element.classList.contains('catagoryActive')) {
+                element.classList.remove('catagoryActive');
+            } else {
+                element.classList.add('catagoryActive');
+            }
+          }
         </script>
 
+
         <style>
-          .btn.btn-primary {
+        .flash-message-container {
+            position: absolute;
+            top: 100%; /* Position it below the navbar */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            z-index: 1000;
+        }
+        .flash-message {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .btn.btn-primary {
               background-color: #daab1d;
               outline: #daab1d;
           }
         
-          .card-header.registration-card-header{
+        .card-header.registration-card-header{
               background-color: #daab1d;
           }
         </style>
         <link href="node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+        
         <link rel="stylesheet" href="../static/userLogin.css">
         <title>Horizon Restaurant</title>
     </head>
@@ -35,13 +64,22 @@
 
 
     <body class="vh-100">
+
+
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
+            <!-- Search icon -->
+            <button>
+              <a class="nav-btn" aria-current="page" href="#">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            </button>
             <!-- User icon -->
             <button>
-                <a class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
-                  <i class="fa-solid fa-user"></i>
+              
+              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
+                <i class="fa-solid fa-user"></i>
               </a>
             </button>
             <!-- Bag-counter icon -->
@@ -57,29 +95,43 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
+              <a class="nav-link" href="{{ url_for('account') }}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
+              <a class="nav-link" href="{{ url_for('orders') }}">Orders</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
             </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
           </ul>
+
         </div>
-      </nav>
+    </div>
+</nav>
+
+
+
 
 <!-- Content starts -->
+<div class="alert alert-danger" role="alert">
+  This is a danger alert—check it out!
+</div>
+
+
 <div class="container-fluid p-0">
   <div class="reset-box">
     <h1 class="reset-title">Login</h1>
     <div class="line"></div>
     <form method="POST">
       <div class="form-group">
-        <input type="text" class="form-control input-box" id="username" placeholder="Username / Email">
+        <input type="text" class="form-control input-box" id="email" placeholder="Email">
         <input type="password" class="form-control input-box" id="password" placeholder="Password">
       </div>
 
@@ -98,7 +150,7 @@
       </div>
 
       <div class="register-here">
-        <h1>Don't have an account? Register <a href="{{ url_for('registerpage') }}">here</a></h1>
+        <h1>Don't have an account? Register <a href="{{ url_for('register') }}">here</a></h1>
       </div>
       <!-- Google and Facebook signup buttons -->
   </div>

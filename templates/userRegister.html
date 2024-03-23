@@ -44,11 +44,18 @@
     <body class="vh-100">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
+            <!-- Search icon -->
+            <button>
+              <a class="nav-btn" aria-current="page" href="#">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+            </button>
             <!-- User icon -->
             <button>
-                <a class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
-                  <i class="fa-solid fa-user"></i>
+              
+              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
+                <i class="fa-solid fa-user"></i>
               </a>
             </button>
             <!-- Bag-counter icon -->
@@ -64,17 +71,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
+              <a class="nav-link" href="{{ url_for('account') }}">Account</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
+              <a class="nav-link" href="{{ url_for('orders') }}">Orders</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
             </li>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
           </ul>
         </div>
       </nav>
@@ -86,8 +97,8 @@
         <div class="line"></div>
         <form method="POST">
           <div class="form-group">
-            <input type="password" class="form-control input-box" id="username" placeholder="Name">
-            <input type="password" class="form-control input-box" id="email" placeholder="Email / Username">
+            <input type="password" class="form-control input-box" id="firstname" placeholder="Name">
+            <input type="password" class="form-control input-box" id="email" placeholder="Email">
             <input type="password" class="form-control input-box" id="password" placeholder="Password">
             <input type="password" class="form-control input-box" id="password2" placeholder="Re-enter Password">
           </div>
