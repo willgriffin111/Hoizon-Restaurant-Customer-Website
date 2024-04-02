@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, render_template, session, request, flash, redirect, url_for, jsonify
+import json
 
 app = Flask(__name__)
 app.secret_key = 'Horizon' 
@@ -8,7 +9,11 @@ app.secret_key = 'Horizon'
 def frontpage():
     if not session.get('isLoggedIn'):
         session['isLoggedIn'] = False
-    return render_template('userFrontPage.html', isLoggedIn=session['isLoggedIn'])
+    if not session.get('menu_items'):
+        session['menu_items'] = []
+    print(session['menu_items'])
+    menuitemslength =  len(session['menu_items'])
+    return render_template('userFrontPage.html', menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
 
 @app.route('/account', methods=['GET', 'POST'])
 def accountpage():
@@ -17,7 +22,17 @@ def accountpage():
 
 @app.route('/orders', methods=['GET', 'POST'])
 def orderspage():
-    return render_template('userAccount.html')
+    return render_template('userOrder.html', menuitems=session['menu_items'],menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
+
+@app.route('/api/data', methods=['POST'])
+def receive_data():
+    data_string = request.data.decode('utf-8')
+    # Convert the string to a Python object (list of dictionaries)
+    session['menu_items'] = json.loads(data_string)
+    # Process the data as needed
+    print(session['menu_items'])
+    menuitemslength =  len(session['menu_items'])
+    return jsonify(menuitemslength)
 
 
 @app.route('/reservations', methods=['GET', 'POST'])

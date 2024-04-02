@@ -293,6 +293,10 @@ body {
     
   }
 
+  .hidden{
+    display: none;
+  }
+
   /* empty box to make menu items not be covered by footer when scroling */
   .bottom-box{
     height: 400px;

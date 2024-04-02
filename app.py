@@ -1,13 +1,14 @@
 #Alex Rogers22018703
 import string
 import mysql.connector
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, jsonify, render_template, request, session, redirect, url_for, flash
 from passlib.hash import sha256_crypt
 import hashlib
 import gc
 from functools import wraps
 from mysql.connector import Error , errorcode
 from datetime import datetime, timedelta
+import json
 
 app = Flask(__name__)
 app.secret_key = 'Horizon' 
@@ -17,14 +18,32 @@ app.secret_key = 'Horizon'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if not session.get('logged_in'):
-        session['logged_in'] = False
-    isLoggedIn = session['logged_in'] 
-    return render_template('userFrontPage.html', isLoggedIn=isLoggedIn)
+    if not session.get('isLoggedIn'):
+        session['isLoggedIn'] = False
+    if not session.get('menu_items'):
+        session['menu_items'] = []
+    print(session['menu_items'])
+    menuitemslength =  len(session['menu_items'])
+    return render_template('userFrontPage.html', menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
+
+@app.route('/api/data', methods=['POST'])
+def receive_data():
+    data_string = request.data.decode('utf-8')
+    # Convert the string to a Python object (list of dictionaries)
+    session['menu_items'] = json.loads(data_string)
+    # Process the data as needed
+    print(session['menu_items'])
+    menuitemslength =  len(session['menu_items'])
+    return jsonify(menuitemslength)
 
 @app.route('/orders', methods=['GET', 'POST'])
 def orders():
-    return render_template('userFrontPage.html')
+    menuitemslength = len(session['menu_items'])
+    ordertotal = 0
+    for item in session['menu_items']:
+        ordertotal += item['price']
+    
+    return render_template('userOrder.html', ordertotal=ordertotal, menuitems=session['menu_items'],menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
 
 
 @app.route('/reservations', methods=['GET', 'POST'])
@@ -167,98 +186,7 @@ def login_required(f):
 @app.route('/account')
 @login_required
 def account():
-    if (session['usertype'] == 'admin'):
-         userid = str(session['userid'])
-         conn = dbfunc.getConnection()
-         if conn != None:    #Checking if connection is None         
-            print('MySQL Connection is established')                          
-            dbcursor = conn.cursor()    #Creating cursor object     
-            dbcursor.execute('SELECT * FROM USER_DATA WHERE User_ID = %s;',(userid,))  
-            data = dbcursor.fetchone()
-            userdata = [data[1],data[2],data[4]]
-            dbcursor.execute('SELECT * FROM BOOKING_INFO ORDER BY Booking_ID LIMIT 5;')   
-		    #print('SELECT statement executed successfully.')             
-            rows = dbcursor.fetchall()
-            datarows=[]			
-            for row in rows:
-                data = list(row)                    
-                print(data)
-                booking_info = []
-                booking_info.append(row[0])
-                booking_info.append(row[2].strftime("%x"))
-                booking_info.append(row[4])
-                booking_info.append(row[5])
-                dbcursor.execute('SELECT * FROM TRAVEL_INFO WHERE Travel_ID = %s;', (str(row[7]),))
-                travel = dbcursor.fetchall()
-                print(travel)
-                booking_info.append(travel[0][1])
-                booking_info.append(travel[0][2])
-                booking_info.append(travel[0][3])
-                booking_info.append(travel[0][4])
-                print(booking_info)
-                datarows.append(booking_info)
-            dbcursor.execute('SELECT * FROM USER_DATA ORDER BY User_ID LIMIT 5;')   
-		    #print('SELECT statement executed successfully.')             
-            rows = dbcursor.fetchall()
-            userrows=[]			
-            for row in rows:
-                data = list(row)                    
-                print(data)
-                user_info = []
-                user_info.append(row[0])
-                user_info.append(row[1])
-                user_info.append(row[2])
-                user_info.append(row[4])
-                user_info.append(row[5])
-                print(user_info)
-                userrows.append(user_info)	
-            dbcursor.close()              
-            conn.close() #Connection must be closed
-		    #print(datarows)
-		    #print(len(datarows))	
-            return render_template('Admin.html', logged_in=session['logged_in'], userinfo=userdata, bookingdata=datarows,userdata=userrows, userid=userid)
-         else:
-            print('DB connection Error')
-            return redirect(url_for('home'))
-    else:
-        userid = str(session['userid'])
-        
-        conn = dbfunc.getConnection()
-        if conn != None:    #Checking if connection is None         
-            print('MySQL Connection is established')                          
-            dbcursor = conn.cursor()    #Creating cursor object     
-            dbcursor.execute('SELECT * FROM USER_DATA WHERE User_ID = %s;', (userid,))  
-            data = dbcursor.fetchone()
-            userdata = [data[1],data[2],data[4]]
-            dbcursor.execute('SELECT * FROM BOOKING_INFO WHERE User_ID = %s LIMIT 5;', (userid,))   
-		    #print('SELECT statement executed successfully.')             
-            rows = dbcursor.fetchall()
-            datarows=[]			
-            for row in rows:
-                data = list(row)                    
-                print(data)
-                booking_info = []
-                booking_info.append(row[0])
-                booking_info.append(row[2].strftime("%x"))
-                booking_info.append(row[4])
-                booking_info.append(row[5])
-                dbcursor.execute('SELECT * FROM TRAVEL_INFO WHERE Travel_ID = %s ;', (str(row[7]),))
-                travel = dbcursor.fetchall()
-                print(travel)
-                booking_info.append(travel[0][1])
-                booking_info.append(travel[0][2])
-                booking_info.append(travel[0][3])
-                booking_info.append(travel[0][4])
-                print(booking_info)
-                datarows.append(booking_info)			
-            dbcursor.close()              
-            conn.close() #Connection must be closed
-		    #print(datarows)
-		    #print(len(datarows))	
-            return render_template('userAccount.html', logged_in=session['logged_in'], userinfo=userdata, bookingdata=datarows,userid=userid)
-        else:
-            print('DB connection Error')
-            return redirect(url_for('home'))
+    return render_template('userAccount.html',  isLoggedIn=session['isLoggedIn'])
 
  
 

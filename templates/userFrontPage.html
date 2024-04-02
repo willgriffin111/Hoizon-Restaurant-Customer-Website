@@ -8,7 +8,7 @@
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
         <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
-        
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         
         <link rel="stylesheet" href="../static/userfrontPage.css">
         <title>Horizon Restaurant</title>
@@ -18,7 +18,7 @@
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
         <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
-            <!-- Search icon -->
+<!-- Search icon -->
             <button>
               <a class="nav-btn" aria-current="page" href="#">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -26,18 +26,18 @@
             </button>
             <!-- User icon -->
             <button>
-              <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
+                <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
                 <i class="fa-solid fa-user"></i>
               </a>
-              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
-                <i class="fa-solid fa-user"></i>
+              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                  <i class="fa-solid fa-user"></i>
               </a>
             </button>
             <!-- Bag-counter icon -->
             <button>
-              <a class="nav-btn" aria-current="page" href="#">
+              <a class="nav-btn" aria-current="page" href="{{ url_for('orders') }}">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <p class="order-counter">10</p>
+                <p class="order-counter" v-text="menuitemslength"></p>
             </a>
           </button>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
-            </li>
+          </li>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
@@ -101,7 +101,7 @@
                           <div class="menu-item-box">
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#Teriyaki" role="button" aria-expanded="false"></a>
                             <h5 class="menu-item-name">Teriyaki Chicken</h5>
-                            <h5 class="menu-item-price">£7.99</h5>
+                            <h5 class="menu-item-price" id="tikkaprice">£7.99</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
                             <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                         </div>
@@ -198,7 +198,7 @@
             <img class="item-img" src="../static/images/mains.jpg" alt="Curry">
               <div class="menu-item-content">
                 <a class="btn menu-collapse-item-close" data-bs-toggle="collapse" href="#Teriyaki" role="button" aria-expanded="false"><i class="fa-solid fa-arrow-left"></i></a>
-                <header class="menu-item-header">Chicken Tikka Curry</header>
+                <header id="tikka" class="menu-item-header">Chicken Tikka Curry</header>
                   <p class="menu-item-description">Indulge in our Chicken Tikka Curry – succulent grilled chicken in a rich, aromatic curry. Savour tender bites, expertly spiced. </p>
                   <div class="Allergies">
                     <H4>Allergies</H4>
@@ -210,9 +210,9 @@
                     <p id="tikka_count" class="sum">1</p>
                     <button @click="menu_item_quantity_increment('tikka_count')" class="sum">+</button>
                   </div>
+                  <p class="hidden" id="tikkaid">1</p>
 
-
-                  <button class="add-order">Add Order</button>
+                  <button class="add-order" @click="add_to_order('tikkaid','tikka','tikka_count','tikkaprice')">Add Order</button>
               </div>
         </div>
       </div>
@@ -221,15 +221,17 @@
     <!-- vue code -->
     <script>
       //arrow rotation code 
-      const { createApp, ref } = Vue;
+      const { createApp, ref, computed } = Vue;
       
       createApp({
        setup() {
         //website varriables
         const isLoggedIn = '{{ isLoggedIn }}'  
+        var menuitemsarray = JSON.parse('{{ menuitems | tojson | safe }}');
+        const menuitems = ref(menuitemsarray);
+        const menuitemslength = ref({{ menuitemslength }});
         
           //variables for the buttons and their states
-          
             
           const arrowRotationStates = ref({
             starter: false,
@@ -241,7 +243,6 @@
           //inverts arrow varriable allowing open class to be either used or blocked
           const toggleArrowRotation = (menuId) => {
             arrowRotationStates.value[menuId] = !arrowRotationStates.value[menuId];
-            console.log(isLoggedIn)
           };
 
           // Define the increment function within the setup function
@@ -266,12 +267,46 @@
             }
           };
 
+
+
+          const add_to_order = (menuitemid,menuitemname,quantity,menuitemprice) => {
+            // Correctly access items using .value
+            var menuname = document.getElementById(menuitemname);
+            var menuquantity = document.getElementById(quantity);
+            var menuId = document.getElementById(menuitemid);
+            var basemenuprice = document.getElementById(menuitemprice);
+            var menuprice = parseFloat((basemenuprice.textContent).replace('£', '')) * parseInt(menuquantity.textContent);
+            // Push the new item into the menuitems array
+            menuitems.value.push({ id: menuId.textContent, name: menuname.textContent, ammount: menuquantity.textContent, price: menuprice});
+            // Alert the JSON string representation of the updated menuitems array
+           alert("Added " +menuname.textContent+ " to order")
+            // Convert the menuitems array to a JSON string
+            const dataToSend = JSON.stringify(menuitems.value);
+            // Send the updated items array to the Flask backend
+            axios.post('/api/data', dataToSend, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => {
+              // Handle the response
+              menuitemslength.value = response.data;
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        };
+
           return {
             arrowRotationStates,
             toggleArrowRotation,
             menu_item_quantity_increment,
             menu_item_quantity_decrease,
+            add_to_order,
             isLoggedIn,
+            menuitems,
+            menuitemsarray,
+            menuitemslength,
           };
        }
       }).mount('#app');

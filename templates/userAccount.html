@@ -21,41 +21,57 @@
     </head>
     <body class="vh-100">
         <!--Navbar-->
-      <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
-            <!-- User icon -->
-            <button>
-                <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
-                  <i class="fa-solid fa-user"></i>
+        <nav class="navbar navbar-expand-lg fixed-top1">
+          <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
+  <!-- Search icon -->
+              <button>
+                <a class="nav-btn" aria-current="page" href="#">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+              </a>
+              </button>
+              <!-- User icon -->
+              <button>
+                {% if isLoggedIn %}
+                    <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                {% else %}
+                    <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                {% endif %}
+              </button>
+              <!-- Bag-counter icon -->
+              <button>
+                <a class="nav-btn" aria-current="page" href="{{ url_for('orders') }}">
+                  <i class="fa-solid fa-bag-shopping"></i>
+                  <p class="order-counter"> {{ menuitemslength }} </p>
               </a>
             </button>
-            <!-- Bag-counter icon -->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <p class="order-counter">10</p>
-            </a>
-          </button>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('orders') }}">Orders</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
+            </li>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
-          
-          </ul>
-        </div>
-      </nav>
+            </ul>
+          </div>
+        </nav>
     
     <!-- Content starts -->
     <div class="container-fluid p-0">
@@ -71,7 +87,7 @@
             <a class="user-options-link" href="#">Reservations</a>
           </li>
           <li class="user-options-element">
-            <a class="user-options-link" href="{{ url_for('resetpasswordpage') }}">Reset password</a>
+            <a class="user-options-link" href="{{ url_for('resetpassword') }}">Reset password</a>
           </li>
           <li class="user-options-element">
             <a class="user-options-link" href="{{ url_for('logout') }}">Log out</a>
@@ -85,7 +101,7 @@
     <footer>
       <!-- Order Button -->
       <div class="orderbutton">
-        <a class="btn order-btn"  href="{{ url_for('frontpage') }}">ORDER</a>
+        <a class="btn order-btn"  href="{{ url_for('home') }}">ORDER</a>
       </div>
       
     </footer>
