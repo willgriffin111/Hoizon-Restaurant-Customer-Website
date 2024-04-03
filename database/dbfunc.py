@@ -6,6 +6,7 @@ from mysql.connector import errorcode
 # MYSQL CONFIG VARIABLES
 name = "alex"
 if name == "alex":
+    #idk why this isnt working man
     hostname    = "localhost"
     username    = "root"
     passwd  = "password"
