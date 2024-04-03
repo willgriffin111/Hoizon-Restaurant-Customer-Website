@@ -187,6 +187,14 @@ body {
       font-size: 50px;
     }
 
+    .delete-btn{
+      text-align: right;
+      font-size: 40px;
+      float: right;
+      background-color: red;
+      border-radius: 10px;
+    }
+
     .input-box{
       margin-top: 15%;
       position: relative;
@@ -255,6 +263,8 @@ footer {
 .hidden{
   display: none;
 }
+
+
 
 
 
