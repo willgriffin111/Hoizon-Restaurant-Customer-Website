@@ -9,6 +9,7 @@ from functools import wraps
 from mysql.connector import Error , errorcode
 from datetime import datetime, timedelta
 import json
+from database import dbfunc
 
 app = Flask(__name__)
 app.secret_key = 'Horizon' 
@@ -18,36 +19,40 @@ app.secret_key = 'Horizon'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    session['resturantid'] = 1
     if not session.get('isLoggedIn'):
         session['isLoggedIn'] = False
     if not session.get('menu_items'):
         session['menu_items'] = []
     print(session['menu_items'])
     menuitemslength =  len(session['menu_items'])
-    menulist = [
-    {"id": 1, "name": "Teriyaki Chicken", "price": 9.99, "description": "Indulge in our Teriyaki Chicken – succulent grilled chicken in a rich, aromatic sauce. Savour tender bites, expertly spiced.", "category": "mains"},
-    {"id": 2, "name": "Chicken Tikka Curry", "price": 8.99, "description": "Indulge in our Chicken Tikka Curry – succulent grilled chicken in a rich, aromatic curry. Savour tender bites, expertly spiced.", "category": "mains"},
-    {"id": 3, "name": "Tiramisu", "price": 5.99, "description": "Delight in our Tiramisu – layers of creamy mascarpone cheese, coffee-soaked ladyfingers, and cocoa powder.", "category": "desserts"},
-    {"id": 4, "name": "Mojito", "price": 6.99, "description": "Refresh yourself with our classic Mojito – a zesty mix of fresh mint, lime juice, sugar, and rum.", "category": "drinks"},
-    {"id": 5, "name": "Caprese Salad", "price": 7.99, "description": "Enjoy our Caprese Salad – a vibrant mix of fresh tomatoes, creamy mozzarella, fragrant basil, and balsamic glaze.", "category": "starters"},
-    {"id": 6, "name": "Spaghetti Bolognese", "price": 10.99, "description": "Savour our Spaghetti Bolognese – al dente pasta tossed in a rich, meaty sauce, topped with grated Parmesan cheese.", "category": "mains"},
-    {"id": 7, "name": "Chocolate Cake", "price": 4.99, "description": "Indulge in our decadent Chocolate Cake – moist layers of chocolate sponge, filled and frosted with rich chocolate ganache.", "category": "desserts"},
-    {"id": 8, "name": "Martini", "price": 8.99, "description": "Sip on our Martini – a classic cocktail made with gin and vermouth, garnished with an olive or a lemon twist.", "category": "drinks"},
-    {"id": 9, "name": "Bruschetta", "price": 6.49, "description": "Enjoy our Bruschetta – toasted bread topped with ripe tomatoes, fresh basil, garlic, and olive oil.", "category": "starters"},
-    {"id": 10, "name": "Grilled Salmon", "price": 12.99, "description": "Relish our Grilled Salmon – perfectly cooked salmon fillet served with lemon wedges and dill sauce.", "category": "mains"},
-    {"id": 11, "name": "Cheesecake", "price": 5.49, "description": "Indulge in our creamy Cheesecake – a smooth and velvety dessert with a buttery biscuit base.", "category": "desserts"},
-    {"id": 12, "name": "Cosmopolitan", "price": 7.49, "description": "Enjoy our Cosmopolitan – a refreshing cocktail made with vodka, triple sec, cranberry juice, and freshly squeezed lime juice.", "category": "drinks"},
-    {"id": 13, "name": "Garlic Bread", "price": 4.49, "description": "Savour our Garlic Bread – slices of crusty bread brushed with garlic-infused butter, toasted to perfection.", "category": "starters"},
-    {"id": 14, "name": "Beef Burger", "price": 11.99, "description": "Indulge in our Beef Burger – a juicy beef patty topped with lettuce, tomato, onion, and melted cheese, served in a sesame seed bun.", "category": "mains"},
-    {"id": 15, "name": "Apple Pie", "price": 6.49, "description": "Enjoy our classic Apple Pie – sweet, tender apples baked in a flaky, buttery pastry, served warm with a scoop of vanilla ice cream.", "category": "desserts"},
-    {"id": 16, "name": "Margarita", "price": 7.99, "description": "Sip on our Margarita – a refreshing cocktail made with tequila, lime juice, triple sec, and simple syrup, served with a salted rim.", "category": "drinks"},
-    {"id": 17, "name": "Caesar Salad", "price": 8.49, "description": "Relish our Caesar Salad – crisp romaine lettuce tossed in Caesar dressing, topped with croutons and Parmesan cheese.", "category": "starters"},
-    {"id": 18, "name": "Steak", "price": 14.99, "description": "Savour our Steak – tender, juicy steak cooked to your liking, served with your choice of sides and sauce.", "category": "mains"},
-    {"id": 19, "name": "Panna Cotta", "price": 5.99, "description": "Delight in our creamy Panna Cotta – a silky-smooth dessert topped with fresh berries and a drizzle of raspberry coulis.", "category": "desserts"},
-    {"id": 20, "name": "Sangria", "price": 8.49, "description": "Enjoy our Sangria – a refreshing drink made with red wine, mixed fruits, orange juice, and brandy, served over ice.", "category": "drinks"}
-    ]   
-    return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
-
+    menulist = [] #blank data in case sql fails
+    print('Collecting Menu') #sql to get the menu items from the menu
+    try:
+        conn = dbfunc.getConnection()           
+        if conn != None:    #Checking if connection is None           
+            if conn.is_connected(): #Checking if connection is established
+                print('MySQL Connection is established')                          
+                dbcursor = conn.cursor()    #Creating cursor object          
+                dbcursor.execute('SELECT * FROM menu WHERE restaurant_id = %s;', (session['resturantid'],))      #Executing
+                menulist = dbcursor.fetchall()
+                dbcursor.close()
+                conn.close()
+                gc.collect()   
+                print(menulist)                     
+                return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
+            else:                        
+                print('Connection error')
+                return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
+        else:                    
+            print('Connection error')
+            return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
+                    
+    except Exception as e:                
+        return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=menuitemslength, isLoggedIn=session['isLoggedIn'])
+    
+     
+    
 @app.route('/api/data', methods=['POST'])
 def receive_data():
     data_string = request.data.decode('utf-8')

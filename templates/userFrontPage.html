@@ -99,11 +99,11 @@
                       </div>
                       <div class="collapse menu-content" id="starterCollapse">
                         {% for menuitem in menutable %}
-                        {% if menuitem['category'] == 'starters' %}
+                        {% if menuitem[3] == 'Starters' %}
                           <div class="menu-item-box">
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem['name']|replace(' ', '_')}}{{menuitem['id']}}" role="button" aria-expanded="false"></a>
-                            <h5 class="menu-item-name">{{menuitem['name']}}</h5>
-                            <h5 class="menu-item-price" id="tikkaprice">£{{menuitem['price']}}</h5>
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
                             <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                         </div>
@@ -129,14 +129,14 @@
                         </div>
                         <div class="collapse" id="mainsCollapse">
                           {% for menuitem in menutable %}
-                          {% if menuitem['category'] == 'mains' %}
-                            <div class="menu-item-box">
-                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem['name']|replace(' ', '_')}}{{menuitem['id']}}" role="button" aria-expanded="false"></a>
-                              <h5 class="menu-item-name">{{menuitem['name']}}</h5>
-                              <h5 class="menu-item-price" id="tikkaprice">£{{menuitem['price']}}</h5>
-                              <!-- link this button to menu item pop up later when adding backend -Alex -->
-                              <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                          </div>
+                          {% if menuitem[3] == 'Mains' %}
+                          <div class="menu-item-box">
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                            <!-- link this button to menu item pop up later when adding backend -Alex -->
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                        </div>
                           {% endif %}
                           {% endfor %}
                         </div>
@@ -159,14 +159,14 @@
                         </div>
                         <div class="collapse" id="dessertCollapse">
                           {% for menuitem in menutable %}
-                          {% if menuitem['category'] == 'desserts' %}
-                            <div class="menu-item-box">
-                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem['name']|replace(' ', '_')}}{{menuitem['id']}}" role="button" aria-expanded="false"></a>
-                              <h5 class="menu-item-name">{{menuitem['name']}}</h5>
-                              <h5 class="menu-item-price" id="tikkaprice">£{{menuitem['price']}}</h5>
-                              <!-- link this button to menu item pop up later when adding backend -Alex -->
-                              <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                          </div>
+                          {% if menuitem[3] == 'Desert' %}
+                          <div class="menu-item-box">
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                            <!-- link this button to menu item pop up later when adding backend -Alex -->
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                        </div>
                           {% endif %}
                           {% endfor %}
                         </div>
@@ -189,14 +189,14 @@
                         </div>
                         <div class="collapse" id="drinksCollapse">
                           {% for menuitem in menutable %}
-                          {% if menuitem['category'] == 'drinks' %}
-                            <div class="menu-item-box">
-                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem['name']|replace(' ', '_')}}{{menuitem['id']}}" role="button" aria-expanded="false"></a>
-                              <h5 class="menu-item-name">{{menuitem['name']}}</h5>
-                              <h5 class="menu-item-price" id="tikkaprice">£{{menuitem['price']}}</h5>
-                              <!-- link this button to menu item pop up later when adding backend -Alex -->
-                              <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                          </div>
+                          {% if menuitem[3] == 'Drinks' %}
+                          <div class="menu-item-box">
+                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                            <!-- link this button to menu item pop up later when adding backend -Alex -->
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                        </div>
                           {% endif %}
                           {% endfor %}
                         </div>
@@ -238,25 +238,25 @@
 
         {% for menuitem in menutable %}
 
-        <div class="collapse menu-content" id="{{menuitem['name']|replace(' ', '_')}}{{menuitem['id']}}">
+        <div class="collapse menu-content" id="{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}">
           <div class="menu-item-content-pop">
             <img class="item-img" src="../static/images/mains.jpg" alt="Curry"> 
               <div class="menu-item-content">
-                <a class="btn menu-collapse-item-close" data-bs-toggle="collapse" href="#{{menuitem['name']|replace(' ', '_')}}{{menuitem['id']}}" role="button" aria-expanded="false"><i class="fa-solid fa-arrow-left"></i></a>
-                <header id="{{menuitem['name']}}" class="menu-item-header">{{menuitem['name']}}</header>
-                  <p class="menu-item-description">{{ menuitem['description'] }} </p>
+                <a class="btn menu-collapse-item-close" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"><i class="fa-solid fa-arrow-left"></i></a>
+                <header id="{{menuitem[2]}}" class="menu-item-header">{{menuitem[2]}}</header>
+                  <p class="menu-item-description">{{ menuitem[4] }} </p>
                   <div class="Allergies">
                     <H4>Allergies</H4>
                     <p>Nut</p>
                     <p>Milk</p>
                   </div>
-                  <div id="menu-item-{{menuitem['name']}}" class="menu-item-qty">
-                    <button @click="menu_item_quantity_decrease('{{menuitem['name']}}_count')" class="sum">-</button>
-                    <p id="{{menuitem['name']}}_count" class="sum">1</p>
-                    <button @click="menu_item_quantity_increment('{{menuitem['name']}}_count')" class="sum">+</button>
+                  <div id="menu-item-{{menuitem[3]}}" class="menu-item-qty">
+                    <button @click="menu_item_quantity_decrease('{{menuitem[2]}}_count')" class="sum">-</button>
+                    <p id="{{menuitem[2]}}_count" class="sum">1</p>
+                    <button @click="menu_item_quantity_increment('{{menuitem[2]}}_count')" class="sum">+</button>
                   </div>
 
-                  <button class="add-order" @click="add_to_order('{{menuitem['id']}}','{{menuitem['name']}}','{{menuitem['name']}}_count','{{menuitem['price']}}')">Add Order</button>
+                  <button class="add-order" @click="add_to_order('{{menuitem[0]}}','{{menuitem[2]}}','{{menuitem[2]}}_count','{{ '%.2f'|format(menuitem[5]) }}')">Add Order</button>
               </div>
           </div>
         </div>
