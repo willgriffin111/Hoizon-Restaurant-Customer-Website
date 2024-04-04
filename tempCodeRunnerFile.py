@@ -1,1 +1,1 @@
-session['menu_items'].clear()
+items_out_of_stock

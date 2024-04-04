@@ -136,9 +136,9 @@ body {
     .reset-title{
       padding-top: 3%;
       font-size: 70px;
-      font-weight: 700;
+      font-weight: 500;
       margin-bottom: 3%;
-      text-align: left;
+      text-align: center;
       margin-left: 5%;
     }
 
@@ -150,41 +150,42 @@ body {
       left: 5%;
     }
 
-    .menu-items-box{
-      padding: 5%;
+    .menu-item-box{
+      position: relative;
+      text-align: center;
+      margin: 15px;
+      margin-top: 20px;
+      width: 90%;
+      margin-left: 5%;
+      border-radius: 30px 30px 30px 30px;
+      box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      background-color: white;
+      height: 200px;
     }
-
-    .menu-item-list{
-      list-style-type: none;
+  
+    .menu-item-name{
+      position: relative;
+      top: 30%;
+      font-size: 60px;
       text-align: left;
-    }
-
-    .menu-list-item{
-      border-bottom: 3px solid black;
-      padding-bottom: 5%;
-      margin-top: 8%;
-      padding-bottom: 5%;
-    }
-
-    .menu-list-item:last-child{
-      border-bottom: none;
-    }
-
-    .menu-item{
+      padding: 5%;
+      font-weight: 400;
       display: inline;
-      font-size: 50px;
     }
-
-    .menu-cost{
+  
+    .menu-item-price{
+      position: relative;
+      top: 30%;
+      font-size: 60px;
+      text-align: right;
+      font-weight: 400;
+      padding-left: 5%;
       display: inline;
-      font-size: 50px;
-      float: right;
-      padding-right: 5%;
     }
-
-    .menu-quantity{
-      display: inline;
-      font-size: 50px;
+    .bottom-box{
+      height: 700px;
+      width: 100%;
     }
 
     .delete-btn{
@@ -203,6 +204,12 @@ body {
       border-radius: 20px;
       background: rgb(228, 228, 228);
       font-size: 60px;
+    }
+
+    .refund-text{
+      padding: 3%;
+      font-size: 40px;
+      margin-bottom: 3%;
     }
 
 
