@@ -320,7 +320,7 @@
             var menuquantity = document.getElementById(quantity);
             var menuprice = parseFloat((menuitemprice).replace('£', '')) * parseInt(menuquantity.textContent);
             // Push the new item into the menuitems array
-            menuitems.value.push({ id: menuitemid, name: menuitemname, quantity: menuquantity.textContent, price: menuprice});
+            menuitems.value.push({ id: menuitemid, name: menuitemname, quantity: menuquantity.textContent, price: menuprice, item_price: menuitemprice});
             // Alert the JSON string representation of the updated menuitems array
            alert("Added " +menuitemname+ " to order")
             // Convert the menuitems array to a JSON string

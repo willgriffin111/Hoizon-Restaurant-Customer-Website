@@ -140,7 +140,7 @@ def orders():
                             # Extracting details from the dictionary
                             name = details.get('name', '')
                             quantity = int(details.get('quantity', 0))
-                            price = details.get('price', 0.0)
+                            price = details.get('item_price', 0.0)
                             description = "" #had to default as costomers cant make notes on orders
 
                             # Check stock availability
@@ -190,7 +190,7 @@ def orders():
 
 
                         # Update the bill with the updated price, to account for the refund
-                        remaining_price = sum(item['quantity'] * item['price'] for item in items_out_of_stock.values())
+                        remaining_price = sum(item['quantity'] * item['item_price'] for item in items_out_of_stock.values())
                         if discount_applied > 0:
                             discount_amount = remaining_price * discount_applied
                             remaining_price -= discount_amount
