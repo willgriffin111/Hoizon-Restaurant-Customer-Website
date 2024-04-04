@@ -26,7 +26,6 @@
         // Check if the alert message is not empty
         if (alertMessage) {
             // Trigger the alert with the Flask variable value
-            alert(alertMessage);
         }
         </script>
 
@@ -50,7 +49,7 @@
         </style>
 
 
-        <link rel="stylesheet" href="../static/userOrder.css">
+        <link rel="stylesheet" href="../static/userAccountOrder.css">
         <title>Horizon Restaurant</title>
     </head>
    
@@ -109,50 +108,32 @@
       </nav>
 
     <!-- Content starts -->
-    <form method="POST">
     <div class="container-fluid p-0">
-      <div class="table-number-box">
-        <h3 class="table-text">Table No.</h3>
-        <select class="table-num-select" name="tableNumber" id="tableNumber">
-          {% for tablenumber in tablenumbers %}
-          <option class="box-option" value="{{ tablenumber[0] }}">{{ tablenumber[0] }}</option>
-          {% endfor %}
-        </select>
+      <h1 class="reset-title">Your Order</h1>
+      {% if orders %}
+      {% for order in orders %}
+      <div class="menu-item-box">
+        <h5 class="menu-item-name">{{ order[1] }}</h5>
+        <h5 class="menu-item-price">Cost: £{{ order[0] }}</h5>
       </div>
-      <div class="reset-box">
-        <h1 class="reset-title">Your Order</h1>
-        <div class="menu-items-box">
-          <ul class="menu-item-list">
-            {% if menuitems %}
-            {% for item in menuitems %}
-              <li class="menu-list-item">
-                  <input class="hidden" value="{{item['id']}}">
-                  <h1 class="menu-quantity">{{ item['quantity'] }}x</h1>
-                  <h1 class="menu-item">{{ item['name'] }}</h1>
-                  <button type="button" onclick= "removeItem({{ item['id'] }})" class="delete-btn"><i class="fa-solid fa-x"></i></button>
-                  <h1 class="menu-cost">£{{ item['price'] }}</h1>
-                  
-              </li>
-            {% endfor %}
-            {% else %}
-            <p style="font-size: 50px;">No items added yet. Please add some food to your order!</p>
-            {% endif %}
-          </ul>
-        </div>
+      {%endfor%}
+      {%else%}
+       <div class="reset-box">
+        <h1 class="refund-text">You dont have any orders, yet. 
+          <br> But when you make orders they will be here</h1>
+       </div>
+      {%endif%}
+    </div>
+
+    <div class="bottom-box"></div>
 
     
   </body>
   <!-- Footer -->
   <footer>
     <!-- Order Button -->
-    <div class="total-cost-box">
-      <h3 class="total-text">Total</h3>
-      <h3 class="total-cost">£{{ ordertotal }}</h3>
-
-    </div>
     <div class="orderbutton">
       <button type="submit" class="btn order-btn">Order</button>
-    </form>
     </div>
   </footer>
 </html>

@@ -101,11 +101,18 @@
                         {% for menuitem in menutable %}
                         {% if menuitem[3] == 'Starters' %}
                           <div class="menu-item-box">
+                            {% if menuitem[7] == True %}
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                            {% else %}
+                            <div class="out-of-stock-box">
+                              <h1 class="out-of-stock-text">Out of Stock!</h1>
+                            </div>
+                            
+                            {% endif %}
                             <h5 class="menu-item-name">{{menuitem[2]}}</h5>
                             <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                         </div>
                         {% endif %}
                         {% endfor %}
@@ -131,11 +138,17 @@
                           {% for menuitem in menutable %}
                           {% if menuitem[3] == 'Mains' %}
                           <div class="menu-item-box">
+                            {% if menuitem[7] == True %}
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                            {% else %}
+                            <div class="out-of-stock-box">
+                              <h1 class="out-of-stock-text">Out of Stock!</h1>
+                            </div>
+                            {% endif %}
                             <h5 class="menu-item-name">{{menuitem[2]}}</h5>
                             <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                         </div>
                           {% endif %}
                           {% endfor %}
@@ -161,11 +174,17 @@
                           {% for menuitem in menutable %}
                           {% if menuitem[3] == 'Desert' %}
                           <div class="menu-item-box">
+                            {% if menuitem[7] == True %}
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                            {% else %}
+                            <div class="out-of-stock-box">
+                              <h1 class="out-of-stock-text">Out of Stock!</h1>
+                            </div>
+                            {% endif %}
                             <h5 class="menu-item-name">{{menuitem[2]}}</h5>
                             <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                         </div>
                           {% endif %}
                           {% endfor %}
@@ -191,11 +210,17 @@
                           {% for menuitem in menutable %}
                           {% if menuitem[3] == 'Drinks' %}
                           <div class="menu-item-box">
+                            {% if menuitem[7] == True %}
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                            {% else %}
+                            <div class="out-of-stock-box">
+                              <h1 class="out-of-stock-text">Out of Stock!</h1>
+                            </div>
+                            {% endif %}
                             <h5 class="menu-item-name">{{menuitem[2]}}</h5>
                             <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
                             <!-- link this button to menu item pop up later when adding backend -Alex -->
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
                         </div>
                           {% endif %}
                           {% endfor %}
@@ -320,13 +345,13 @@
             var menuquantity = document.getElementById(quantity);
             var menuprice = parseFloat((menuitemprice).replace('£', '')) * parseInt(menuquantity.textContent);
             // Push the new item into the menuitems array
-            menuitems.value.push({ id: menuitemid, name: menuitemname, ammount: menuquantity.textContent, price: menuprice});
+            menuitems.value.push({ id: menuitemid, name: menuitemname, quantity: menuquantity.textContent, price: menuprice, item_price: menuitemprice});
             // Alert the JSON string representation of the updated menuitems array
            alert("Added " +menuitemname+ " to order")
             // Convert the menuitems array to a JSON string
             const dataToSend = JSON.stringify(menuitems.value);
             // Send the updated items array to the Flask backend
-            axios.post('/api/data', dataToSend, {
+            axios.post('{{ url_for('add_to_cart') }}', dataToSend, {
               headers: {
                 'Content-Type': 'application/json'
               }

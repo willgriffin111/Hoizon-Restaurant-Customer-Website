@@ -109,50 +109,40 @@
       </nav>
 
     <!-- Content starts -->
-    <form method="POST">
     <div class="container-fluid p-0">
-      <div class="table-number-box">
-        <h3 class="table-text">Table No.</h3>
-        <select class="table-num-select" name="tableNumber" id="tableNumber">
-          {% for tablenumber in tablenumbers %}
-          <option class="box-option" value="{{ tablenumber[0] }}">{{ tablenumber[0] }}</option>
-          {% endfor %}
-        </select>
-      </div>
       <div class="reset-box">
-        <h1 class="reset-title">Your Order</h1>
-        <div class="menu-items-box">
-          <ul class="menu-item-list">
-            {% if menuitems %}
-            {% for item in menuitems %}
-              <li class="menu-list-item">
-                  <input class="hidden" value="{{item['id']}}">
-                  <h1 class="menu-quantity">{{ item['quantity'] }}x</h1>
-                  <h1 class="menu-item">{{ item['name'] }}</h1>
-                  <button type="button" onclick= "removeItem({{ item['id'] }})" class="delete-btn"><i class="fa-solid fa-x"></i></button>
-                  <h1 class="menu-cost">£{{ item['price'] }}</h1>
-                  
-              </li>
-            {% endfor %}
-            {% else %}
-            <p style="font-size: 50px;">No items added yet. Please add some food to your order!</p>
-            {% endif %}
-          </ul>
-        </div>
+        {% if outOfStockItems %}
+        <h1 class="refund-title">Order Confirmed</h1>
+        <h1 class="refund-text">Thank you for your order! However, we regret to inform you that some items were out of stock. Don't worry, though – 
+          we've refunded the amount for the unavailable items.</h1>
+        
+        <h1 class="refund-price">The New total is: £{{ordertotal}}</h1>
+        <h1 class="refund-text">The items that could not be refunded are:</h1>
+        <ul class="menu-item-list">
+          {% for item_name, item_data in outOfStockItems.items() %}
+          <li class="menu-list-item">
+              <h1 class="menu-quantity">{{ item_data['quantity'] }}x</h1>
+              <h1 class="menu-item">{{ item_name }}</h1>
+              <h1 class="menu-cost">£{{ item_data['price'] * item_data['quantity']}}</h1>
+          </li>
+      {% endfor %}
+        </ul>
+        {% else %}
+        <h1 class="refund-title">Order Confirmed</h1>
+        <h1 class="refund-text">Thank you for your order!</h1>
+        
+        <h1 class="refund-price">Your total is: £{{ordertotal}}</h1>
+        {% endif %}
+      </div>
+    </div>
 
     
   </body>
   <!-- Footer -->
   <footer>
     <!-- Order Button -->
-    <div class="total-cost-box">
-      <h3 class="total-text">Total</h3>
-      <h3 class="total-cost">£{{ ordertotal }}</h3>
-
-    </div>
     <div class="orderbutton">
       <button type="submit" class="btn order-btn">Order</button>
-    </form>
     </div>
   </footer>
 </html>
