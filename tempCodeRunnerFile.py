@@ -1,1 +1,1 @@
-orderspage
+session['menu_items'].clear()

@@ -320,13 +320,13 @@
             var menuquantity = document.getElementById(quantity);
             var menuprice = parseFloat((menuitemprice).replace('£', '')) * parseInt(menuquantity.textContent);
             // Push the new item into the menuitems array
-            menuitems.value.push({ id: menuitemid, name: menuitemname, ammount: menuquantity.textContent, price: menuprice});
+            menuitems.value.push({ id: menuitemid, name: menuitemname, quantity: menuquantity.textContent, price: menuprice});
             // Alert the JSON string representation of the updated menuitems array
            alert("Added " +menuitemname+ " to order")
             // Convert the menuitems array to a JSON string
             const dataToSend = JSON.stringify(menuitems.value);
             // Send the updated items array to the Flask backend
-            axios.post('/api/data', dataToSend, {
+            axios.post('{{ url_for('add_to_cart') }}', dataToSend, {
               headers: {
                 'Content-Type': 'application/json'
               }
