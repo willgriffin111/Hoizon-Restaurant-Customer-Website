@@ -29,3 +29,17 @@ def create_bill(sub_total, discount_applied):
         except mysql.connector.Error as err:
             print(f"Error: {err}")
             return None
+        
+def getRestaurantNames():
+        restaurantNames = []
+        conn = dbfunc.getConnection() 
+        if conn != None:    #Checking if connection is None                    
+            if conn.is_connected(): #Checking if connection is established  
+                dbcursor = conn.cursor()    #Creating cursor object                                                 
+                dbcursor.execute("SELECT restaurant_id, restaurant_name FROM restaurant;")                                           
+                restaurantList = dbcursor.fetchall()
+                for restaurant in restaurantList:
+                    restaurantNames.append([restaurant[1],restaurant[0]])
+                dbcursor.close()
+                conn.close() 
+        return(restaurantNames)

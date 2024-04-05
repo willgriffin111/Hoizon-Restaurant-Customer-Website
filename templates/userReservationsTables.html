@@ -77,31 +77,21 @@
 
       <!-- Content starts -->
       <div id="app">
-      <form method="POST">
+        <form action="{{url_for('confirmBooking')}}" method="POST">
       <div class="container-fluid p-0">
         <div class="reset-box">
-          <h1 class="reset-title">Reserve</h1>
+          <h1 class="reset-title">Pick A Table</h1>
           <div class="line"></div>
             <div class="form-group">
-              <select class="form-control rest-input-box" name="Restaurant" id="Restaurant">
-                {% for Restaurant in Restaurants %}
-                <option class="rest-box-option" value="{{ Restaurant[1] }}">{{ Restaurant[0] }}</option>
-                {% endfor %}
-              </select>
-              <input type="text" class="name-input-box" id="firstName" name="firstName" placeholder="First Name" required>
-              <input type="text" class="name-input-box" id="lastName" name="lastName" placeholder="Last Name" required>
-              <input type="email" class="form-control input-box" id="Email" name="Email" placeholder="Email" required>
-              <input type="text" class="form-control input-box" id="Phonenum" name="Phonenum" placeholder="Phone Number" required>
-              <input type="date" class="date-input-box" id="date" name="date" required>
-              <select class="time-input-box" name="time" id="time">
-                {% for time in times %}
-                <option class="time-box-option" value="{{ time }}">{{ time }}</option>
-                {% endfor %}
-              </select>
-              <input type="number" class="form-control input-box" id="numpeople" name="numpeople" placeholder="Number of people" required>
-            </div>
-          </p>
+              {% for table in available_tables %}
+                  <div class="table-radio">
+                      <input type="radio" name="table" id="table_{{ loop.index }}" value="{{ table }}" {% if loop.first %} checked {% endif %}>
+                      <label for="table_{{ loop.index }}">Table number: {{ table[0] }}  Capacity: {{table[1]}}</label>
+                  </div>
+              {% endfor %}
+          </div>
         </div>
+        <div class="bottom-box"></div>
       </div>
     </div>
 
@@ -110,7 +100,7 @@
     <footer>
       <!-- Order Button -->
       <div class="orderbutton">
-        <button type="submit" class="btn order-btn">BOOK</button>
+        <button type="submit" class="btn order-btn">CONFIRM BOOKING</button>
       </div>
     </form>
     </footer>
