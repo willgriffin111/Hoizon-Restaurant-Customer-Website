@@ -85,7 +85,7 @@
             <div class="form-group">
               <select class="form-control rest-input-box" name="Restaurant" id="Restaurant">
                 {% for Restaurant in Restaurants %}
-                <option class="rest-box-option" value="{{ Restaurant[1] }}">{{ Restaurant[0] }}</option>
+                <option class="rest-box-option" value="{{ Restaurant }}">{{ Restaurant[0] }}</option>
                 {% endfor %}
               </select>
               <input type="text" class="name-input-box" id="firstName" name="firstName" placeholder="First Name" required>
