@@ -268,7 +268,8 @@ def reservationspage():
     #this form checks to see what tables are not booked in the timeslot and redirects them so they can choose what table 
     if request.method == "POST":
         print("Reservation checking for available tables")
-        Restaurantid = request.form['Restaurant']
+        Restaurant = ast.literal_eval(request.form['Restaurant'])
+        Restaurantid = Restaurant[1]
         name = request.form['firstName'] +  " " + request.form['lastName']
         Email = request.form['Email']           
         Phonenum = request.form['Phonenum']   
@@ -278,7 +279,7 @@ def reservationspage():
         numpeople = request.form['numpeople']
         
         #compileing all the form data so it can be used after table has been selected
-        session['reservationdata'] = {"name": name, "email": Email, "phonenum": Phonenum, "numpeople": numpeople, "date": date, "time": time_str, "restaurant": Restaurantid}
+        session['reservationdata'] = {"name": name, "email": Email, "phonenum": Phonenum, "numpeople": numpeople, "date": date, "time": time_str, "restaurant": Restaurantid, "restaurantname": Restaurant[0]}
         conn = dbfunc.getConnection()           
         if conn != None:    #Checking if connection is None           
             if conn.is_connected(): #Checking if connection is established
@@ -333,7 +334,7 @@ def confirmBooking():
                 conn.close()
                 gc.collect() 
                 print("Reservation created sucsessfully")
-                return render_template('userReservationConfirm.html', reservationdata=session['reservationdata'], tablenum=table[0])
+                return render_template('userReservationsConfirm.html', reservationdata=session['reservationdata'], tablenum=table[0], menuitemslength=session['menuitemslength'],isLoggedIn=session['isLoggedIn'])
     else:
         return redirect(url_for('home'))
 

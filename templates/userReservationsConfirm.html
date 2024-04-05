@@ -112,12 +112,12 @@
     <div class="container-fluid p-0">
       <div class="reset-box">
         <h1 class="refund-title">Table Reserved</h1>
-        <h1 class="refund-text">Thank you for your order! However, we regret to inform you that some items were out of stock. Don't worry, though – 
-          we've refunded the amount for the unavailable items.</h1>
+        <h1 class="refund-text">Your table has been reserved at: {{reservationdata['restaurantname']}}</h1>
         
-        <h1 class="refund-price">The New total is: £{{ordertotal}}</h1>
-        <h1 class="refund-text">The items that could not be refunded are:</h1>
-        <ul class="menu-item-list">
+        <h1 class="refund-price">Date: {{reservationdata['date']}}<br> 
+          Time: {{reservationdata['time']}}<br>
+          Table Number: {{ tablenum }}</h1>
+        
           
       </div>
     </div>
@@ -128,7 +128,7 @@
   <footer>
     <!-- Order Button -->
     <div class="orderbutton">
-      <button type="submit" class="btn order-btn">Order</button>
+      <a href="{{url_for('home')}}" class="btn order-btn">Return</a>
     </div>
   </footer>
 </html>

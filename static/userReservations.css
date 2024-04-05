@@ -212,6 +212,10 @@ body {
       color: #ffffff;
   }
 
+  .refund-price{
+    font-size: 60px;
+    text-align: center;
+  }
 
 /* order button */
   .orderbutton{

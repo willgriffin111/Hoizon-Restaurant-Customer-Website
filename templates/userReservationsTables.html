@@ -83,12 +83,16 @@
           <h1 class="reset-title">Pick A Table</h1>
           <div class="line"></div>
             <div class="form-group">
+              {% if available_tables%}
               {% for table in available_tables %}
                   <div class="table-radio">
                       <input type="radio" name="table" id="table_{{ loop.index }}" value="{{ table }}" {% if loop.first %} checked {% endif %}>
                       <label for="table_{{ loop.index }}">Table number: {{ table[0] }}  Capacity: {{table[1]}}</label>
                   </div>
               {% endfor %}
+              {% else %}
+              <h1 class="no-tables">No tables are currently available. <br>Please try another time</h1>
+              {% endif %}
           </div>
         </div>
         <div class="bottom-box"></div>
