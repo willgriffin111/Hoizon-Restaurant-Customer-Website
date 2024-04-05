@@ -11,7 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>        
 <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
-
+        
         <script>
           function riseCatagory(elementId) {
             var element = document.getElementById(elementId);
@@ -131,73 +131,80 @@
       </div>
     </div>
     
-    <div id="myModal" class="modal fade">
-      <div class="modal-dialog modal-confirm">
-          <div class="modal-content">
-              <div class="modal-header flex-column">
-                  <div class="icon-box">
-                      <i class="material-icons"></i>
-                  </div>                        
-                  <h4 class="modal-title w-100">Error</h4>    
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-              </div>
-              <div class="modal-body">
-                  <p id="error_message"></p>
-              </div>
-              <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    <style>
+      .modal-dialog {
+          max-width: 600px; /* Adjust the maximum width as needed */
+          width: 80%; /* Adjust the width as needed */
+          margin: 400px auto;
+        
+      }
+  
+      .modal-content {
+          height: 400px; /* Adjust the height as needed */
+      }
+  </style>
+      </head>
+      <body>
+      <!-- Modal HTML -->
+      <div id="myModal" class="modal fade" style="display: none;">
+          <div class="modal-dialog modal-confirm">
+              <div class="modal-content">
+                  <div class="modal-header flex-column">
+                      <div class="icon-box">
+                          <i class="material-icons">&#xE5CD;</i>
+                      </div>                        
+                      <h4 class="modal-title w-100">Error</h4>    
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                      <p>{{ error_message }}</p>
+                  </div>
               </div>
           </div>
       </div>
-  </div>
-  
-  <!-- Include necessary Bootstrap and jQuery libraries -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  
-  <!-- Your validation logic and form submission -->
-  <script>
-      $(document).ready(function(){
+      
+      <!-- Trigger the modal -->
+      <script>
+     $(document).ready(function(){
     
   
-          // Function to validate form inputs before submission
-          function validateForm() {
-              var firstname = $('#firstname').val();
-              var email = $('#email').val();
-              var password = $('#password').val();
-              var password2 = $('#password2').val();
-  
-              if (!firstname || !email || !password || !password2) {
-                  
-                  displayErrorModal('Please fill in all fields.');
-                  return false;
-              }
-  
-              // Add more validation as needed
-  
-              // Return true if form is valid
-              return true;
-          }
-          function displayErrorModal(errorMessage) {
-              // Set the error message in the modal body
-              $('#myModal .modal-body').html('<p>' + errorMessage + '</p>');
-              // Show the modal
-              $('#myModal').modal('show');
-          }
+    function validateForm() {
+        var firstname = $('#firstname').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var password2 = $('#password2').val();
 
-          // Submit form with validation
-          $('#registerForm').submit(function(event) {
-              if (!validateForm()) {
-                  event.preventDefault(); // Prevent form submission if validation fails
-              } else {
-                  // Form is valid, continue with form submission
-                
-              }
-          });
-      });
-  </script>
+        if (!firstname || !email || !password || !password2) {
+            
+            displayErrorModal('Please fill in all fields.');
+            return false;
+        }
 
-    
+        // Add more validation as needed
+
+        // Return true if form is valid
+        return true;
+        
+    }
+    function displayErrorModal(errorMessage) {
+        // Set the error message in the modal body
+        $('#myModal .modal-body').html('<p>' + errorMessage + '</p>');
+        // Show the modal
+        $('#myModal').modal('show');
+    }
+
+    // Submit form with validation
+    $('#registerForm').submit(function(event) {
+        if (!validateForm()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        } else {
+            // Form is valid, continue with form submission
+          
+        }
+    });
+});
+    </script>
+      
   </body>
   <!-- Footer -->
   <footer>

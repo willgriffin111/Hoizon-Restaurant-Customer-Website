@@ -398,6 +398,7 @@ def register():
                             session['logged_in'] = True
                             session['username'] = firstname
                             session['usertype'] = 'standard'
+                            return redirect(url_for('Horizon_Front'))
                             return render_template("success_modal.html")
                 else:
                     error = "Database connection error"
@@ -409,6 +410,7 @@ def register():
         return render_template("error_modal.html", error_message=error)
 
     return render_template("userRegister.html", error=error, logged_in=session.get('logged_in'))
+
 
 @app.route('/resetpassword', methods=["GET","POST"])
 def resetpassword():
