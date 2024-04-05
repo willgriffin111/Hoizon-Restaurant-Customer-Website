@@ -8,7 +8,6 @@ import gc
 from functools import wraps
 from mysql.connector import Error , errorcode
 import datetime
-from datetime import datetime, timedelta
 import json
 from database import dbfunc
 import re
@@ -275,7 +274,7 @@ def reservationspage():
         Phonenum = request.form['Phonenum']   
         date = request.form['date']  
         time_str = request.form['time']
-        time = datetime.strptime(time_str, "%H:%M").time()
+        time = datetime.datetime.strptime(time_str, "%H:%M").time()
         numpeople = request.form['numpeople']
         
         #compileing all the form data so it can be used after table has been selected
@@ -328,7 +327,7 @@ def confirmBooking():
                 dbcursor.execute("INSERT INTO reservation (restaurant_id, reservation_customer_name, reservation_customer_phone, \
                                         table_id, reservation_party_size, reservation_author, reservation_creation_time, reservation_date,\
                                             reservation_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (session['reservationdata']['restaurant'], session['reservationdata']['name'], session['reservationdata']['phonenum'], table[2],
-                                                                                                        session['reservationdata']['numpeople'], "Costomer Reservation",datetime.now(), session['reservationdata']['date'], datetime.strptime(session['reservationdata']['time'], "%H:%M").time())) 
+                                                                                                        session['reservationdata']['numpeople'], "Costomer Reservation",datetime.datetime.now(), session['reservationdata']['date'], datetime.datetime.strptime(session['reservationdata']['time'], "%H:%M").time())) 
                 conn.commit()
                 dbcursor.close()
                 conn.close()
