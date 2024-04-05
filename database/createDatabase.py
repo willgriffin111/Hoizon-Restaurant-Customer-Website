@@ -1,6 +1,6 @@
 import mysql.connector,dbfunc
 
-conn = dbfunc.getConnection()   #connection to DB
+conn = dbfunc.getnondbConnection()   #connection to DB
 DB_NAME = 'Horizon_Restaurant'             #DB Name
 DBStatement = 'CREATE DATABASE ' + DB_NAME + ';'    #SQL
 if conn != None:    #Checking if connection is None
