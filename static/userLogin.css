@@ -19,14 +19,12 @@ body {
   
     .navbar-brand{
       font-size: 70px;
-      padding-left: 40px;
+
       font-weight: bold;
-      
+
     }
   
-    .navbar-nav{
-      padding-left: 2%;
-    }
+
   
     .nav-item{
       font-size: 40px;
@@ -37,7 +35,7 @@ body {
     }
   
     .nav-item:last-child{
-  
+
       border-bottom: none;
     }
     
@@ -147,7 +145,7 @@ button{
   background-color: white;
 }
 
-footer {
+.login {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -207,4 +205,302 @@ footer {
   .navbar-collapse{
     background-color: white;
   }
+}
+
+
+
+/*<---------- Website Format ---------->*/
+
+@media only screen and (min-width: 1660px) {
+
+  .navbar-brand{
+    font-size: 70px;
+    font-weight: 200;
+    color: white
+  }
+  .navbar-brand:hover{
+    color: white;
+  }
+  .nav-link:hover{
+    color: rgb(255, 255, 255);
+  }
+
+  .nav-link{
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    margin-right: 30px;
+  }
+
+  button{
+    background-color: rgb(29, 29, 29,0.01);
+  }
+
+  .fa-user{
+    display:none;
+  }
+
+
+  .nav-btn{
+    font-size: 60px;
+    color:rgb(255, 255, 255);
+    position: relative;
+  }
+
+  .navbar{
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: rgb(29, 29, 29,0.8);
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 11;
+    position: fixed;
+    height: 150px;
+  }
+  .navbar-collapse{
+    background-color: rgb(29, 29, 29,0.01);
+  }
+
+  .order-counter{
+    font-size: 35px;
+    padding: 0px;
+    font-weight: 300;
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+  }
+
+
+  /*<----------- Login form ----------->*/
+
+  .container-fluid{
+    top: 200px;
+    position: relative;
+    
+  }
+
+
+
+  .reset-box{
+    position: relative;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+    width: 60%;
+    height: 80%;
+    border-radius: 30px;
+    color: black;
+    padding-bottom: 50px;
+    margin-left: 290px;
+  }
+
+   /*<---- Alert  -----*/
+  .alert{
+    display: none;
+  }
+  .reset-title{
+    padding-top: 10%;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 3%;
+  }
+
+  .line{
+    position: relative;
+    background-color: black;
+    width: 90%;
+    height: 1px;
+    left: 5%;
+  }
+
+  .input-box{
+    margin-top: 5%;
+    position: relative;
+    width: 40%;
+    border-radius: 20px;
+    background: rgb(228, 228, 228);
+    font-size: 30px;
+    margin-left: 20%;
+  }
+
+  h1{
+    font-size: 27px;
+  }
+
+  .social-login {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+  
+  .social-login a {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .social-login a:last-child {
+    margin-right: 0;
+  }
+  
+  .social-login svg {
+    width: 70px;
+    height: 70px;
+    color: #333;
+    transition: all 0.3s;
+  }
+  
+  .social-login a:hover svg {
+    color: #fff;
+    background-color: #3b5998; /* For Facebook */
+    border-radius: 38px;
+    width: 75px;
+    height: 75px;
+  }
+
+  .login {
+    width: 18%;
+    height: 10%;
+    text-align: center;
+    left: 40%;
+    position: relative;
+    margin-top: 12%;
+  }
+
+  .order-btn{
+    font-size: 40px;
+    padding: 6%;
+
+  }
+
+
+  /*<---------- Footer --------->*/
+
+  .fcontainer{
+    width: 100%;
+    background-color: #dddddd;
+}
+
+ul{
+    list-style:none;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer{
+    background-color: #dddddd;
+    padding: 30px 0;
+    padding-left: 40px;
+    margin-top: 5%;
+
+}
+
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-weight: 500;
+    position: relative;
+    margin-left: 20px;
+ }
+ .footer-col h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: rgb(0, 0, 0);
+    height: 2px;
+    box-sizing: border-box;
+    width:  120px;
+    display: none;
+ }
+ .footer-col ul li{
+    margin-bottom: 10px;
+ }
+ .footer-col ul li a{
+    font-size: 24px;
+    text-transform: capitalize;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 300;
+    color: #000000;
+    display: block;
+    transition: all 0.3s ease;
+ }
+ .footer-col ul li a:hover{
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+ }
+
+  
+}
+
+@media only screen and (max-width: 1000px) {
+  .menu-web {
+    display: none;
+  }
+  .footer{
+    display: none;
+  }
+  .navbar{
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: white;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+  }
+
+  .navbar-brand{
+    font-size: 70px;
+    font-weight: bold;
+
+  }
+
+  .container{
+    width: 40px;
+    margin-left: 98px;
+    padding: 0%;
+  }
+
+  .nav-item{
+    font-size: 40px;
+    padding: 5px;
+    border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+    padding-bottom: 5px; /* Adjuxt the space between the text and the line */
+    width: 95%;
+  }
+
+  .nav-item:last-child{
+
+    border-bottom: none;
+  }
+  
+  .nav-link{
+    color: black;
+  }
+
+  .nav-link:hover{
+    color: gray;
+  }
+  
+  .navbar-toggler{
+    border: none;
+    color: black;
+  }
+  
+  .navbar-toggler-icon{
+    font-size: 60px;
+  }
+  .nav-btn{
+    font-size: 60px;
+    color: black;
+    position: relative;
+    text-align: right;
+    display:flex ;
+    text-decoration: none;
+    margin-right: 60px;
+  }
+
 }

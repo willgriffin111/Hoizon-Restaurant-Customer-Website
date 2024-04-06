@@ -278,40 +278,47 @@ def reservationspage():
         time = datetime.datetime.strptime(time_str, "%H:%M").time()
         numpeople = request.form['numpeople']
         
-        #compileing all the form data so it can be used after table has been selected
-        session['reservationdata'] = {"name": name, "email": Email, "phonenum": Phonenum, "numpeople": numpeople, "date": date, "time": time_str, "restaurant": Restaurantid, "restaurantname": Restaurant[0]}
-        conn = dbfunc.getConnection()           
-        if conn != None:    #Checking if connection is None           
-            if conn.is_connected(): #Checking if connection is established
-                print('MySQL Connection is established')                          
-                dbcursor = conn.cursor()    #Creating cursor object
-                
-                #grabbing all booked table ids for that time slot          
-                dbcursor.execute('SELECT table_id FROM reservation WHERE restaurant_id = %s AND reservation_date = %s AND reservation_time = %s;', (Restaurantid, date, time,))     #Executing
-                tableids = dbcursor.fetchall()
-                
-                #getting all tables that the resturant has so it can be check what tables are free
-                dbcursor.execute('SELECT table_number, table_capacity, table_id FROM tables WHERE restaurant_id = %s;', (Restaurantid,))
-                alltables = dbcursor.fetchall()
-                
-                # Extract booked table IDs into a set for faster lookup
-                booked_table_ids = set(table_id for table_id, in tableids)
+        #checking to make sure were not booking in the past
+        combined_datetime = datetime.datetime.combine(datetime.datetime.strptime(date, '%Y-%m-%d').date(), datetime.datetime.strptime(time_str, "%H:%M").time())
+        if combined_datetime >= datetime.datetime.now():
 
-                # Initialize a list to store available table information
-                available_tables = []
+            #compileing all the form data so it can be used after table has been selected
+            session['reservationdata'] = {"name": name, "email": Email, "phonenum": Phonenum, "numpeople": numpeople, "date": date, "time": time_str, "restaurant": Restaurantid, "restaurantname": Restaurant[0]}
+            conn = dbfunc.getConnection()           
+            if conn != None:    #Checking if connection is None           
+                if conn.is_connected(): #Checking if connection is established
+                    print('MySQL Connection is established')                          
+                    dbcursor = conn.cursor()    #Creating cursor object
+                    
+                    #grabbing all booked table ids for that time slot          
+                    dbcursor.execute('SELECT table_id FROM reservation WHERE restaurant_id = %s AND reservation_date = %s AND reservation_time = %s;', (Restaurantid, date, time,))     #Executing
+                    tableids = dbcursor.fetchall()
+                    
+                    #getting all tables that the resturant has so it can be check what tables are free
+                    dbcursor.execute('SELECT table_number, table_capacity, table_id FROM tables WHERE restaurant_id = %s;', (Restaurantid,))
+                    alltables = dbcursor.fetchall()
+                    
+                    # Extract booked table IDs into a set for faster lookup
+                    booked_table_ids = set(table_id for table_id, in tableids)
 
-                # Iterate through all tables to check availability
-                for table_number, table_capacity, table_id in alltables:
-                    # Check if the table is not already booked and has enough capacity
-                    if table_id not in booked_table_ids and table_capacity >= int(numpeople):
-                        available_tables.append((table_number, table_capacity, table_id))
+                    # Initialize a list to store available table information
+                    available_tables = []
 
-                print("Available Tables:", available_tables)
-                dbcursor.close()
-                conn.close()
-                gc.collect() 
-                print(session['reservationdata'])
-                return render_template('userReservationsTables.html', available_tables=available_tables, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+                    # Iterate through all tables to check availability
+                    for table_number, table_capacity, table_id in alltables:
+                        # Check if the table is not already booked and has enough capacity
+                        if table_id not in booked_table_ids and table_capacity >= int(numpeople):
+                            available_tables.append((table_number, table_capacity, table_id))
+
+                    print("Available Tables:", available_tables)
+                    dbcursor.close()
+                    conn.close()
+                    gc.collect() 
+                    print(session['reservationdata'])
+                    return render_template('userReservationsTables.html', available_tables=available_tables, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+        else:
+            #need to display an error here saying "the date or time your trying to book has passed"
+            return render_template('userReservations.html', times=times,menuitemslength=session['menuitemslength'], Restaurants=restaurantNames, isLoggedIn=session['isLoggedIn'],)
     else:
         return render_template('userReservations.html', times=times,menuitemslength=session['menuitemslength'], Restaurants=restaurantNames, isLoggedIn=session['isLoggedIn'],)
 
@@ -372,7 +379,7 @@ def login():
     except Exception as e:
         error = str(e) + " <br/> Invalid credentials, try again."
 
-    return render_template("userLogin.html", form=form, error=error, logged_in=session.get('logged_in'))
+    return render_template("userLogin.html", form=form, error=error, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():

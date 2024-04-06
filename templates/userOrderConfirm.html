@@ -57,13 +57,17 @@
     <body class="vh-100">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
-<!-- Search icon -->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            </button>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Horizon</a>
+            </div>
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Restaurant</a>
+            </div>
+          </div>
+        </div>
+
             <!-- User icon -->
             <button>
               {% if isLoggedIn %}
@@ -98,7 +102,7 @@
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
           </li>
           </li>
           <li class="nav-item">
@@ -138,11 +142,55 @@
 
     
   </body>
-  <!-- Footer -->
-  <footer>
+
+  <div class="mobile-submit">
     <!-- Order Button -->
-    <div class="orderbutton">
+      <div class="orderbutton">
       <button type="submit" class="btn order-btn">Order</button>
+  </form>
     </div>
+    </div>
+<!-- Footer -->
+  <footer class="footer">
+    <div class="fcontainer">
+      <div class="row">
+        <div class="footer-col">
+          <h4>Company</h4><br>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Our service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Vacancies</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Help</h4><br>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Online Booking</a></li>
+            <li><a href="#">Payment options</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Explore us</h4><br>
+          <ul>
+            <li><a href="#">Sitemap</a></li>
+            <li><a href="#">Chains</a></li>
+            <li><a href="#">Recipes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Partners</h4><br>
+          <ul>
+            <li><a href="#">Work With us</a></li>
+            <li><a href="#">Advertise with us</a></li>
+            <li><a href="#">Cooking insites</a></li>
+            <li><a href="#">Affiliates</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p style="color: black; margin:0px ;"  >Copyright © 2024 Horizon Restaurant. All rights reserved.</p>
   </footer>
 </html>
