@@ -68,25 +68,34 @@
 
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
-            <!-- Search icon -->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            </button>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Horizon</a>
+            </div>
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Restaurant</a>
+            </div>
+          </div>
+        </div>
+
             <!-- User icon -->
             <button>
-              
-              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('home') }}">
-                <i class="fa-solid fa-user"></i>
-              </a>
+              {% if isLoggedIn %}
+                  <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                      <i class="fa-solid fa-user"></i>
+                  </a>
+              {% else %}
+                  <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                      <i class="fa-solid fa-user"></i>
+                  </a>
+              {% endif %}
             </button>
             <!-- Bag-counter icon -->
             <button>
-              <a class="nav-btn" aria-current="page" href="#">
+              <a class="nav-btn" aria-current="page" href="{{ url_for('orders') }}">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <p class="order-counter">10</p>
+                <p class="order-counter"> {{ menuitemslength }} </p>
             </a>
           </button>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,17 +113,15 @@
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
-            </li>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
+          </li>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
           </ul>
-
         </div>
-    </div>
-</nav>
+      </nav>
 
 
 
@@ -160,11 +167,55 @@
     
   </body>
   <!-- Footer -->
-  <footer>
+  <div class="login">
     <!-- Order Button -->
     <div class="orderbutton">
       <button type="submit" class="btn order-btn">Login</button>
     </div>
   </form>
-  </footer>
+</div>
+<footer class="footer">
+  <div class="fcontainer">
+    <div class="row">
+      <div class="footer-col">
+        <h4>Company</h4><br>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Our service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">Vacancies</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get Help</h4><br>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Online Booking</a></li>
+          <li><a href="#">cancellations</a></li>
+          <li><a href="#">Payment options</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore us</h4><br>
+        <ul>
+          <li><a href="#">Sitemap</a></li>
+          <li><a href="#">Chains</a></li>
+          <li><a href="#">Recipes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Partners</h4><br>
+        <ul>
+          <li><a href="#">Work With us</a></li>
+          <li><a href="#">Advertise with us</a></li>
+          <li><a href="#">Cooking insites</a></li>
+          <li><a href="#">Affiliates</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p style="color: black; margin:0px ;"  >Copyright © 2024 Horizon Restaurant. All rights reserved.</p>
+</footer>
+
 </html>

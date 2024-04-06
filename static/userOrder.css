@@ -2,7 +2,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    position: relative;
     overflow-x: hidden;
     background-color: rgb(241, 241, 241);
   }
@@ -230,14 +229,7 @@ button{
   background-color: white;
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  text-align: center;
-  left: 0;
-}
+
 
 .total-cost-box{
   padding: 5%;
@@ -331,3 +323,403 @@ footer {
     background-color: white;
   }
 }
+
+
+/*<------------------------------------- Website Format ------------------------------------- >*/
+
+@media only screen and (min-width: 1660px) {
+
+  .navbar-brand{
+    font-size: 70px;
+    font-weight: 200;
+    color: white;
+    padding: 0%;
+  }
+  .navbar-brand:hover{
+    color: white;
+  }
+  .nav-link:hover{
+    color: rgb(255, 255, 255);
+  }
+
+  .nav-link{
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    margin-right: 30px;
+  }
+
+  .nav-btn{
+    font-size: 60px;
+    color:white;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+
+  .navbar{
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: rgb(29, 29, 29,0.8);
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 11;
+    position: fixed;
+    height: 150px;
+  }
+  .navbar-collapse{
+    background-color: rgb(29, 29, 29,0.01);
+  }
+  /* content area */
+  .content-box {
+    margin-top: 300px;
+    background-color: rgb(241, 241, 241);
+    height: 100px;
+  }
+
+
+  .fa-user{
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) {
+  .menu-web {
+    display: none;
+  }
+  .footer{
+    display: none;
+  }
+  .mobile-submit{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    text-align: center;
+    left: 0;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  
+  .menu-web {
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+  .collapse-contain{
+    margin-top: 150px;
+    margin-left: -40px;
+    margin-bottom: 20px;
+  }
+  
+  .card-title{
+    font-weight: 450;
+  }
+
+  .fcontainer{
+    max-width:100%;
+    background-color: #dddddd;
+    margin: auto;
+
+    
+}
+
+ul{
+    list-style:none;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer{
+    background-color: #dddddd;
+    padding: 30px 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    margin-top: 200px;
+}
+
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-weight: 500;
+    position: relative;
+ }
+ .footer-col h4::before{
+    content: '';
+    position: absolute;
+    left: 25%;
+    bottom: -10px;
+    background-color: rgb(0, 0, 0);
+    height: 3;
+    box-sizing: border-box;
+    width:  120px;
+ }
+ .footer-col ul li{
+    margin-bottom: 10px;
+ }
+ .footer-col ul li a{
+    font-size: 24px;
+    text-transform: capitalize;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 300;
+    color: #000000;
+    display: block;
+    transition: all 0.3s ease;
+ }
+ .footer-col ul li a:hover{
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+ }
+
+ .reset-box{
+  position: relative;
+  left: 0%;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+  width: 100%  ;
+  height: 100%;
+  border-radius: 30px;
+  color: black;
+  padding-bottom: 50px;
+}
+
+
+
+/* table number box */
+.table-number-box{
+  position: relative;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+  width: 40%;
+  height: 100px;
+  border-radius: 10px;
+  color: black;
+  padding-bottom: 50px;
+  left: 30%;
+}
+.table-text{
+  display: inline-block;
+  font-size: 30px;
+  text-align: left;
+  padding-left: 5%;
+  font-weight: 500;
+  margin-right: 45%;
+}
+.table-num-select{
+  display: inline-block;
+  border: none;
+  position: relative; 
+  border-radius: 10px;
+  background: rgb(228, 228, 228);
+  font-size: 30px;
+  color: rgb(90, 90, 90);
+  margin-right: 10%;
+  margin-top: 20px;
+  }
+
+.box-option{
+  font-size: 20px;
+}
+
+.reset-box{
+  position: relative;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+  width: 60%;
+  height: 100%;
+  border-radius: 30px;
+  color: black;
+  padding-bottom: 50px;
+  margin: auto;
+
+}
+
+.reset-title{
+  padding-top: 3%;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 3%;
+  text-align: left;
+  margin-left: 5%;
+}
+
+.line{
+  position: relative;
+  background-color: black;
+  width: 90%;
+  height: 1px;
+  left: 5%;
+}
+
+.menu-items-box{
+  padding: 0%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.menu-item-list{
+  list-style-type: none;
+  text-align: left;
+}
+
+.menu-list-item{
+  border-bottom: 3px solid black;
+  padding-bottom: 5%;
+  margin-top: 8%;
+  padding-bottom: 5%;
+}
+
+.menu-list-item:last-child{
+  border-bottom: none;
+}
+
+.menu-item{
+  display: inline;
+  font-size: 30px;
+}
+
+.menu-cost{
+  display: inline;
+  font-size: 30px;
+  float: right;
+  padding-right: 5%;
+}
+
+.menu-quantity{
+  display: inline;
+  font-size: 30px;
+}
+
+.delete-btn{
+  text-align: right;
+  font-size: 25px;
+  float: right;
+  background-color: red;
+  border-radius: 10px;
+}
+
+.input-box{
+  margin-top: 15%;
+  position: relative;
+  left: 10%;
+  width: 80%;
+  border-radius: 20px;
+  background: rgb(228, 228, 228);
+  font-size: 50px;
+}
+
+
+/* order button */
+.orderbutton{
+width: 40%; 
+
+}
+.order-btn{
+padding: 100px;
+width: 40%;
+font-size: 10px;
+background-color: #daab1d;
+color: white;
+margin: auto;
+}
+
+.order-btn:hover{
+background-color:#daab1d ;
+}
+
+
+
+button{
+border: none;
+background-color: white;
+}
+
+.mobile-submit{
+bottom: 0;
+width: 20%;
+background-color: rgb(241, 241, 241);
+text-align: center;
+
+margin: auto;
+}
+
+.total-cost-box{
+padding: 5%;
+padding-bottom: 10%;
+margin-top: 10%;
+
+}
+
+.total-cost{
+font-size: 50px;
+float: right;
+}
+.total-text{
+font-size: 50px;
+float: left;
+}
+
+.order-counter{
+font-size: 35px;
+padding: 0px;
+font-weight: bold;
+color: rgb(51, 51, 51);
+}
+
+
+.social-login {
+text-align: center;
+margin-top: 60px;
+margin-bottom: 50px;
+}
+
+.social-login a {
+display: inline-block;
+margin-right: 20px;
+}
+
+.social-login a:last-child {
+margin-right: 0;
+}
+
+.social-login svg {
+width: 100px;
+height: 100px;
+color: #333;
+transition: all 0.3s;
+}
+
+.social-login a:hover svg {
+color: #fff;
+background-color: #3b5998; /* For Facebook */
+}
+
+.form-control {
+margin-bottom: 10px;
+}
+
+.login-here{
+margin-top: 20px;
+}
+
+
+
+/* media quirries */
+@media only screen and (min-width: 992px) {
+.nav-item {
+border-bottom: none;
+}
+.navbar-collapse{
+background-color: white;
+}
+}
+}
+

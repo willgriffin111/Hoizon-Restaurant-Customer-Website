@@ -21,13 +21,6 @@
                     console.error('Error removing item:', error);
                 });
         }
-        var alertMessage = "{{ ordermessage }}";
-
-        // Check if the alert message is not empty
-        if (alertMessage) {
-            // Trigger the alert with the Flask variable value
-            alert(alertMessage);
-        }
         </script>
 
         <style>
@@ -51,19 +44,25 @@
 
 
         <link rel="stylesheet" href="../static/userOrder.css">
+        <link rel="stylesheet" href="../static/userfrontPage.css">
         <title>Horizon Restaurant</title>
+        
     </head>
    
     <body class="vh-100">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
-<!-- Search icon -->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            </button>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Horizon</a>
+            </div>
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Restaurant</a>
+            </div>
+          </div>
+        </div>
+
             <!-- User icon -->
             <button>
               {% if isLoggedIn %}
@@ -98,7 +97,7 @@
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
           </li>
           </li>
           <li class="nav-item">
@@ -110,49 +109,90 @@
 
     <!-- Content starts -->
     <form method="POST">
-    <div class="container-fluid p-0">
-      <div class="table-number-box">
-        <h3 class="table-text">Table No.</h3>
-        <select class="table-num-select" name="tableNumber" id="tableNumber">
-          {% for tablenumber in tablenumbers %}
-          <option class="box-option" value="{{ tablenumber[0] }}">{{ tablenumber[0] }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="reset-box">
-        <h1 class="reset-title">Your Order</h1>
-        <div class="menu-items-box">
-          <ul class="menu-item-list">
+      <div class="container-fluid p-0">
+        <div class="table-number-box">
+          <h3 class="table-text">Table No.</h3>
+          <select class="table-num-select" name="tableNumber" id="tableNumber">
+            {% for tablenumber in tablenumbers %}
+            <option class="box-option" value="{{ tablenumber[0] }}">{{ tablenumber[0] }}</option>
+{% endfor %}
+          </select>
+        </div>
+        <div class="reset-box">
+          <h1 class="reset-title">Your Order</h1>
+          <div class="menu-items-box">
+            <ul class="menu-item-list">
             {% if menuitems %}
-            {% for item in menuitems %}
-              <li class="menu-list-item">
-                  <input class="hidden" value="{{item['id']}}">
-                  <h1 class="menu-quantity">{{ item['quantity'] }}x</h1>
-                  <h1 class="menu-item">{{ item['name'] }}</h1>
-                  <button type="button" onclick= "removeItem({{ item['id'] }})" class="delete-btn"><i class="fa-solid fa-x"></i></button>
-                  <h1 class="menu-cost">£{{ item['price'] }}</h1>
-                  
-              </li>
-            {% endfor %}
-            {% else %}
+              {% for item in menuitems %}
+                <li class="menu-list-item">
+                    <input class="hidden" value="{{item['id']}}">
+                    <h1 class="menu-quantity">{{ item['quantity'] }}x</h1>
+                    <h1 class="menu-item">{{ item['name'] }}</h1>
+                    <button type="button" onclick= "removeItem({{ item['id'] }})" class="delete-btn"><i class="fa-solid fa-x"></i></button>
+                    <h1 class="menu-cost">£{{ item['price'] }}</h1>                
+                </li>
+              {% endfor %}
+{% else %}
             <p style="font-size: 50px;">No items added yet. Please add some food to your order!</p>
             {% endif %}
+            </ul>
+          </div>
+        </div>
+    </body>
+
+    <div class="mobile-submit">
+    <!-- Order Button -->
+      <div class="total-cost-box">
+        <h3 class="total-text">Total</h3>
+        <h3 class="total-cost">£{{ ordertotal }}</h3>
+      </div>
+      <div class="orderbutton">
+      <button type="submit" class="btn order-btn">Order</button>
+  </form>
+    </div>
+    </div>
+<!-- Footer -->
+  <footer class="footer">
+    <div class="fcontainer">
+      <div class="row">
+        <div class="footer-col">
+          <h4>Company</h4><br>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Our service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Vacancies</a></li>
           </ul>
         </div>
-
-    
-  </body>
-  <!-- Footer -->
-  <footer>
-    <!-- Order Button -->
-    <div class="total-cost-box">
-      <h3 class="total-text">Total</h3>
-      <h3 class="total-cost">£{{ ordertotal }}</h3>
-
+        <div class="footer-col">
+          <h4>Get Help</h4><br>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Online Booking</a></li>
+            <li><a href="#">Payment options</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Explore us</h4><br>
+          <ul>
+            <li><a href="#">Sitemap</a></li>
+            <li><a href="#">Chains</a></li>
+            <li><a href="#">Recipes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Partners</h4><br>
+          <ul>
+            <li><a href="#">Work With us</a></li>
+            <li><a href="#">Advertise with us</a></li>
+            <li><a href="#">Cooking insites</a></li>
+            <li><a href="#">Affiliates</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="orderbutton">
-      <button type="submit" class="btn order-btn">Order</button>
-    </form>
-    </div>
+    <p style="color: black; margin:0px ;"  >Copyright © 2024 Horizon Restaurant. All rights reserved.</p>
   </footer>
+  
 </html>

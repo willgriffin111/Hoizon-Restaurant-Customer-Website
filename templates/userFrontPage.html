@@ -17,13 +17,17 @@
     <div id="app">
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
-        <a class="navbar-brand" href="{{ url_for('home') }}">Horizon <br>Restaurant</a>
-<!-- Search icon -->
-            <button>
-              <a class="nav-btn" aria-current="page" href="#">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-            </button>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Horizon</a>
+            </div>
+            <div class="col">
+              <a class="navbar-brand" href="{{ url_for('home') }}">Restaurant</a>
+            </div>
+          </div>
+        </div>
+
             <!-- User icon -->
             <button>
                 <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
@@ -55,7 +59,7 @@
               <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('privacy') }}">Privacy Policy</a>
+              <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
           </li>
           </li>
           <li class="nav-item">
@@ -81,7 +85,7 @@
                     <div class="row">
                       <!-- Menu Items -->
                       <!-- Starters -->
-                      <div class="col-md-12">
+                      <div class="col-md-12 col-lg-3">
                         <div class="card menu-card">
                           <a class="btn collapse-btn" data-bs-toggle="collapse" href="#starterCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('starter')"></a>
                           <div class="row">
@@ -97,28 +101,26 @@
                           </div>
                         </div>
                       </div>
-                      <div class="collapse menu-content" id="starterCollapse">
+                      <div class="collapse menu-mobile menu-content"  id="starterCollapse">
                         {% for menuitem in menutable %}
                         {% if menuitem[3] == 'Starters' %}
-                          <div class="menu-item-box">
-                            {% if menuitem[7] == True %}
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                            {% else %}
-                            <div class="out-of-stock-box">
-                              <h1 class="out-of-stock-text">Out of Stock!</h1>
-                            </div>
-                            
-                            {% endif %}
-                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
-                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
-                            <!-- link this button to menu item pop up later when adding backend -Alex -->
+                        <div class="menu-item-box">
+                          {% if menuitem[7] == True %}
+                          <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                          <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                          {% else %}
+                          <div class="out-of-stock-box">
+                            <h1 class="out-of-stock-text">Out of Stock!</h1>
+                          </div>
+                          {% endif %}
+                          <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                          <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
                         </div>
                         {% endif %}
                         {% endfor %}
                       </div>
                       <!-- Mains -->
-                      <div class="col-md-12">
+                      <div class="col-md-12 col-lg-3">
                           <div class="card menu-card">
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#mainsCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('mains')"></a>
                             <div class="row">
@@ -134,27 +136,26 @@
                             </div>
                           </div>
                         </div>
-                        <div class="collapse" id="mainsCollapse">
+                        <div class="collapse menu-mobile menu-content" id="mainsCollapse">
                           {% for menuitem in menutable %}
                           {% if menuitem[3] == 'Mains' %}
-                          <div class="menu-item-box">
-                            {% if menuitem[7] == True %}
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                            {% else %}
-                            <div class="out-of-stock-box">
-                              <h1 class="out-of-stock-text">Out of Stock!</h1>
-                            </div>
-                            {% endif %}
-                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
-                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
-                            <!-- link this button to menu item pop up later when adding backend -Alex -->
-                        </div>
+                            <div class="menu-item-box">
+                              {% if menuitem[7] == True %}
+                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                              <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                              {% else %}
+                              <div class="out-of-stock-box">
+                                <h1 class="out-of-stock-text">Out of Stock!</h1>
+                              </div>
+                              {% endif %}
+                              <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                              <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                          </div>
                           {% endif %}
                           {% endfor %}
                         </div>
                         <!-- Desserts -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-lg-3" >
                           <div class="card menu-card">
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#dessertCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('desserts')"></a>
                             <div class="row">
@@ -170,27 +171,26 @@
                             </div>
                           </div>
                         </div>
-                        <div class="collapse" id="dessertCollapse">
+                        <div class="collapse menu-mobile menu-content" id="dessertCollapse">
                           {% for menuitem in menutable %}
                           {% if menuitem[3] == 'Desert' %}
-                          <div class="menu-item-box">
-                            {% if menuitem[7] == True %}
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                            {% else %}
-                            <div class="out-of-stock-box">
-                              <h1 class="out-of-stock-text">Out of Stock!</h1>
-                            </div>
-                            {% endif %}
-                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
-                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
-                            <!-- link this button to menu item pop up later when adding backend -Alex -->
-                        </div>
+                            <div class="menu-item-box">
+                              {% if menuitem[7] == True %}
+                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                              <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                              {% else %}
+                              <div class="out-of-stock-box">
+                                <h1 class="out-of-stock-text">Out of Stock!</h1>
+                              </div>
+                              {% endif %}
+                              <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                              <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                          </div>
                           {% endif %}
                           {% endfor %}
                         </div>
                         <!-- Drinks -->
-                        <div class="col-md-12">
+                        <div class="col-md-12 col-lg-3">
                           <div class="card menu-card">
                             <a class="btn collapse-btn" data-bs-toggle="collapse" href="#drinksCollapse" role="button" aria-expanded="false" aria-controls="collapseExample" @click="toggleArrowRotation('drinks')"></a>
                             <div class="row">
@@ -206,88 +206,146 @@
                             </div>
                           </div>
                         </div>
-                        <div class="collapse" id="drinksCollapse">
+                        <div class="collapse menu-mobile menu-content" id="drinksCollapse">
                           {% for menuitem in menutable %}
                           {% if menuitem[3] == 'Drinks' %}
-                          <div class="menu-item-box">
-                            {% if menuitem[7] == True %}
-                            <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
-                            <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
-                            {% else %}
-                            <div class="out-of-stock-box">
-                              <h1 class="out-of-stock-text">Out of Stock!</h1>
-                            </div>
-                            {% endif %}
-                            <h5 class="menu-item-name">{{menuitem[2]}}</h5>
-                            <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
-                            <!-- link this button to menu item pop up later when adding backend -Alex -->
-                        </div>
+                            <div class="menu-item-box">
+                              {% if menuitem[7] == True %}
+                              <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                              <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                              {% else %}
+                              <div class="out-of-stock-box">
+                                <h1 class="out-of-stock-text">Out of Stock!</h1>
+                              </div>
+                              {% endif %}
+                              <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                              <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                          </div>
                           {% endif %}
                           {% endfor %}
                         </div>
                          <!-- empty box to make menu items not be covered by footer when scroling -->
-                        <div class="col-md-12">
+                        <div class="col-md-3">
                           <div class="bottom-box"></div>
                         </div>
                     </div>
+                    
               </div>
 
+              <div id="starter-head" class="collapse-contain">
+
+                <div class="collapse menu-content menu-web"  id="starterCollapse">
+                  {% for menuitem in menutable %}
+                  {% if menuitem[3] == 'Starters' %}
+                    <div class="menu-item-box">
+                      {% if menuitem[7] == True %}
+                      <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                      <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                      {% else %}
+                      <div class="out-of-stock-box">
+                        <h1 class="out-of-stock-text">Out of Stock!</h1>
+                      </div>
+                      {% endif %}
+                      <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                      <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="collapse menu-content  menu-web" id="mainsCollapse">
+                  {% for menuitem in menutable %}
+                  {% if menuitem[3] == 'Mains' %}
+                    <div class="menu-item-box">
+                      {% if menuitem[7] == True %}
+                      <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                      <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                      {% else %}
+                      <div class="out-of-stock-box">
+                        <h1 class="out-of-stock-text">Out of Stock!</h1>
+                      </div>
+                      {% endif %}
+                      <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                      <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="collapse menu-content menu-web" id="dessertCollapse">
+                  {% for menuitem in menutable %}
+                  {% if menuitem[3] == 'Desert' %}
+                    <div class="menu-item-box">
+                      {% if menuitem[7] == True %}
+                      <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                      <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                      {% else %}
+                      <div class="out-of-stock-box">
+                        <h1 class="out-of-stock-text">Out of Stock!</h1>
+                      </div>
+                      {% endif %}
+                      <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                      <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="collapse menu-content menu-web" id="drinksCollapse">
+                  {% for menuitem in menutable %}
+                  {% if menuitem[3] == 'Drinks' %}
+                    <div class="menu-item-box">
+                      {% if menuitem[7] == True %}
+                      <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
+                      <button class="menu-item-add"><i class="fa-solid fa-plus"></i></button>
+                      {% else %}
+                      <div class="out-of-stock-box">
+                        <h1 class="out-of-stock-text">Out of Stock!</h1>
+                      </div>
+                      {% endif %}
+                      <h5 class="menu-item-name">{{menuitem[2]}}</h5>
+                      <h5 class="menu-item-price" id="tikkaprice">£{{ '%.2f'|format(menuitem[5]) }}</h5>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
             </div>
           </div> 
           
         </div>
+               
         <!-- menu item popups -->
-        <div class="collapse menu-content" id="Teriyaki">
-          <div class="menu-item-content-pop">
-            <img class="item-img" src="../static/images/mains.jpg" alt="Curry">
-              <div class="menu-item-content">
-                <a class="btn menu-collapse-item-close" data-bs-toggle="collapse" href="#Teriyaki" role="button" aria-expanded="false"><i class="fa-solid fa-arrow-left"></i></a>
-                <header id="tikka" class="menu-item-header">Chicken Tikka Curry</header>
-                  <p class="menu-item-description">Indulge in our Chicken Tikka Curry – succulent grilled chicken in a rich, aromatic curry. Savour tender bites, expertly spiced. </p>
-                  <div class="Allergies">
-                    <H4>Allergies</H4>
-                    <p>Nut</p>
-                    <p>Milk</p>
-                  </div>
-                  <div id="menu-item-tikka" class="menu-item-qty">
-                    <button @click="menu_item_quantity_decrease('tikka_count')" class="sum">-</button>
-                    <p id="tikka_count" class="sum">1</p>
-                    <button @click="menu_item_quantity_increment('tikka_count')" class="sum">+</button>
-                  </div>
-                  <p class="hidden" id="tikkaid">1</p>
 
-                  <button class="add-order" @click="add_to_order('tikkaid','tikka','tikka_count','tikkaprice')">Add Order</button>
-              </div>
-          </div>
-        </div>
 
         {% for menuitem in menutable %}
 
-        <div class="collapse menu-content" id="{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}">
-          <div class="menu-item-content-pop">
-            <img class="item-img" src="../static/images/mains.jpg" alt="Curry"> 
+      
+          <div class="collapse menu-content" id="{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}">
+            <div class="menu-item-content-pop">
+              <img class="item-img" src="../static/images/mains.jpg" alt="Curry"> 
               <div class="menu-item-content">
                 <a class="btn menu-collapse-item-close" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"><i class="fa-solid fa-arrow-left"></i></a>
                 <header id="{{menuitem[2]}}" class="menu-item-header">{{menuitem[2]}}</header>
-                  <p class="menu-item-description">{{ menuitem[4] }} </p>
-                  <div class="Allergies">
-                    <H4>Allergies</H4>
-                    <p>Nut</p>
-                    <p>Milk</p>
-                  </div>
-                  <div id="menu-item-{{menuitem[3]}}" class="menu-item-qty">
-                    <button @click="menu_item_quantity_decrease('{{menuitem[2]}}_count')" class="sum">-</button>
-                    <p id="{{menuitem[2]}}_count" class="sum">1</p>
-                    <button @click="menu_item_quantity_increment('{{menuitem[2]}}_count')" class="sum">+</button>
-                  </div>
-
+                <p class="menu-item-description">{{ menuitem[4] }} </p>
+                <div class="Allergies">
+                  <H4>Allergies</H4>
+                  <p>Nut</p>
+                  <p>Milk</p>
+                </div>
+                <div id="menu-item-{{menuitem[3]}}" class="menu-item-qty">
+                  <button @click="menu_item_quantity_decrease('{{menuitem[2]}}_count')" class="sum">-</button>
+                  <p id="{{menuitem[2]}}_count" class="sum">1</p>
+                  <button @click="menu_item_quantity_increment('{{menuitem[2]}}_count')" class="sum">+</button>
+                </div>
+                
                   <button class="add-order" @click="add_to_order('{{menuitem[0]}}','{{menuitem[2]}}','{{menuitem[2]}}_count','{{ '%.2f'|format(menuitem[5]) }}')">Add Order</button>
               </div>
+            </div>
+            <div class="outer-background"></div>
           </div>
-        </div>
+        
 
         {% endfor %}
     </div>
+    
 
     <!-- vue code -->
     <script>
@@ -381,11 +439,53 @@
       </script>
     </body>
     <!-- Footer -->
-    <footer>
+    <div class="mobile-footer">
       <!-- Order Button -->
       <div class="orderbutton">
         <a href="{{ url_for('orders') }}" class="btn order-btn">ORDER NOW</a>
       </div>
-      
+    </div>
+    <footer class="footer">
+      <div class="fcontainer">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Company</h4><br>
+            <ul>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Our service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Accessibility</a></li>
+              <li><a href="#">Vacancies</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Get Help</h4><br>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Online Booking</a></li>
+              <li><a href="#">cancellations</a></li>
+              <li><a href="#">Payment options</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Explore us</h4><br>
+            <ul>
+              <li><a href="#">Sitemap</a></li>
+              <li><a href="#">Chains</a></li>
+              <li><a href="#">Recipes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Partners</h4><br>
+            <ul>
+              <li><a href="#">Work With us</a></li>
+              <li><a href="#">Advertise with us</a></li>
+              <li><a href="#">Cooking insites</a></li>
+              <li><a href="#">Affiliates</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p style="color: black; margin:0px ;"  >Copyright © 2024 Horizon Restaurant. All rights reserved.</p>
     </footer>
 </html>

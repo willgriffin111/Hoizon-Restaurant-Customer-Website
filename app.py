@@ -379,7 +379,7 @@ def login():
     except Exception as e:
         error = str(e) + " <br/> Invalid credentials, try again."
 
-    return render_template("userLogin.html", form=form, error=error, logged_in=session.get('logged_in'))
+    return render_template("userLogin.html", form=form, error=error, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():

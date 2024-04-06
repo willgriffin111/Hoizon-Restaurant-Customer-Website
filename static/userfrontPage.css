@@ -17,11 +17,10 @@ body {
     width: 100%;
   }
 
+
   .navbar-brand{
     font-size: 70px;
-    padding-left: 40px;
     font-weight: bold;
-    
   }
 
   .navbar-nav{
@@ -56,6 +55,7 @@ body {
   
   .navbar-toggler-icon{
     font-size: 60px;
+    margin-right: 10px;
   }
   .nav-btn{
     font-size: 60px;
@@ -69,18 +69,6 @@ body {
   .navbar-collapse{
     background: rgb(228, 228, 228);
   }
-  .top-bg {
-    background-image: url('images/FrontBackground.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 400px;
-    width: 100%;
-    display: none;
-  }
-
-
-
-
 
   /* content area */
   .content-box {
@@ -143,7 +131,7 @@ body {
     transition: 0.1s linear;
   }
 
-  .out-of-stock-box {
+.out-of-stock-box {
     width: 100%;
     height: 100%;
     border-radius: 8px 8px 30px 30px;
@@ -346,7 +334,7 @@ button{
   background-color: white;
 }
 
-footer {
+.mobile-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -361,8 +349,6 @@ footer {
   font-weight: bold;
   color: rgb(51, 51, 51);
 }
-
-
 
         /* Registration form styles */
 .registration-container {
@@ -390,6 +376,8 @@ footer {
     font-size: 20px; 
 }
 
+
+
 /* media quirries */
 @media only screen and (min-width: 992px) {
   .nav-item {
@@ -398,4 +386,576 @@ footer {
   .navbar-collapse{
     background-color: white;
   }
+}
+
+
+
+
+/* <-------- Website based Resolution ---------> */
+
+
+
+
+@media only screen and (min-width: 1660px) {
+
+  .navbar-brand{
+    font-size: 70px;
+    font-weight: 200;
+    color: white
+  }
+  .navbar-brand:hover{
+    color: white;
+  }
+  .nav-link:hover{
+    color: rgb(255, 255, 255);
+  }
+
+  .nav-link{
+    color: rgb(255, 255, 255);
+    font-weight: 300;
+    margin-right: 30px;
+  }
+
+  .nav-btn{
+    font-size: 60px;
+    color:white;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+
+  .navbar{
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: rgb(29, 29, 29,0.8);
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 11;
+    position: fixed;
+    height: 150px;
+  }
+  .navbar-collapse{
+    background-color: rgb(29, 29, 29,0.01);
+  }
+  /* content area */
+  .content-box {
+    margin-top: 300px;
+    background-color: rgb(241, 241, 241);
+    height: 100px;
+  }
+
+  .top-bg {
+    background-image: url('images/FrontBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 520px;
+    width: 100%;
+
+  }
+
+  /* menu buttons */
+  .menu-card {
+    margin: 15px;
+    margin-top: 20px;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 8px 8px 30px 30px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column; /* Change the flex direction to column */
+  }
+  
+  .menu-card:hover {
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.45);
+  }
+  
+  .fa-user{
+    display: none;
+  }
+  .menu-column-img {
+    flex: 0 0 auto; /* Set the flex basis to auto to allow content to determine size */
+    max-width: 100%; /* Allow the image to take up the full width */
+  }
+  
+  .menu-column-content {
+    flex: 0 0 100%; /* Set the width to 100% */
+    max-width: 100%;
+    align-self: flex-start; /* Align content at the start */
+  }
+
+  .card-title{
+    margin-top: 1%;
+    font-size:50px;
+    text-align: center;
+    font-weight: 100;
+  }
+
+  .catagoryActive{
+    margin-top: 10px;
+  }
+
+  .menu-card img {
+    height: 350px;
+    width: 100%; /* Make the image take up the full width */
+  }
+  
+
+  .menu-card-arrow{
+    position: absolute;
+    top: 40%;
+    left: 85%;
+    font-size: 70px;
+    font-weight: bold;
+    transform: rotate(0deg);
+    transition: 0.1s linear;
+    display: none;
+  }
+
+  .open{
+    transform: rotate(180deg);
+    transition: 0.1s linear;
+  }
+
+
+  /* menu collapse */
+  .collapse-btn{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px 8px 30px 30px;
+  }
+
+  .menu-item-box{
+    position: relative;
+    margin: 10px;
+    width: 420px;
+    border-radius: 30px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    height: 280px;
+    margin-left: 65px;
+    margin-bottom: 20px;
+    
+  }
+
+  .menu-name{
+    font-weight: 200;
+  }
+
+  .menu-item-name{
+    font-size: 50px;
+    text-align: center;
+    padding: 5%;
+    font-weight: 100;
+  }
+
+  .menu-item-price{
+    font-size: 50px;
+    text-align: center;
+    font-weight: 100;
+    padding-left: 5%;
+  }
+
+  .menu-item-add{
+    position: absolute;
+    top: 25%;
+    left: 80%;
+    font-size: 60px;
+    width: 17%;
+    height: 50%;
+    display: none;
+    
+  }
+
+  /* Menu item Page */
+
+.menu-content{
+  margin: auto;
+}
+
+.outer-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); 
+
+}
+
+.menu-item-content-pop{
+  position: fixed;
+  width: 480px;
+  height: 780px;
+  top: 235px;
+  left: 0;
+  z-index: 15;
+  background: white;
+  border-radius: 10px;
+  margin-left: 750px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.item-img{
+  height: 320px;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  .menu-item-header{
+    text-align: center;
+    margin: 20px;
+    font-size: 35px;
+    font-weight: 600;
+  }
+  
+  .menu-item-description{
+    font-size: 25px;
+    padding: 20px;
+  }
+  
+  .Allergies{
+    float: left;
+    margin-left: 30px;
+    padding: 5px;
+  }
+  
+  .Allergies H4{
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  .Allergies p{
+    font-size: 20px;
+  }
+  
+  .Calories{
+    float: left;
+    padding: 20px;
+    margin-left: 100px;
+  }
+  
+  .Calories H4{
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  .Calories p{
+    font-size: 20px;
+  }
+  
+  
+  .menu-item-qty{
+    padding: 20px;
+    
+  }
+  
+  .sum{
+    padding: 5px;
+    font-size:20px ;
+    border-radius: 15px;
+    background-color: #d7d7d7;
+    color: rgb(0, 0, 0);
+    width: 45px;
+    margin: 2px;
+    text-align: center;
+    float: left;
+    margin-top: 32px;
+  
+  }
+  
+  .add-order{
+    padding: 20px;
+    width: 150px;
+    font-size:20px ;
+    border-radius: 15px;
+    background-color: #e4b04a;
+    color: white;
+    float: right;
+    margin-right: 50px;
+  }
+
+  .menu-collapse-item-close{
+    width: 10px;
+    height: 15px;
+    position: absolute;
+    top:42%;
+    left: 2%;
+    font-size: 30px;
+    padding-top: 20px;
+    
+  }
+
+  .hidden{
+    display: none;
+  }
+
+  /* empty box to make menu items not be covered by footer when scroling */
+  .bottom-box{
+    height: 0px;
+  }
+
+  /* order button */
+  .orderbutton{
+    width: 100%; 
+
+  }
+  .order-btn{
+    padding: 10px;
+    width: 100%;
+    font-size: 60px;
+    background-color: #daab1d;
+    color: white;
+
+  }
+
+  .order-btn:hover{
+    background-color:#daab1d ;
+  }
+
+
+  button{
+    border: none;
+    background-color: rgb(29, 29, 29,0.0001);
+  }
+
+  .mobile-footer {
+    display: none;
+  }
+
+  .order-counter{
+    font-size: 35px;
+    padding: 0px;
+    font-weight: 300;
+    color: rgb(255, 255, 255);
+    margin-left: 10px;
+  }
+
+
+
+          /* Registration form styles */
+  .registration-container {
+      margin-top: 50px; /* Adjust as needed */
+  }
+
+  .registration-card {
+      width: 90%;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+  }
+  .registration-card-header {
+      background-color: #007bff;
+      color: white;
+      border-radius: 8px 8px 0 0;
+    }
+  .registration-card-body {
+      padding: 20px;
+    }
+  .registration-form-group {
+      margin-bottom: 20px;
+    }
+  .registration-btn {
+      font-size: 20px; 
+  }
+
+
+/* Removing the content in mobile format */
+
+  .menu-mobile{
+    display: none;
+  }
+
+  .col-lg-3 {
+    flex: 0 0 25%; /* Set the width to 25% of the parent container */
+    max-width: 25%; /* Set the maximum width to 25% */
+    margin-top: -250px;
+  }
+  .menu-card {
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .menu-card:hover {
+    transform: translateY(-20px); /* Adjust the value as needed */
+  }
+  
+  
+  .menu-items-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto multiple rows */
+    padding-left:100px;
+  }
+
+  .collapse-header{
+    text-align: center;
+    padding: 20px;
+  }
+
+  .collapse-header {
+    display: none;
+  }
+  
+  .collapse-header.show {
+    display: block;
+  }
+
+  
+}
+
+@media only screen and (max-width: 1000px) {
+  .menu-web {
+    display: none;
+  }
+  .footer{
+    display: none;
+  }
+
+     /* navbar */
+     .navbar{
+      /* background-color: rgb(41, 41, 41, 0.85) */
+      background-color: white;
+      box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+      z-index: 11;
+      position: fixed;
+      width: 100%;
+    }
+  
+  
+    .navbar-brand{
+      font-size: 70px;
+      font-weight: bold;
+    }
+  
+    .navbar-nav{
+      padding-left: 2%;
+    }
+  
+    .nav-item{
+      font-size: 40px;
+      padding: 5px;
+      border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+      padding-bottom: 5px; /* Adjust the space between the text and the line */
+      width: 95%;
+    }
+
+    .container{
+      width: 40px;
+      margin-right: 480px;
+    }
+
+    .nav-item:last-child{
+  
+      border-bottom: none;
+    }
+    
+    .nav-link{
+      color: black;
+    }
+  
+    .nav-link:hover{
+      color: gray;
+    }
+    
+    .navbar-toggler{
+      border: none;
+      color: black;
+      margin-right: 40px;
+    }
+    
+    .navbar-toggler-icon{
+      font-size: 60px;
+      margin-right: 10px;
+    }
+    .nav-btn{
+      font-size: 60px;
+      color: black;
+      position: relative;
+      text-align: right;
+      display:flex ;
+      text-decoration: none;
+      margin-right: 60px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+  .menu-web {
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+  .collapse-contain{
+    margin-top: 150px;
+    margin-left: -40px;
+    margin-bottom: 20px;
+  }
+  
+  .card-title{
+    font-weight: 450;
+  }
+
+  .fcontainer{
+    width: 100%;
+    background-color: #dddddd;
+}
+
+ul{
+    list-style:none;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer{
+    background-color: #dddddd;
+    padding: 30px 0;
+    padding-left: 40px;
+
+}
+
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+.footer-col h4{
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-weight: 500;
+    position: relative;
+    margin-left: 20px;
+ }
+ .footer-col h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: rgb(0, 0, 0);
+    height: 2px;
+    box-sizing: border-box;
+    width:  120px;
+    display: none;
+ }
+ .footer-col ul li{
+    margin-bottom: 10px;
+ }
+ .footer-col ul li a{
+    font-size: 24px;
+    text-transform: capitalize;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 300;
+    color: #000000;
+    display: block;
+    transition: all 0.3s ease;
+ }
+ .footer-col ul li a:hover{
+    color: rgb(0, 0, 0);
+    padding-left: 10px;
+ }
+
 }
