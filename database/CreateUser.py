@@ -5,19 +5,9 @@ from passlib.hash import sha256_crypt
   #connection to DB
 # DB_NAME = 'horizon_resturant'    #DB Name
 # DB_NAME = 'horizonResturant'    #DB Name  MISPELLED
-DB_NAME = 'Horizon_Restaurant'
-staffId = 3
-restrantid = 1
-staffName = 'Will'
-staffType = 'FRONT'
-staffPassword = sha256_crypt.hash('password')  #password goes in brackets default password
-
-restId = 1
-restloc = "MARS"
-restname = 'its joe mamas restaurant'
-restcap = 6
 
 
+#function run at the bottom uncomment or comment then dependign on what you want
 
 # Create restaurant
 def create_restaurant(restId, restloc, restname, restcap):
@@ -91,9 +81,27 @@ def create_customer(userEmail, firstName, lastName, phoneNumber, userPassword):
     else:
         print('DBFunc error')
        
+DB_NAME = 'Horizon_Restaurant'
+staffId = 1
+restrantid = 1
+staffName = 'Alex'
+staffType = 'ADMIN'
+staffPassword = sha256_crypt.hash('password')  #password goes in brackets default password
+
+restId = 1
+restloc = "Bristol"
+restname = 'Bristol'
+restcap = 6
+
+table_number = 1
+table_capacity = 2
+restaurant_id = 1
        
 email = 'exsample@email.com'
 firstname = "John"
 lastname = "Doe"
 phonenumber = "889788987"
-create_customer(email, firstname, lastname, phonenumber, staffPassword)
+#create_customer(email, firstname, lastname, phonenumber, staffPassword)
+create_restaurant(restId, restloc, restname, restcap)
+create_table(table_number, table_capacity, restaurant_id)
+create_user(staffId, restrantid, staffName, staffType, staffPassword)
