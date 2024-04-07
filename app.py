@@ -332,9 +332,9 @@ def confirmBooking():
             if conn.is_connected(): #Checking if connection is established
                 print('MySQL Connection is established')                          
                 dbcursor = conn.cursor()    #Creating cursor object          
-                dbcursor.execute("INSERT INTO reservation (restaurant_id, reservation_customer_name, reservation_customer_phone, \
+                dbcursor.execute("INSERT INTO reservation (restaurant_id, reservation_customer_name, reservation_customer_email, reservation_customer_phone, \
                                         table_id, reservation_party_size, reservation_author, reservation_creation_time, reservation_date,\
-                                            reservation_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (session['reservationdata']['restaurant'], session['reservationdata']['name'], session['reservationdata']['phonenum'], table[2],
+                                            reservation_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (session['reservationdata']['restaurant'], session['reservationdata']['name'], session['reservationdata']['email'], session['reservationdata']['phonenum'], table[2],
                                                                                                         session['reservationdata']['numpeople'], "Costomer Reservation",datetime.datetime.now(), session['reservationdata']['date'], datetime.datetime.strptime(session['reservationdata']['time'], "%H:%M").time())) 
                 conn.commit()
                 dbcursor.close()
