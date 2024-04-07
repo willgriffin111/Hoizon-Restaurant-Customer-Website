@@ -20,15 +20,20 @@ app.secret_key = 'Horizon'
 
 """ ROOTING PLEASE ADD COMMENT WHEN COMMITING - OSCAR """
 
-#root for front page
+#makes sure session ids are established to ensure no errors
 @app.route('/', methods=['GET', 'POST'])
-def home():
-    session['resturantid'] = 1
-    session['email'] = 'exsample@email.com'
+def sessionsVarriables():
+    #if the website needs any session varriables they are established here
     if not session.get('isLoggedIn'):
         session['isLoggedIn'] = False
     if not session.get('menu_items'):
         session['menu_items'] = []
+    return redirect(url_for('home'))
+
+#root for front page
+@app.route('/horizon', methods=['GET', 'POST'])
+def home():
+    session['resturantid'] = 1
     print(session['menu_items'])
     session['menuitemslength'] =  len(session['menu_items'])
     menulist = [] #blank data in case sql fails
@@ -75,6 +80,7 @@ def home():
     
      
 #root for getting the data when someone add something to order 
+#this code will add the menu items slected by the user into their cart with quantity
 @app.route('/addtocart', methods=['POST'])
 def add_to_cart():
     data_string = request.data.decode('utf-8')
@@ -101,9 +107,145 @@ def add_to_cart():
     session['menuitemslength'] =  len(session['menu_items'])
     return jsonify(session['menuitemslength'])
 
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = {}
+    error = ''
+    try:
+        if request.method == "POST":
+            email = request.form.get('email')
+            password = request.form.get('password')
+            if email and password:  # Simplified the condition
+                conn = dbfunc.getConnection()
+                if conn:
+                    with conn.cursor() as dbcursor:
+                        dbcursor.execute("SELECT customer_password, customer_first_name, customer_last_name FROM customer WHERE customer_email = %s;", (email,))
+                        data = dbcursor.fetchone()
+                        if data:
+                            if sha256_crypt.verify(password, data[0]):
+                                session['isLoggedIn'] = True
+                                session['username'] = str(data[1]) + ' ' + str(data[2])
+                                session['email'] = email
+                                return redirect(url_for('sessionsVarriables'))
+                            else:
+                                error = "Invalid credentials username/password, try again."
+                        else:
+                            error = "Email / password does not exist, login again"
+                else:
+                    error = "Database connection error"
+                
+    except Exception as e:
+        error = str(e) + " <br/> Invalid credentials, try again."
+
+    print(error)
+    return render_template("userLogin.html", form=form, error=error, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    error = ''
+    try:
+        if request.method == "POST":
+            email = request.form.get('email')
+            firstname = request.form.get('firstname')  # corrected variable names
+            lastname = request.form.get('lastname')  # corrected variable names
+            phonenumber = request.form.get('phonenum')  # corrected variable names
+            password = request.form.get('password')
+            if email and firstname and password and lastname and phonenumber:  # Simplified the condition
+                conn = dbfunc.getConnection()
+                if conn:
+                    with conn.cursor() as dbcursor:
+                        dbcursor.execute("SELECT * FROM customer WHERE customer_email = %s;", (email,))
+                        rows = dbcursor.fetchall()
+                        if rows:
+                            error = "Email already in-use, please use another or log in"
+                        else:
+                            password_hash = sha256_crypt.hash(password)
+                            dbcursor.execute("INSERT INTO customer (customer_first_name, customer_last_name, customer_password, customer_email, customer_phone_details) VALUES (%s, %s, %s, %s, %s)", (firstname, lastname, password_hash, email, phonenumber))
+                            conn.commit()
+                            session['isLoggedIn'] = True
+                            session['username'] = firstname + ' ' + lastname
+                            session['email'] = email
+                            return redirect(url_for('sessionsVarriables'))
+                else:
+                    error = "Database connection error"
+            else:
+                error = "Incomplete parameters"
+    except Exception as e:
+        error = str(e)
+        # Rendering the error modal template with the error message
+        return render_template("error_modal.html", error_message=error)
+
+    return render_template("userRegister.html", error=error, logged_in=session.get('logged_in'))
+
+
+@app.route('/resetpassword', methods=["GET","POST"])
+def resetpassword():
+    form={}
+    error = ''
+    try:	
+        if request.method == "POST":            
+            email = request.form['email']
+            password = request.form['password']            
+            form = request.form
+            print('Password change start 1.1')
+            
+            if email != None and password != None:  #check if em or pw is none          
+                conn = dbfunc.getConnection() 
+                if conn != None:    #Checking if connection is None                    
+                    if conn.is_connected(): #Checking if connection is established                        
+                        print('MySQL Connection is established')                          
+                        dbcursor = conn.cursor()    #Creating cursor object                                                 
+                        dbcursor.execute("SELECT User_Password, user_type, User_Firstname, User_ID \
+                            FROM user_data WHERE User_Email = %s;", (email,))                                                
+                        data = dbcursor.fetchone()
+                        #print(data[0])
+                        if dbcursor.rowcount < 1: #this mean no user exists                         
+                            error = "Email does not exist, login again"
+                            return render_template("userResetPassword.html", error=error, logged_in=session['logged_in'])
+                        else:                            
+                            #data = dbcursor.fetchone()[0] #extracting password   
+                            # verify passowrd hash and password received from user                                                             
+                            password = sha256_crypt.hash((str(password)))
+                            dbcursor.execute("UPDATE user_data SET User_Password = %s WHERE User_Email = %s;", (password,email,)) 
+                            conn.commit()
+                            dbcursor.close()
+                            conn.close()                                
+                            return redirect(url_for('home'))
+                                                          
+                    gc.collect()
+                    print('login start 1.10')
+                    return render_template("userResetPassword.html", form=form, error=error, logged_in=session['logged_in'])
+    except Exception as e:                
+        error = str(e) + " <br/> Invalid credentials, try again."
+        return render_template("userResetPassword.html", form=form, error = error, logged_in=session['logged_in'])   
+    
+    return render_template("userResetPassword.html", form=form, error = error, logged_in=session['logged_in'])
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('userPolicyPage.html', logged_in=session['isLoggedIn'])
+
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'isLoggedIn' in session:
+            if session["isLoggedIn"]:
+                return f(*args, **kwargs)
+            else:
+                flash('You need to login first', 'error')
+                return redirect(url_for('login'))
+        else:
+            flash('You need to login first', 'error')
+            return redirect(url_for('login'))
+    return wrap
+
+""" Orders systems """
 
 #root for orders page
 @app.route('/orders', methods=['GET', 'POST'])
+@login_required
 def orders():
     #find length of menu items for cart counter
     session['menuitemslength'] = len(session['menu_items'])
@@ -243,7 +385,9 @@ def orders():
     else:
         return render_template('userOrder.html',tablenumbers=tablenumbers, ordertotal=ordertotal, menuitems=session['menu_items'],menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
 
+#as it says it removes an item that has been slected from the cart
 @app.route('/remove_item', methods=['POST'])
+@login_required
 def remove_item():
     item_id = request.json['id']
     filtered_data = [item for item in session['menu_items'] if int(item['id']) != item_id]
@@ -253,7 +397,10 @@ def remove_item():
     return 'Item removed successfully'
 
 
+""" Reservations Systems """
+
 @app.route('/reservations', methods=['GET', 'POST'])
+@login_required
 def reservationspage():
     restaurantNames = orderfunctions.getRestaurantNames() #gets all the resturants for the reservation to choose from
     
@@ -322,7 +469,9 @@ def reservationspage():
     else:
         return render_template('userReservations.html', times=times,menuitemslength=session['menuitemslength'], Restaurants=restaurantNames, isLoggedIn=session['isLoggedIn'],)
 
+#this is just the confirm after the table is chosen and then inserts into reservations
 @app.route('/confirmbooking', methods=['GET', 'POST'])
+@login_required
 def confirmBooking():
     if request.method == "POST":
         table = ast.literal_eval(request.form['table'])
@@ -345,150 +494,24 @@ def confirmBooking():
     else:
         return redirect(url_for('home'))
 
+
+
+#idk where this came from it may be oscar but it may also be some acsidentially included code
 @app.route('/error', methods=['GET', 'POST'])
 def error():
     return render_template('errorPage.html')
 
-@app.route('/login', methods=["GET", "POST"])
-def login():
-    form = {}
-    error = ''
-    try:
-        if request.method == "POST":
-            email = request.form.get('email')
-            password = request.form.get('password')
-            if email and password:  # Simplified the condition
-                conn = dbfunc.getConnection()
-                if conn:
-                    with conn.cursor() as dbcursor:
-                        dbcursor.execute("SELECT User_Password, user_type, User_Firstname, User_ID FROM user_data WHERE User_Email = %s;", (email,))
-                        data = dbcursor.fetchone()
-                        if data:
-                            if sha256_crypt.verify(password, data[0]):
-                                session['userid'] = int(data[3])
-                                session['logged_in'] = True
-                                session['username'] = str(data[2])
-                                session['usertype'] = str(data[1])
-                                return redirect(url_for('Horizon_Front'))
-                            else:
-                                error = "Invalid credentials username/password, try again."
-                        else:
-                            error = "Email / password does not exist, login again"
-                else:
-                    error = "Database connection error"
-    except Exception as e:
-        error = str(e) + " <br/> Invalid credentials, try again."
 
-    return render_template("userLogin.html", form=form, error=error, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+""" Account Views mainly to see things like orders and reservations """
 
-@app.route('/register', methods=['POST', 'GET'])
-def register():
-    error = ''
-    try:
-        if request.method == "POST":
-            email = request.form.get('email')
-            firstname = request.form.get('firstname')  # corrected variable names
-            email = request.form.get('email')  # corrected variable names
-            password = request.form.get('password')
-            if email and firstname and password:  # Simplified the condition
-                conn = dbfunc.getConnection()
-                if conn:
-                    with conn.cursor() as dbcursor:
-                        dbcursor.execute("SELECT * FROM user_data WHERE User_Email = %s;", (email,))
-                        rows = dbcursor.fetchall()
-                        if rows:
-                            error = "Email already in-use, please use another or log in"
-                        else:
-                            password_hash = sha256_crypt.hash(password)
-                            dbcursor.execute("INSERT INTO user_data (User_FirstName, User_LastName, User_Password, User_Email) VALUES (%s, %s, %s, %s)", (firstname, secondname, password_hash, email))
-                            conn.commit()
-                            session['logged_in'] = True
-                            session['username'] = firstname
-                            session['usertype'] = 'standard'
-                            return redirect(url_for('Horizon_Front'))
-                            return render_template("success_modal.html")
-                else:
-                    error = "Database connection error"
-            else:
-                error = "Incomplete parameters"
-    except Exception as e:
-        error = str(e)
-        # Rendering the error modal template with the error message
-        return render_template("error_modal.html", error_message=error)
-
-    return render_template("userRegister.html", error=error, logged_in=session.get('logged_in'))
-
-
-@app.route('/resetpassword', methods=["GET","POST"])
-def resetpassword():
-    form={}
-    error = ''
-    try:	
-        if request.method == "POST":            
-            email = request.form['email']
-            password = request.form['password']            
-            form = request.form
-            print('Password change start 1.1')
-            
-            if email != None and password != None:  #check if em or pw is none          
-                conn = dbfunc.getConnection() 
-                if conn != None:    #Checking if connection is None                    
-                    if conn.is_connected(): #Checking if connection is established                        
-                        print('MySQL Connection is established')                          
-                        dbcursor = conn.cursor()    #Creating cursor object                                                 
-                        dbcursor.execute("SELECT User_Password, user_type, User_Firstname, User_ID \
-                            FROM user_data WHERE User_Email = %s;", (email,))                                                
-                        data = dbcursor.fetchone()
-                        #print(data[0])
-                        if dbcursor.rowcount < 1: #this mean no user exists                         
-                            error = "Email does not exist, login again"
-                            return render_template("userResetPassword.html", error=error, logged_in=session['logged_in'])
-                        else:                            
-                            #data = dbcursor.fetchone()[0] #extracting password   
-                            # verify passowrd hash and password received from user                                                             
-                            password = sha256_crypt.hash((str(password)))
-                            dbcursor.execute("UPDATE user_data SET User_Password = %s WHERE User_Email = %s;", (password,email,)) 
-                            conn.commit()
-                            dbcursor.close()
-                            conn.close()                                
-                            return redirect(url_for('home'))
-                                                          
-                    gc.collect()
-                    print('login start 1.10')
-                    return render_template("userResetPassword.html", form=form, error=error, logged_in=session['logged_in'])
-    except Exception as e:                
-        error = str(e) + " <br/> Invalid credentials, try again."
-        return render_template("userResetPassword.html", form=form, error = error, logged_in=session['logged_in'])   
-    
-    return render_template("userResetPassword.html", form=form, error = error, logged_in=session['logged_in'])
-
-
-@app.route('/privacy')
-def privacy():
-    return render_template('userPolicyPage.html', logged_in=session['logged_in'])
-
-
-
-
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            if session["logged_in"]:
-                return f(*args, **kwargs)
-            else:
-                flash('You need to login first', 'error')
-                return redirect(url_for('login'))
-        else:
-            flash('You need to login first', 'error')
-            return redirect(url_for('login'))
-    return wrap
-
+#redirects to account
 @app.route('/account')
 @login_required
 def account():
     return render_template('userAccount.html',  isLoggedIn=session['isLoggedIn'])
 
+
+#this will get all the times created and subtotals for orders and the send them to the page
 @app.route('/accountorders')
 def accountOrders():
     #get all the bill ids for the orders
@@ -503,24 +526,29 @@ def accountOrders():
             unique_bill_ids = set()  # Set to store unique bill IDs
             compiled_bill = []   # List to store compiled bill IDs
 
+            #when the orders come in there are multiple per bill as its made per menu item
+            #so we need to get rid of any repeats of bill id's
             for bill_id, time in billiIdOrders:
                 if bill_id not in unique_bill_ids:
                     unique_bill_ids.add(bill_id)
-                    compiled_bill.append([bill_id, time.date()])
+                    compiled_bill.append([bill_id, time.date()]) #all times should be the same for the bill id
             
             print(compiled_bill)
+            #this gets the subtotal for each bill to compile with the time
             for billid in compiled_bill:   
                 print(billid)
                 dbcursor.execute('SELECT bill_sub_total FROM bill WHERE bill_id = %s;', (billid[0],))
                 billTotal = dbcursor.fetchone()
                 userOrders.append([billTotal[0], billid[1]])
                 
+            #now we have a collection of dates of orders and the ammount spent
             print(userOrders)
             dbcursor.close()
             conn.close()
             gc.collect()  
     return render_template('userAccountOrder.html', orders=userOrders, isLoggedIn=session['isLoggedIn'])
 
+#this gets all the reservations made by the user and all returns all relevent data
 @app.route('/accountreservations')
 def accountReservations():
     #get all the bill ids for the orders
@@ -535,13 +563,14 @@ def accountReservations():
             
             
             print(reservationList)
+            #this code converts the ids to valid table numbers and restaurant names
             for reservation in reservationList:   
                 print(reservation)
                 dbcursor.execute('SELECT table_number FROM tables WHERE table_id = %s;', (reservation[3],))
                 tableNumber = dbcursor.fetchone()
                 dbcursor.execute('SELECT restaurant_name FROM restaurant WHERE restaurant_id = %s;', (reservation[4],))
                 restaurantName = dbcursor.fetchone()
-                if(reservation[1] >= datetime.date.today()):
+                if(reservation[1] >= datetime.date.today()): #check to make sure were not showing reservations that have already happened
                     userReservations.append({"name": reservation[0], "date": reservation[1], "time": reservation[2], "table": tableNumber[0], "location": restaurantName[0]})
                 
             print(userReservations)
@@ -559,6 +588,6 @@ def logout():
     session.clear() #clears session variables
     print("You have been logged out!")
     gc.collect()
-    return redirect(url_for('home'))
+    return redirect(url_for('sessionsVarriables'))
 
 app.run(debug=True)
