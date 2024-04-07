@@ -109,18 +109,21 @@
 
     <!-- Content starts -->
     <div class="container-fluid p-0">
-      <h1 class="reset-title">Your Order History</h1>
-      {% if orders %}
-      {% for order in orders %}
+      <h1 class="reset-title">Your Reservations</h1>
+      {% if Reservations %}
+      {% for Reservation in Reservations %}
       <div class="menu-item-box">
-        <h5 class="menu-item-name">{{ order[1] }}</h5>
-        <h5 class="menu-item-price">Cost: £{{ order[0] }}</h5>
+        <h5 class="menu-item-name">Name: {{ Reservation['name'] }}<br>
+          Date: {{ Reservation['date'] }}<br>
+          Time: {{ Reservation['time'] }}<br>
+          Location: {{ Reservation['location'] }}<br>
+          Table: {{ Reservation['table'] }}<br></h5>
       </div>
       {%endfor%}
       {%else%}
        <div class="reset-box">
-        <h1 class="refund-text">You dont have any orders, yet. 
-          <br> But when you make orders they will be here</h1>
+        <h1 class="refund-text">You dont have any reservations booked at the moment.
+          <br> But when you make a reservations it will be here</h1>
        </div>
       {%endif%}
     </div>

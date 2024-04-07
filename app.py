@@ -498,7 +498,7 @@ def accountOrders():
         if conn.is_connected(): #Checking if connection is established
             print('MySQL Connection is established')                          
             dbcursor = conn.cursor()    #Creating cursor object          
-            dbcursor.execute('SELECT bill_id, order_time_created FROM orders WHERE customer_email = %s;', (session['email'],))      #Executing
+            dbcursor.execute('SELECT bill_id, order_time_created FROM orders WHERE customer_email = %s ORDER BY order_time_created DESC;', (session['email'],))    #Executing
             billiIdOrders = dbcursor.fetchall()
             unique_bill_ids = set()  # Set to store unique bill IDs
             compiled_bill = []   # List to store compiled bill IDs
@@ -520,6 +520,35 @@ def accountOrders():
             conn.close()
             gc.collect()  
     return render_template('userAccountOrder.html', orders=userOrders, isLoggedIn=session['isLoggedIn'])
+
+@app.route('/accountreservations')
+def accountReservations():
+    #get all the bill ids for the orders
+    userReservations = []
+    conn = dbfunc.getConnection()           
+    if conn != None:    #Checking if connection is None           
+        if conn.is_connected(): #Checking if connection is established
+            print('MySQL Connection is established')                          
+            dbcursor = conn.cursor()    #Creating cursor object          
+            dbcursor.execute('SELECT reservation_customer_name, reservation_date, reservation_time, table_id, restaurant_id FROM reservation WHERE reservation_customer_email = %s ORDER BY reservation_date ASC;', (session['email'],))    #Executing
+            reservationList = dbcursor.fetchall()
+            
+            
+            print(reservationList)
+            for reservation in reservationList:   
+                print(reservation)
+                dbcursor.execute('SELECT table_number FROM tables WHERE table_id = %s;', (reservation[3],))
+                tableNumber = dbcursor.fetchone()
+                dbcursor.execute('SELECT restaurant_name FROM restaurant WHERE restaurant_id = %s;', (reservation[4],))
+                restaurantName = dbcursor.fetchone()
+                if(reservation[1] >= datetime.date.today()):
+                    userReservations.append({"name": reservation[0], "date": reservation[1], "time": reservation[2], "table": tableNumber[0], "location": restaurantName[0]})
+                
+            print(userReservations)
+            dbcursor.close()
+            conn.close()
+            gc.collect()  
+    return render_template('userAccountReservations.html', Reservations=userReservations, isLoggedIn=session['isLoggedIn'])
 
  
 

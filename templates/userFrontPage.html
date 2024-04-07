@@ -173,7 +173,7 @@
                         </div>
                         <div class="collapse menu-mobile menu-content" id="dessertCollapse">
                           {% for menuitem in menutable %}
-                          {% if menuitem[3] == 'Desert' %}
+                          {% if menuitem[3] == 'Dessert' %}
                             <div class="menu-item-box">
                               {% if menuitem[7] == True %}
                               <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>
@@ -272,7 +272,7 @@
                 </div>
                 <div class="collapse menu-content menu-web" id="dessertCollapse">
                   {% for menuitem in menutable %}
-                  {% if menuitem[3] == 'Desert' %}
+                  {% if menuitem[3] == 'Dessert' %}
                     <div class="menu-item-box">
                       {% if menuitem[7] == True %}
                       <a class="btn collapse-btn" data-bs-toggle="collapse" href="#{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}" role="button" aria-expanded="false"></a>

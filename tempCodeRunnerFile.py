@@ -1,1 +1,1 @@
-items_out_of_stock
+if(datetime.date.today() < reservation[1]):
