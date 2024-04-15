@@ -48,7 +48,8 @@
         <title>Horizon Restaurant</title>
     </head>
    
-    <body class="vh-100">
+    <body>
+      {% block content %}
 
       <!--Navbar-->
       <nav class="navbar navbar-expand-lg fixed-top1">
@@ -100,15 +101,33 @@
 
     <!-- Content starts -->
     <div class="container-fluid p-0">
+      <div class="flash-message">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'error' %}
+                        <div class="alert-danger">{{ message }} message</div>
+                    {% elif category == 'success'%}
+                        <div class="alert-success">{{ message }}message 2</div>
+                    {% elif category == 'message'%}
+                        <div class="alert-message">{{ message }} message 3</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+  </div>
       <div class="reset-box">
         <h1 class="reset-title">Register</h1>
         <div class="line"></div>
-        <form id="registerForm" method="POST">
+        <form id="registerForm" method="POST" action="{{ url_for('register') }}">
           <div class="form-group">
-            <input type="text" class="form-control input-box" id="firstname" placeholder="Name">
-            <input type="email" class="form-control input-box" id="email" placeholder="Email">
-            <input type="password" class="form-control input-box" id="password" placeholder="Password">
-            <input type="password" class="form-control input-box" id="password2" placeholder="Re-enter Password">
+            <input type="text" class="form-control input-box" id="firstname" name="firstname" placeholder="First Name">
+            <input type="text" class="form-control input-box" id="lastname" name="lastname" placeholder="Last Name">
+            <input type="email" class="form-control input-box" id="email" name="email" placeholder="Email">
+            <input type="phonenumber" class="form-control input-box" id="email" name="phonenumber" placeholder="Phonenumber">
+            <input type="password" class="form-control input-box" id="password" name="password" placeholder="Password">
+            <input type="password" class="form-control input-box" id="password2" name="password2" placeholder="Re-enter Password">
           </div>
 
           <div class="social-login">
@@ -130,81 +149,32 @@
           </div>
       </div>
     </div>
-    
-    <style>
-      .modal-dialog {
-          max-width: 600px; /* Adjust the maximum width as needed */
-          width: 80%; /* Adjust the width as needed */
-          margin: 400px auto;
-        
-      }
-  
-      .modal-content {
-          height: 400px; /* Adjust the height as needed */
-      }
-  </style>
-      </head>
-      <body>
-      <!-- Modal HTML -->
-      <div id="myModal" class="modal fade" style="display: none;">
-          <div class="modal-dialog modal-confirm">
-              <div class="modal-content">
-                  <div class="modal-header flex-column">
-                      <div class="icon-box">
-                          <i class="material-icons">&#xE5CD;</i>
-                      </div>                        
-                      <h4 class="modal-title w-100">Error</h4>    
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  </div>
-                  <div class="modal-body">
-                      <p>{{ error_message }}</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      
-      <!-- Trigger the modal -->
-      <script>
-     $(document).ready(function(){
-    
-  
-    function validateForm() {
-        var firstname = $('#firstname').val();
-        var email = $('#email').val();
-        var password = $('#password').val();
-        var password2 = $('#password2').val();
 
-        if (!firstname || !email || !password || !password2) {
-            
-            displayErrorModal('Please fill in all fields.');
-            return false;
-        }
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all flash messages
+    const flashMessages = document.querySelectorAll('.flash-message');
 
-        // Add more validation as needed
+    // Loop over each flash message and show it for a few seconds
+    flashMessages.forEach(message => {
+        // Show the message
+        message.style.display = 'block';
 
-        // Return true if form is valid
-        return true;
-        
-    }
-    function displayErrorModal(errorMessage) {
-        // Set the error message in the modal body
-        $('#myModal .modal-body').html('<p>' + errorMessage + '</p>');
-        // Show the modal
-        $('#myModal').modal('show');
-    }
-
-    // Submit form with validation
-    $('#registerForm').submit(function(event) {
-        if (!validateForm()) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        } else {
-            // Form is valid, continue with form submission
-          
-        }
+        // Hide the message after 3 seconds (adjust this value to change the duration)
+        setTimeout(function() {
+            message.style.display = 'none';
+        }, 8000);
     });
 });
-    </script>
-      
+</script>
+
+
+
+    {% endblock %}
+
+>
+
+
   </body>
   <!-- Footer -->
   <footer>

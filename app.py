@@ -18,18 +18,6 @@ app = Flask(__name__)
 app.secret_key = 'Horizon' 
 
 
-""" ROOTING PLEASE ADD COMMENT WHEN COMMITING - OSCAR """
-
-#makes sure session ids are established to ensure no errors
-@app.route('/', methods=['GET', 'POST'])
-def sessionsVarriables():
-    #if the website needs any session varriables they are established here
-    if not session.get('isLoggedIn'):
-        session['isLoggedIn'] = False
-    if not session.get('menu_items'):
-        session['menu_items'] = []
-    return redirect(url_for('home'))
-
 #root for front page
 @app.route('/horizon', methods=['GET', 'POST'])
 def home():
@@ -78,7 +66,7 @@ def home():
         print(e)               
         return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
     
-     
+
 #root for getting the data when someone add something to order 
 #this code will add the menu items slected by the user into their cart with quantity
 @app.route('/addtocart', methods=['POST'])
@@ -106,6 +94,28 @@ def add_to_cart():
     #returns length of menu array so that it can update cart counter
     session['menuitemslength'] =  len(session['menu_items'])
     return jsonify(session['menuitemslength'])
+
+
+
+#for USER MESSAGES SUCCESS/MESSSAGE/ERROR
+@app.route('/message/<string:message_type>/<string:message>')
+def display_message(message_type, message):
+    session['message'] = {'type': message_type, 'text': message}
+    return '', 204
+
+
+
+#sessionsVarriables
+@app.route('/', methods=['GET', 'POST'])
+def sessionsVarriables():
+    if not session.get('isLoggedIn'):
+        session['isLoggedIn'] = False
+    if not session.get('menu_items'):
+        session['menu_items'] = []
+    return redirect(url_for('home'))
+
+
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -143,40 +153,77 @@ def login():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     error = ''
-    try:
-        if request.method == "POST":
-            email = request.form.get('email')
-            firstname = request.form.get('firstname')  # corrected variable names
-            lastname = request.form.get('lastname')  # corrected variable names
-            phonenumber = request.form.get('phonenum')  # corrected variable names
-            password = request.form.get('password')
-            if email and firstname and password and lastname and phonenumber:  # Simplified the condition
-                conn = dbfunc.getConnection()
-                if conn:
-                    with conn.cursor() as dbcursor:
-                        dbcursor.execute("SELECT * FROM customer WHERE customer_email = %s;", (email,))
-                        rows = dbcursor.fetchall()
-                        if rows:
-                            error = "Email already in-use, please use another or log in"
-                        else:
-                            password_hash = sha256_crypt.hash(password)
-                            dbcursor.execute("INSERT INTO customer (customer_first_name, customer_last_name, customer_password, customer_email, customer_phone_details) VALUES (%s, %s, %s, %s, %s)", (firstname, lastname, password_hash, email, phonenumber))
-                            conn.commit()
-                            session['isLoggedIn'] = True
-                            session['username'] = firstname + ' ' + lastname
-                            session['email'] = email
-                            return redirect(url_for('sessionsVarriables'))
-                else:
-                    error = "Database connection error"
+    if request.method == "POST":
+        firstname = request.form.get('firstname')  # corrected variable names
+        lastname = request.form.get('lastname')  # corrected variable names
+        email = request.form.get('email')
+        phonenumber = request.form.get('phonenumber')  # corrected variable names
+        password = request.form.get('password')
+        password2 = request.form.get('password2')
+        if not (firstname and lastname and email and phonenumber and password and password2):
+            error = "Please fill in all fields"
+        elif password != password2:
+            error = "Passwords do not match"
+        elif len(password) < 8:
+            error = "Password should be at least 8 characters long"
+        else:# Simplified the condition
+            conn = dbfunc.getConnection()
+            if conn:
+                with conn.cursor() as dbcursor:
+                    dbcursor.execute("SELECT * FROM customer WHERE customer_email = %s;", (email,))
+                    rows = dbcursor.fetchall()
+                    if rows:
+                        error = "Email already in-use, please use another or log in"
+                    else:
+                        password_hash = sha256_crypt.hash(password)
+                        dbcursor.execute("INSERT INTO customer (customer_first_name, customer_last_name, customer_password, customer_email, customer_phone_details) VALUES (%s, %s, %s, %s, %s)", (firstname, lastname, password_hash, email, phonenumber))
+                        conn.commit()
+                        session['isLoggedIn'] = True
+                        session['email'] = email
+                        print('register success')
+                        flash('Registration successful', 'success')
+                        return redirect(url_for('account'))
             else:
-                error = "Incomplete parameters"
-    except Exception as e:
-        error = str(e)
-        # Rendering the error modal template with the error message
-        return render_template("error_modal.html", error_message=error)
+                error = "Database connection error"
+    else:
+        flash(error, 'error')
+        print('register fail 1')
+    return render_template("userRegister.html", error_message=error, logged_in=session.get('isLoggedIn'))
 
-    return render_template("userRegister.html", error=error, logged_in=session.get('logged_in'))
 
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'isLoggedIn' in session:
+            if session["isLoggedIn"]:
+                return f(*args, **kwargs)
+            else:
+                
+                flash('You need to login first', 'error')
+                return redirect(url_for('login'))
+        else:
+            flash('You need to login first', 'error')
+            return redirect(url_for('login'))
+    return wrap
+
+@app.route('/account')
+@login_required  # Add this decorator to exempt the account route from login check
+def account():
+    if session.get('isLoggedIn'):
+        return render_template("userAccount.html", username=session.get('username'), email=session.get('email'))
+    else:
+        return redirect(url_for('login'))
+    
+
+@app.route("/logout")
+@login_required
+def logout():    
+    session.clear() #clears session variables
+    message = "You have been logged out!"
+    flash(message, 'message')
+    gc.collect()
+    return redirect(url_for('sessionsVarriables'))
 
 @app.route('/resetpassword', methods=["GET","POST"])
 def resetpassword():
@@ -226,20 +273,6 @@ def resetpassword():
 def privacy():
     return render_template('userPolicyPage.html', logged_in=session['isLoggedIn'])
 
-
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'isLoggedIn' in session:
-            if session["isLoggedIn"]:
-                return f(*args, **kwargs)
-            else:
-                flash('You need to login first', 'error')
-                return redirect(url_for('login'))
-        else:
-            flash('You need to login first', 'error')
-            return redirect(url_for('login'))
-    return wrap
 
 """ Orders systems """
 
@@ -504,13 +537,6 @@ def error():
 
 """ Account Views mainly to see things like orders and reservations """
 
-#redirects to account
-@app.route('/account')
-@login_required
-def account():
-    return render_template('userAccount.html',  isLoggedIn=session['isLoggedIn'])
-
-
 #this will get all the times created and subtotals for orders and the send them to the page
 @app.route('/accountorders')
 def accountOrders():
@@ -579,15 +605,6 @@ def accountReservations():
             gc.collect()  
     return render_template('userAccountReservations.html', Reservations=userReservations, isLoggedIn=session['isLoggedIn'])
 
- 
 
-
-@app.route("/logout")
-@login_required
-def logout():    
-    session.clear() #clears session variables
-    print("You have been logged out!")
-    gc.collect()
-    return redirect(url_for('sessionsVarriables'))
 
 app.run(debug=True)

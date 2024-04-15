@@ -80,12 +80,12 @@ TABLES['MENU_INGREDIENTS'] = 'CREATE TABLE menu_ingredients(\
 # <--- New customer table added to the database --->
 
 TABLES['CUSTOMER'] = 'CREATE TABLE customer (\
-  customer_email Varchar(255) NOT NULL, \
+  customer_email VARCHAR(255) NOT NULL, \
   PRIMARY KEY (customer_email),\
   customer_first_name VARCHAR(255) NOT NULL,\
   customer_last_name VARCHAR(255) NOT NULL,\
   customer_password VARCHAR(255) NOT NULL,\
-  customer_phone_details INT NOT NULL\
+  customer_phone_details VARCHAR(20) NOT NULL\
 );'
 
 # TABLES['DISCOUNT'] = 'CREATE TABLE discount (\

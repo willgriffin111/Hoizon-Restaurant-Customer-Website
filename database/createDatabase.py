@@ -1,4 +1,4 @@
-import mysql.connector,dbfunc
+import mysql.connector, dbfunc
 
 conn = dbfunc.getnondbConnection()   #connection to DB
 DB_NAME = 'Horizon_Restaurant'             #DB Name
@@ -8,9 +8,13 @@ if conn != None:    #Checking if connection is None
         print('MySQL Connection is established')                          
         dbcursor = conn.cursor()    #Creating cursor object
         #CREATE database - only if you want to create new DB and 
-        #your useraccount has privileges to create new Database        
+
+
+        #your useraccount has privileges to create new Database
+
+
         dbcursor.execute(DBStatement)
-        #dbcursor.execute('CREATE DATABASE {}'.format(DB_NAME))
+        dbcursor.execute('CREATE DATABASE {}'.format(DB_NAME))
         print("Database {} created successfully.".format(DB_NAME))     
         dbcursor.close()                               
         conn.close() #Connection must be closed

@@ -1,5 +1,3 @@
-#Alex Rogers22018703
-
 import mysql.connector
 from mysql.connector import errorcode
  
