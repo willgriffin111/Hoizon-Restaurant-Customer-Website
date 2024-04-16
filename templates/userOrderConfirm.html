@@ -70,21 +70,15 @@
 
             <!-- User icon -->
             <button>
-              {% if isLoggedIn %}
-                  <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
-                      <i class="fa-solid fa-user"></i>
-                  </a>
-              {% else %}
-                  <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
-                      <i class="fa-solid fa-user"></i>
-                  </a>
-              {% endif %}
+              <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                  <i class="fa-solid fa-user"></i>
+              </a>
             </button>
             <!-- Bag-counter icon -->
             <button>
               <a class="nav-btn" aria-current="page" href="{{ url_for('orders') }}">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <p class="order-counter"> {{ menuitemslength }} </p>
+                <p class="order-counter">{{ menuitemslength }}</p>
             </a>
           </button>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,9 +99,11 @@
               <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
           </li>
           </li>
+          {% if isLoggedIn == Flase %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
+          {% endif %}
           </ul>
         </div>
       </nav>

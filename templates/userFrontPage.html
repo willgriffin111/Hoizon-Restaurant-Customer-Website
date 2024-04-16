@@ -30,10 +30,7 @@
 
             <!-- User icon -->
             <button>
-                <a v-if="isLoggedIn === 'true'" class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
-                <i class="fa-solid fa-user"></i>
-              </a>
-              <a v-else class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+              <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
                   <i class="fa-solid fa-user"></i>
               </a>
             </button>
@@ -62,9 +59,11 @@
               <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
           </li>
           </li>
+          {% if isLoggedIn == Flase %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
+          {% endif %}
           </ul>
         </div>
       </nav>

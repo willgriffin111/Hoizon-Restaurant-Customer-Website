@@ -1,0 +1,183 @@
+* {
+    font-family: 'Helvetica Neue';
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    background-color: rgb(241, 241, 241);
+}
+
+.topbar{
+    margin: 0;
+    background-color: rgba(101, 101, 101, 0.9); /* Adjust alpha value here */
+    width: 100%;
+    margin-top: 0;
+}
+
+h1{
+    font-weight: 200;
+    color: white;
+    font-size: 60px;
+    margin-left: 10px;
+    padding: 30px;
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    margin: auto;
+    margin-top: 10%;
+    max-width: 500px;
+    padding: 2%;
+    height: 300px;
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.20);
+}
+
+.welcome-title {
+    font-size: larger;
+}
+
+.welcome-content {
+    font-size: 23px;
+    width: 90%;
+    margin-top: 7%;
+    text-align: center;
+}
+
+.loction-options {
+    margin-top: 10%;
+    font-size: 23px;
+}
+
+select{
+    font-size: 20px;
+    border: none;
+    background-color: rgb(229, 229, 229);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.submit{
+    margin-top: 10%;
+}
+
+button{
+    font-size: 24px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #daab1d;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover{
+    background-color:#f6c121;
+}
+
+.fakefooter{
+    width: 100%;
+    background-color: rgb(224, 224, 224);
+    bottom: 0;
+    position: fixed;
+    height: 10%;
+}
+
+.extra{
+    margin-top:4%;
+    padding: 5px;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .extra{
+        font-size: 15px;
+    }
+
+    .topbar{
+        margin: 0;
+        background-color: rgba(255, 255, 255); /* Adjust alpha value here */
+        width: 100%;
+        margin-top: 0;
+    }
+    
+    h1{
+        font-weight: 600;
+        color: rgb(0, 0, 0);
+        font-size: 30px;
+        margin-left: 5px;
+        padding: 30px;
+        
+    }
+    
+    .welcome-container {
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        margin: auto;
+        margin-top: 10%;
+        max-width: 90%;
+        padding: 2%;
+        height: 400px;
+        border-radius: 15px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.20);
+        margin-top: 20%;
+    }
+    
+    .welcome-title {
+        font-size: larger;
+    }
+    
+    .welcome-content {
+        font-size: 23px;
+        width: 90%;
+        margin-top: 7%;
+        text-align: center;
+    }
+    
+    .loction-options {
+        margin-top: 10%;
+        font-size: 23px;
+        margin: auto;
+        margin-left: 20%;
+    }
+    
+    select{
+        font-size: 20px;
+        border: none;
+        background-color: rgb(229, 229, 229);
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+        margin-left: 5%;
+        margin-top: 5%;
+    }
+    
+    .submit{
+        margin-top: 10%;
+    }
+    
+    button{
+        font-size: 24px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #daab1d;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        margin-bottom: 40px;
+    }
+
+  }

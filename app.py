@@ -25,12 +25,28 @@ def sessionsVarriables():
         session['isLoggedIn'] = False
     if not session.get('menu_items'):
         session['menu_items'] = []
-    return redirect(url_for('home'))
+    session['menuitemslength'] =  len(session['menu_items'])
+    #get all the names and ids of restaurant
+    conn = dbfunc.getConnection()           
+    if conn != None:    #Checking if connection is None           
+        if conn.is_connected(): #Checking if connection is established
+            print('MySQL Connection is established')                          
+            dbcursor = conn.cursor()    #Creating cursor object          
+            dbcursor.execute('SELECT restaurant_name, restaurant_id FROM restaurant;')      #Executing
+            restaurants = dbcursor.fetchall()
+            dbcursor.close()
+            conn.close()
+            gc.collect()  
+    if request.method == "POST":
+        session['resturantid'] = request.form.get('options')
+        print(session['resturantid'])
+        return redirect(url_for('home'))
+        
+    return render_template('welcome.html',locations=restaurants, isLoggedIn=session['isLoggedIn'])
 
 #root for front page
 @app.route('/horizon', methods=['GET', 'POST'])
 def home():
-    session['resturantid'] = 1
     print(session['menu_items'])
     session['menuitemslength'] =  len(session['menu_items'])
     menulist = [] #blank data in case sql fails
@@ -132,7 +148,7 @@ def login():
                                 session['isLoggedIn'] = True
                                 session['username'] = str(data[1]) + ' ' + str(data[2])
                                 session['email'] = email
-                                return redirect(url_for('sessionsVarriables'))
+                                return redirect(url_for('home'))
                             else:
                                 error = "Invalid credentials username/password, try again."
                         else:
@@ -186,13 +202,13 @@ def register():
     else:
         flash(error, 'error')
         print('register fail 1')
-    return render_template("userRegister.html", error_message=error, logged_in=session.get('isLoggedIn'))
+    return render_template("userRegister.html", menuitemslength=session['menuitemslength'], error_message=error, logged_in=session.get('isLoggedIn'))
 
 
 
 @app.route('/privacy')
 def privacy():
-    return render_template('userPolicyPage.html', isLoggedIn=session['isLoggedIn'])
+    return render_template('userPolicyPage.html', menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
 
 
 def login_required(f):
@@ -478,7 +494,7 @@ def error():
 @app.route('/account')
 @login_required  # Add this decorator to exempt the account route from login check
 def account():
-    return render_template("userAccount.html", username=session['username'], email=session.get('email'))
+    return render_template("userAccount.html", menuitemslength=session['menuitemslength'] , username=session['username'],isLoggedIn=session['isLoggedIn'], email=session.get('email'))
 
 #this will get all the times created and subtotals for orders and the send them to the page
 @app.route('/accountorders')
@@ -516,7 +532,7 @@ def accountOrders():
             dbcursor.close()
             conn.close()
             gc.collect()  
-    return render_template('userAccountOrder.html', orders=userOrders, isLoggedIn=session['isLoggedIn'])
+    return render_template('userAccountOrder.html', menuitemslength=session['menuitemslength'], orders=userOrders, isLoggedIn=session['isLoggedIn'])
 
 #this gets all the reservations made by the user and all returns all relevent data
 @app.route('/accountreservations')
@@ -548,7 +564,7 @@ def accountReservations():
             dbcursor.close()
             conn.close()
             gc.collect()  
-    return render_template('userAccountReservations.html', Reservations=userReservations, isLoggedIn=session['isLoggedIn'])
+    return render_template('userAccountReservations.html', menuitemslength=session['menuitemslength'], Reservations=userReservations, isLoggedIn=session['isLoggedIn'])
 
 @app.route('/resetpassword', methods=["GET","POST"])
 @login_required
@@ -564,7 +580,7 @@ def resetpassword():
             if session['email'] != None and password != None and confirmpass != None:  #check if em or pw is none    
                 if password != confirmpass:
                     error = "Passwords do not match"
-                    return render_template("userResetPassword.html", error = error, isLoggedIn=session['isLoggedIn'])
+                    return render_template("userResetPassword.html", menuitemslength=session['menuitemslength'], error = error, isLoggedIn=session['isLoggedIn'])
                 else:
                     conn = dbfunc.getConnection() 
                     if conn != None:    #Checking if connection is None                    
@@ -588,13 +604,13 @@ def resetpassword():
                         conn.close()                                                                   
                         gc.collect()
                         print('login start 1.10')
-                        return render_template("userResetPassword.html", error=error, isLoggedIn=session['isLoggedIn'])
+                        return render_template("userResetPassword.html", menuitemslength=session['menuitemslength'], error=error, isLoggedIn=session['isLoggedIn'])
                     
     except Exception as e:                
         error = str(e) + " <br/> Invalid credentials, try again."
-        return render_template("userResetPassword.html",error = error, isLoggedIn=session['isLoggedIn'])   
+        return render_template("userResetPassword.html", menuitemslength=session['menuitemslength'],error = error, isLoggedIn=session['isLoggedIn'])   
     
-    return render_template("userResetPassword.html", error = error, isLoggedIn=session['isLoggedIn'])
+    return render_template("userResetPassword.html", menuitemslength=session['menuitemslength'], error = error, isLoggedIn=session['isLoggedIn'])
  
 @app.route("/logout")
 @login_required

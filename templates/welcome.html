@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/userWelcome.css">
+    <title>Whalecum</title>
+</head>
+<body>
+    <div class="topbar">
+        <h1>Horizon Restaurant</h1>
+    </div>
+    <div class="welcome-container">
+        <div class="welcome-title"><h2>Welcome</h2></div>
+        <div class="welcome-content">Please choose location:
+        </div>
+        <form method="POST">
+        <div class="loction-options">
+            <label for="options">Restaurant Locations:</label>
+            <select id="options" name="options">
+                {% for item in locations %}
+                <option value="{{item[1]}}">{{item[0]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="submit">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    </div>
+    <div class="fakefooter"><p class="extra">Copyright © 2024 Horizon Restaurant. All rights reserved</p></div>
+</body>
+</html>
