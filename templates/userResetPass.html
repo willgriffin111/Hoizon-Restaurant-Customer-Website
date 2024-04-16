@@ -22,18 +22,34 @@
     <body class="vh-100">
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg fixed-top1">
-          <a class="navbar-brand" href="{{ url_for('frontpage') }}">Horizon <br>Restaurant</a>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <a class="navbar-brand" href="{{ url_for('home') }}">Horizon</a>
+              </div>
+              <div class="col">
+                <a class="navbar-brand" href="{{ url_for('home') }}">Restaurant</a>
+              </div>
+            </div>
+          </div>
+  
               <!-- User icon -->
               <button>
-                  <a class="nav-btn" aria-current="page" href="{{ url_for('accountpage') }}">
-                    <i class="fa-solid fa-user"></i>
-                </a>
+                {% if isLoggedIn %}
+                    <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                {% else %}
+                    <a class="nav-btn" aria-current="page" href="{{ url_for('account') }}">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                {% endif %}
               </button>
               <!-- Bag-counter icon -->
               <button>
-                <a class="nav-btn" aria-current="page" href="#">
+                <a class="nav-btn" aria-current="page" href="{{ url_for('orders') }}">
                   <i class="fa-solid fa-bag-shopping"></i>
-                  <p class="order-counter">10</p>
+                  <p class="order-counter"> {{ menuitemslength }} </p>
               </a>
             </button>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,17 +58,21 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('accountpage') }}">Account</a>
+                <a class="nav-link" href="{{ url_for('account') }}">Account</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('orderspage') }}">Orders</a>
+                <a class="nav-link" href="{{ url_for('orders') }}">Orders</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('reservationspage') }}">Reservations</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('privicypolpage') }}">Privacy Policy</a>
-              </li>
+                <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
+            </li>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
             </ul>
           </div>
         </nav>
@@ -62,11 +82,11 @@
         <div class="reset-box">
           <h1 class="reset-title">Reset</h1>
           <div class="line"></div>
-          <form>
+          <form method="POST">
             <div class="form-group">
-              <input type="password" class="form-control input-box" id="Passwordboxold" placeholder="Old Password">
-              <input type="password" class="form-control input-box" id="Passwordboxnew" placeholder="New Password">
-              <input type="password" class="form-control input-box" id="Passwordboxreenter" placeholder="Re-enter Password">
+              <input type="password" class="form-control input-box" id="oldpassword" name="oldpassword" placeholder="Old Password">
+              <input type="password" class="form-control input-box" id="password" name="password" placeholder="New Password">
+              <input type="password" class="form-control input-box" id="confirmpassword" name="confirmpassword" placeholder="Re-enter Password">
             </div>
           </p>
         </div>
