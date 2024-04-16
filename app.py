@@ -18,6 +18,15 @@ app = Flask(__name__)
 app.secret_key = 'Horizon' 
 
 
+#sessionsVarriables
+@app.route('/', methods=['GET', 'POST'])
+def sessionsVarriables():
+    if not session.get('isLoggedIn'):
+        session['isLoggedIn'] = False
+    if not session.get('menu_items'):
+        session['menu_items'] = []
+    return redirect(url_for('home'))
+
 #root for front page
 @app.route('/horizon', methods=['GET', 'POST'])
 def home():
@@ -104,19 +113,6 @@ def display_message(message_type, message):
     return '', 204
 
 
-
-#sessionsVarriables
-@app.route('/', methods=['GET', 'POST'])
-def sessionsVarriables():
-    if not session.get('isLoggedIn'):
-        session['isLoggedIn'] = False
-    if not session.get('menu_items'):
-        session['menu_items'] = []
-    return redirect(url_for('home'))
-
-
-
-
 @app.route('/login', methods=["GET", "POST"])
 def login():
     form = {}
@@ -176,9 +172,11 @@ def register():
                         error = "Email already in-use, please use another or log in"
                     else:
                         password_hash = sha256_crypt.hash(password)
+                        print(phonenumber)
                         dbcursor.execute("INSERT INTO customer (customer_first_name, customer_last_name, customer_password, customer_email, customer_phone_details) VALUES (%s, %s, %s, %s, %s)", (firstname, lastname, password_hash, email, phonenumber))
                         conn.commit()
                         session['isLoggedIn'] = True
+                        session['username'] = firstname + ' ' + lastname
                         session['email'] = email
                         print('register success')
                         flash('Registration successful', 'success')
@@ -190,6 +188,11 @@ def register():
         print('register fail 1')
     return render_template("userRegister.html", error_message=error, logged_in=session.get('isLoggedIn'))
 
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('userPolicyPage.html', isLoggedIn=session['isLoggedIn'])
 
 
 def login_required(f):
@@ -207,71 +210,6 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-@app.route('/account')
-@login_required  # Add this decorator to exempt the account route from login check
-def account():
-    if session.get('isLoggedIn'):
-        return render_template("userAccount.html", username=session.get('username'), email=session.get('email'))
-    else:
-        return redirect(url_for('login'))
-    
-
-@app.route("/logout")
-@login_required
-def logout():    
-    session.clear() #clears session variables
-    message = "You have been logged out!"
-    flash(message, 'message')
-    gc.collect()
-    return redirect(url_for('sessionsVarriables'))
-
-@app.route('/resetpassword', methods=["GET","POST"])
-def resetpassword():
-    form={}
-    error = ''
-    try:	
-        if request.method == "POST":            
-            email = request.form['email']
-            password = request.form['password']            
-            form = request.form
-            print('Password change start 1.1')
-            
-            if email != None and password != None:  #check if em or pw is none          
-                conn = dbfunc.getConnection() 
-                if conn != None:    #Checking if connection is None                    
-                    if conn.is_connected(): #Checking if connection is established                        
-                        print('MySQL Connection is established')                          
-                        dbcursor = conn.cursor()    #Creating cursor object                                                 
-                        dbcursor.execute("SELECT User_Password, user_type, User_Firstname, User_ID \
-                            FROM user_data WHERE User_Email = %s;", (email,))                                                
-                        data = dbcursor.fetchone()
-                        #print(data[0])
-                        if dbcursor.rowcount < 1: #this mean no user exists                         
-                            error = "Email does not exist, login again"
-                            return render_template("userResetPassword.html", error=error, logged_in=session['logged_in'])
-                        else:                            
-                            #data = dbcursor.fetchone()[0] #extracting password   
-                            # verify passowrd hash and password received from user                                                             
-                            password = sha256_crypt.hash((str(password)))
-                            dbcursor.execute("UPDATE user_data SET User_Password = %s WHERE User_Email = %s;", (password,email,)) 
-                            conn.commit()
-                            dbcursor.close()
-                            conn.close()                                
-                            return redirect(url_for('home'))
-                                                          
-                    gc.collect()
-                    print('login start 1.10')
-                    return render_template("userResetPassword.html", form=form, error=error, logged_in=session['logged_in'])
-    except Exception as e:                
-        error = str(e) + " <br/> Invalid credentials, try again."
-        return render_template("userResetPassword.html", form=form, error = error, logged_in=session['logged_in'])   
-    
-    return render_template("userResetPassword.html", form=form, error = error, logged_in=session['logged_in'])
-
-
-@app.route('/privacy')
-def privacy():
-    return render_template('userPolicyPage.html', logged_in=session['isLoggedIn'])
 
 
 """ Orders systems """
@@ -537,8 +475,14 @@ def error():
 
 """ Account Views mainly to see things like orders and reservations """
 
+@app.route('/account')
+@login_required  # Add this decorator to exempt the account route from login check
+def account():
+    return render_template("userAccount.html", username=session['username'], email=session.get('email'))
+
 #this will get all the times created and subtotals for orders and the send them to the page
 @app.route('/accountorders')
+@login_required
 def accountOrders():
     #get all the bill ids for the orders
     userOrders = []
@@ -576,6 +520,7 @@ def accountOrders():
 
 #this gets all the reservations made by the user and all returns all relevent data
 @app.route('/accountreservations')
+@login_required
 def accountReservations():
     #get all the bill ids for the orders
     userReservations = []
@@ -605,6 +550,59 @@ def accountReservations():
             gc.collect()  
     return render_template('userAccountReservations.html', Reservations=userReservations, isLoggedIn=session['isLoggedIn'])
 
+@app.route('/resetpassword', methods=["GET","POST"])
+@login_required
+def resetpassword():
+    form={}
+    error = ''
+    try:	
+        if request.method == "POST":    
+            oldpass = request.form['oldpassword']        
+            password = request.form['password']  
+            confirmpass = request.form['confirmpassword']    
+            print('Password change start 1.1')
+            if session['email'] != None and password != None and confirmpass != None:  #check if em or pw is none    
+                if password != confirmpass:
+                    error = "Passwords do not match"
+                    return render_template("userResetPassword.html", error = error, isLoggedIn=session['isLoggedIn'])
+                else:
+                    conn = dbfunc.getConnection() 
+                    if conn != None:    #Checking if connection is None                    
+                        if conn.is_connected(): #Checking if connection is established                        
+                            print('MySQL Connection is established')                          
+                            dbcursor = conn.cursor()    #Creating cursor object 
+                            dbcursor.execute("SELECT customer_password FROM customer WHERE customer_email = %s;", (session['email'],))
+                            data = dbcursor.fetchone()
+                            if data:
+                                if sha256_crypt.verify(oldpass, data[0]):                                                                        
+                                    #data = dbcursor.fetchone()[0] #extracting password   
+                                    # verify passowrd hash and password received from user                                                             
+                                    password = sha256_crypt.hash((str(password)))
+                                    dbcursor.execute("UPDATE customer SET customer_password = %s WHERE customer_email = %s;", (password,session['email'],)) 
+                                    conn.commit()
+                                    dbcursor.close()
+                                    conn.close()                                
+                                    return redirect(url_for('account'))
+                                
+                        dbcursor.close()
+                        conn.close()                                                                   
+                        gc.collect()
+                        print('login start 1.10')
+                        return render_template("userResetPassword.html", error=error, isLoggedIn=session['isLoggedIn'])
+                    
+    except Exception as e:                
+        error = str(e) + " <br/> Invalid credentials, try again."
+        return render_template("userResetPassword.html",error = error, isLoggedIn=session['isLoggedIn'])   
+    
+    return render_template("userResetPassword.html", error = error, isLoggedIn=session['isLoggedIn'])
+ 
+@app.route("/logout")
+@login_required
+def logout():    
+    session.clear() #clears session variables
+    print("You have been logged out!")
+    gc.collect()
+    return redirect(url_for('sessionsVarriables'))
 
 
 app.run(debug=True)
