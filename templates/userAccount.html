@@ -81,10 +81,10 @@
       <div class="user-options">
         <ul class="user-options-list">
           <li class="user-options-element">
-            <a class="user-options-link" href="#">Orders</a>
+            <a class="user-options-link" href="{{ url_for('accountOrders') }}">Orders</a>
           </li>
           <li class="user-options-element">
-            <a class="user-options-link" href="#">Reservations</a>
+            <a class="user-options-link" href="{{ url_for('accountReservations') }}">Reservations</a>
           </li>
           <li class="user-options-element">
             <a class="user-options-link" href="{{ url_for('resetpassword') }}">Reset password</a>
