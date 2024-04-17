@@ -399,7 +399,7 @@ button{
 @media only screen and (min-width: 1660px) {
 
   .navbar-brand{
-    font-size: 70px;
+    font-size: 50px;
     font-weight: 200;
     color: white
   }

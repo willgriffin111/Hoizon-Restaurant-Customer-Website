@@ -19,6 +19,7 @@
           }
         </script>
         <link rel="stylesheet" href="../static/userReservations.css">
+        <link rel="stylesheet" href="../static/userfrontPage.css">
         <title>Horizon Restaurant</title>
     </head>
     <body class="vh-100">
@@ -65,12 +66,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
             </li>
-            </li>
-            {% if isLoggedIn == Flase %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-            </li>
-            {% endif %}
+              <a class="nav-link" href="{{ url_for('sessionsVarriables') }}">Restaurant</a>
+          </li>
+            {% if isLoggedIn == False %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          {% endif %}
             </ul>
           </div>
         </nav>

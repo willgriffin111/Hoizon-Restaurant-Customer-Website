@@ -12,16 +12,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>        
 <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
         
-        <script>
-          function riseCatagory(elementId) {
-            var element = document.getElementById(elementId);
-            if (element.classList.contains('catagoryActive')) {
-                element.classList.remove('catagoryActive');
-            } else {
-                element.classList.add('catagoryActive');
-            }
-          }
-        </script>
+
         
 
         <style>
@@ -45,6 +36,7 @@
 
 
         <link rel="stylesheet" href="../static/userRegister.css">
+        <link rel="stylesheet" href="../static/userfrontPage.css">
         <title>Horizon Restaurant</title>
     </head>
    
@@ -94,8 +86,10 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
           </li>
-          </li>
-          {% if isLoggedIn == Flase %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('sessionsVarriables') }}">Restaurant</a>
+        </li>
+          {% if isLoggedIn == False %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('login') }}">Login</a>
           </li>
@@ -185,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <footer>
     <!-- Order Button -->
     <div class="orderbutton">
-      <button type="submit" class="btn order-btn">Next</button>
+      <button type="submit" class="btn order-btn">Register</button>
     </div>
   </footer>
 </form>

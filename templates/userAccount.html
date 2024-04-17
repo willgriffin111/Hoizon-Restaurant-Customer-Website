@@ -7,16 +7,19 @@
         </script>
         <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
         <script>
-          function riseCatagory(elementId) {
-            var element = document.getElementById(elementId);
-            if (element.classList.contains('catagoryActive')) {
-                element.classList.remove('catagoryActive');
-            } else {
-                element.classList.add('catagoryActive');
-            }
+          function deleteCustomer() {
+              var result = confirm("Are you sure you want to delete the account?");
+              
+              if (result) {
+                  // If user clicks 'OK', submit the form
+                  document.getElementById("deleteCustomer").submit();
+              } else {
+                  // If user clicks 'Cancel', do nothing
+              }
           }
-        </script>
+      </script>
         <link rel="stylesheet" href="../static/userAccountPage.css">
+        <link rel="stylesheet" href="../static/userfrontPage.css">
         <title>Horizon Restaurant</title>
     </head>
     <body class="vh-100">
@@ -63,8 +66,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('privacy') }}">Policies</a>
             </li>
-            </li>
-            {% if isLoggedIn == Flase %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('sessionsVarriables') }}">Restaurant</a>
+          </li>
+            {% if isLoggedIn == False %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
@@ -93,6 +98,9 @@
             <a class="user-options-link" href="{{ url_for('logout') }}">Log out</a>
           </li>
         </ul>
+        <form id="deleteCustomer" action="{{ url_for('removeaccount') }}" method="POST">
+          <button class="delete-btn" type="button" onclick="deleteCustomer()">Delete Account</button>
+      </form>
       </div>
     </div>
       

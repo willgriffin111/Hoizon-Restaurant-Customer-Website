@@ -48,6 +48,7 @@ def sessionsVarriables():
 @app.route('/horizon', methods=['GET', 'POST'])
 def home():
     print(session['menu_items'])
+    print(session['isLoggedIn'])
     session['menuitemslength'] =  len(session['menu_items'])
     menulist = [] #blank data in case sql fails
     print('Collecting Menu') #sql to get the menu items from the menu
@@ -496,6 +497,26 @@ def error():
 def account():
     return render_template("userAccount.html", menuitemslength=session['menuitemslength'] , username=session['username'],isLoggedIn=session['isLoggedIn'], email=session.get('email'))
 
+#this deleates the customer
+@app.route('/removeaccount', methods=["GET","POST"])
+@login_required  
+def removeaccount():
+    if request.method == "POST":
+        conn = dbfunc.getConnection()           
+        if conn != None:    #Checking if connection is None           
+            if conn.is_connected(): #Checking if connection is established
+                print('MySQL Connection is established')                          
+                dbcursor = conn.cursor()    #Creating cursor object  
+                dbcursor.execute('DELETE FROM orders WHERE customer_email = %s', (session['email'],)) 
+                conn.commit()
+                dbcursor.execute('DELETE FROM customer WHERE customer_email = %s', (session['email'],))    
+                conn.commit()
+                dbcursor.close()
+                conn.close()
+                print("User has been deleated")
+                return redirect(url_for('logout'))
+    return redirect(url_for('home'))
+
 #this will get all the times created and subtotals for orders and the send them to the page
 @app.route('/accountorders')
 @login_required
@@ -545,7 +566,7 @@ def accountReservations():
         if conn.is_connected(): #Checking if connection is established
             print('MySQL Connection is established')                          
             dbcursor = conn.cursor()    #Creating cursor object          
-            dbcursor.execute('SELECT reservation_customer_name, reservation_date, reservation_time, table_id, restaurant_id FROM reservation WHERE reservation_customer_email = %s ORDER BY reservation_date ASC;', (session['email'],))    #Executing
+            dbcursor.execute('SELECT reservation_customer_name, reservation_date, reservation_time, table_id, restaurant_id, reservation_id FROM reservation WHERE reservation_customer_email = %s ORDER BY reservation_date ASC;', (session['email'],))    #Executing
             reservationList = dbcursor.fetchall()
             
             
@@ -558,13 +579,32 @@ def accountReservations():
                 dbcursor.execute('SELECT restaurant_name FROM restaurant WHERE restaurant_id = %s;', (reservation[4],))
                 restaurantName = dbcursor.fetchone()
                 if(reservation[1] >= datetime.date.today()): #check to make sure were not showing reservations that have already happened
-                    userReservations.append({"name": reservation[0], "date": reservation[1], "time": reservation[2], "table": tableNumber[0], "location": restaurantName[0]})
+                    userReservations.append({"name": reservation[0], "date": reservation[1], "time": reservation[2], "table": tableNumber[0], "location": restaurantName[0], "id": reservation[5]})
                 
             print(userReservations)
             dbcursor.close()
             conn.close()
             gc.collect()  
     return render_template('userAccountReservations.html', menuitemslength=session['menuitemslength'], Reservations=userReservations, isLoggedIn=session['isLoggedIn'])
+
+#this removes a selected reservation
+@app.route('/removereservation', methods=["GET","POST"])
+@login_required  
+def removereservation():
+    if request.method == "POST":
+        reservationid = request.form['id']
+        conn = dbfunc.getConnection()           
+        if conn != None:    #Checking if connection is None           
+            if conn.is_connected(): #Checking if connection is established
+                print('MySQL Connection is established')                          
+                dbcursor = conn.cursor()    #Creating cursor object  
+                dbcursor.execute('DELETE FROM reservation WHERE reservation_id = %s', (reservationid,))    
+                conn.commit()
+                dbcursor.close()
+                conn.close()
+                print("Reservation has been deleated")
+                return redirect(url_for('accountReservations'))
+    return redirect(url_for('accountReservations'))
 
 @app.route('/resetpassword', methods=["GET","POST"])
 @login_required

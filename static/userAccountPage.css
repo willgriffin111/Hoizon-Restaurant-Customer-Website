@@ -127,6 +127,22 @@ list-style-type: none;
   font-family: Arial, sans-serif;
 }
 
+.delete-btn{
+  background-color: rgb(236, 0, 0);
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  margin-top: 10%;
+  border-radius: 20px;
+  padding: 10px;
+  align-items: center;
+}
+
+.delete-btn:hover{
+  background-color: rgb(194, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
 
 
 /* order button */
