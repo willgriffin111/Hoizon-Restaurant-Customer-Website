@@ -170,3 +170,40 @@ footer {
     background-color: white;
   }
 }
+
+@media only screen and (min-width: 1660px) {
+  .reset-pass-box{
+    width: 50%;
+    margin-top: -200px;
+    height: 20%;
+  }
+  .navbar{
+  margin-top: 200px;
+  }
+
+  .reset-title{
+    font-size:60px;
+    font-weight: 200;
+    margin-bottom: 10px;
+  }
+  .form-control{
+    margin: 0px;
+    margin-top: 5%;
+    font-size: 30px;
+  }
+  .reset-box{
+    height: 300%;
+  }
+
+  .border{
+    width: 10%;
+    left: 45%;
+    position: relative;
+    top: 60%;
+  }
+  .footer{
+    position: relative;
+    margin-top: 44%;
+  }
+
+}
