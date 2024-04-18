@@ -169,7 +169,7 @@ button{
   background-color: white;
 }
 
-footer {
+.order-spce {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -192,4 +192,42 @@ footer {
   .navbar-collapse{
     background-color: white;
   }
+}
+
+@media only screen and (min-width: 1660px) {
+  .navbar{
+    top: 0;
+  }
+  .order-spce{
+    display: none;
+  }
+  
+  footer{
+    margin-top: 20%;
+  }
+  .user-name{
+    margin-top: 10px;
+    font-size:  40px;
+  }
+  
+  .user-options{
+    font-size: 30px;
+    margin-top: 5%;
+  }
+  .delete-btn{
+    background-color: rgb(236, 0, 0);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin-top: 5%;
+    border-radius: 5px;
+    padding: 10px;
+    align-items: center;
+  }
+  
+  .delete-btn:hover{
+    background-color: rgb(194, 0, 0);
+    color: rgb(255, 255, 255);
+  }
+
 }
