@@ -381,6 +381,15 @@ footer {
     color: white;
     padding: 0%;
   }
+
+  .order-h{
+   min-width: 50%;
+  }
+
+  .container-h{
+    left: 20%;
+  }
+
   .navbar-brand:hover{
     color: white;
   }
@@ -766,5 +775,9 @@ border-bottom: none;
 .navbar-collapse{
 background-color: white;
 }
+.order-bt{
+  display: none;
+}
+
 }
 }
