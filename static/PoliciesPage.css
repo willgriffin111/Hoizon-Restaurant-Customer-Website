@@ -12,6 +12,7 @@ body {
     /* background-color: rgb(41, 41, 41, 0.85) */
     background-color: white;
     box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    top: 0;
   }
 
   .navbar-brand{
@@ -145,7 +146,7 @@ button{
   background-color: white;
 }
 
-footer {
+.order-btn-space {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -355,4 +356,90 @@ border-radius: 15px;
   color: white;
   float: right;
   margin-right: 50px;
+}
+
+@media only screen and (min-width: 1660px) {
+  .navbar{
+    top: 0;
+    position: absolute;
+  }
+  .order-btn-space{
+    display: none;
+  }
+
+  footer{
+    margin-top: 90%;
+    position: absolute;
+    width: 100%;
+  }
+
+
+
+  #accordion{
+    margin: 100px auto;
+    align-items: center;
+    margin: auto;
+    width: 70%;
+    padding-bottom:300px;
+  
+  }
+  #accordion li{
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 25px;
+    border-radius: 10px;
+    vertical-align: middle;
+  
+  }
+  #accordion li label{
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 200;
+    cursor: pointer;
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+  }   
+  #accordion label + input[type="radio"]{
+    display:none ;
+  }
+  #accordion .content{
+    padding: 0 50px;
+    line-height: 50px;
+    max-height: 0;
+    overflow: hidden;
+    transition:max-height 0.5s;
+    text-align:justify;
+    text-justify: inter-word;
+    font-size: 30px;
+    font-weight: 200;
+  
+  }
+  #accordion label + input[type="radio"]:checked + .content{
+    max-height:  700px;
+  }
+  
+  
+  
+  @media(max-width:767px){
+    #accordion{
+       width: 90%;
+       margin-bottom: 30px;
+    }
+  }
+  .Help{
+    margin-top: 80px;
+    padding: 5px;
+  }
+
+  .Privacy-header{
+    font-size: 60px;
+    text-align: center;
+    padding-bottom: 10px;
+
+  }
 }
