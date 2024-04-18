@@ -1,186 +1,118 @@
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    position: relative;
-    overflow-x: hidden;
-    background-color: rgb(241, 241, 241);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+  background-color: rgb(241, 241, 241);
+}
+
+  /* navbar */
+  .navbar{
+    /* background-color: rgb(41, 41, 41, 0.85) */
+    background-color: white;
+    box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    position: absolute;
+    width: 100%;
   }
 
-    /* navbar */
-    .navbar{
-      /* background-color: rgb(41, 41, 41, 0.85) */
-      background-color: white;
-      box-shadow: 0 10px 6px rgba(0, 0, 0, 0.25);
-      z-index: 10;
-      position: absolute;
-      width: 100%;
-    }
-  
-    .navbar-brand{
-      font-size: 70px;
-      padding-left: 40px;
-      font-weight: bold;
-      
-    }
-  
-    .navbar-nav{
-      padding-left: 2%;
-    }
-  
-    .nav-item{
-      font-size: 40px;
-      padding: 5px;
-      border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
-      padding-bottom: 5px; /* Adjust the space between the text and the line */
-      width: 95%;
-    }
-  
-    .nav-item:last-child{
-  
-      border-bottom: none;
-    }
+  .navbar-brand{
+    font-size: 70px;
+    padding-left: 40px;
+    font-weight: bold;
     
-    .nav-link{
-      color: black;
-    }
+  }
+
+  .navbar-nav{
+    padding-left: 2%;
+  }
+
+  .nav-item{
+    font-size: 40px;
+    padding: 5px;
+    border-bottom: 1px solid black; /* Adjust the thickness and color as needed */
+    padding-bottom: 5px; /* Adjust the space between the text and the line */
+    width: 95%;
+  }
+
+  .nav-item:last-child{
+
+    border-bottom: none;
+  }
   
-    .nav-link:hover{
-      color: gray;
-    }
-    
-    .navbar-toggler{
-      border: none;
-      color: black;
-    }
-    
-    .navbar-toggler-icon{
-      font-size: 60px;
-    }
-    .nav-btn{
-      font-size: 60px;
-      color: black;
-      position: relative;
-      text-align: right;
-      display:flex ;
-      text-decoration: none;
-    }
+  .nav-link{
+    color: black;
+  }
+
+  .nav-link:hover{
+    color: gray;
+  }
   
-    .navbar-collapse{
-      background: rgb(228, 228, 228);
-    }
-    .top-bg {
-      background-image: url('images/FrontBackground.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 400px;
-      width: 100%;
-      display: none;
-    }
-
-
-    .container-fluid{
-      text-align: center;
-      top: 400px;
-      position: relative;
-    }
+  .navbar-toggler{
+    border: none;
+    color: black;
+  }
   
-    .reset-box{
-      position: relative;
-      left: 5%;
-      background: rgb(255, 255, 255);
-      box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
-      width: 90%;
-      height: auto;
-      border-radius: 30px;
-      color: black;
-      padding-bottom: 20px;
-    }
+  .navbar-toggler-icon{
+    font-size: 60px;
+  }
+  .nav-btn{
+    font-size: 60px;
+    color: black;
+    position: relative;
+    text-align: right;
+    display:flex ;
+    text-decoration: none;
+  }
 
-    .reset-title{
-      padding-top: 10%;
-      font-size: 90px;
-      font-weight: 500;
-      margin-bottom: 3%;
-    }
+  .navbar-collapse{
+    background: rgb(228, 228, 228);
+  }
+  .top-bg {
+    background-image: url('images/FrontBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 100%;
+    display: none;
+  }
 
-    .line{
-      position: relative;
-      background-color: black;
-      width: 90%;
-      height: 1px;
-      left: 5%;
-      margin-bottom: 10%;
-    }
+  .container-fluid{
+    text-align: center;
+    top: 400px;
+    position: relative;
+  }
 
-    .input-box{
-      margin-top: 5%;
-      position: relative;
-      left: 10%;
-      width: 80%;
-      border-radius: 20px;
-      background: rgb(228, 228, 228);
-      font-size: 60px;
-      color: rgb(90, 90, 90);
-    }
+  .reset-box{
+    position: relative;
+    left: 5%;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+    width: 90%;
+    height: auto;
+    border-radius: 30px;
+    color: black;
+    padding-bottom: 20px;
+  }
 
-    .name-input-box{
-      margin-top: 5%;
-      position: relative;
-      border: none;
-      width: 38%;
-      border-radius: 20px;
-      background: rgb(228, 228, 228);
-      font-size: 60px;
-      color: rgb(90, 90, 90);
-      margin-left: 2%;
-      margin-right: 2%;
-    }
+  .reset-title{
+    padding-top: 10%;
+    font-size: 90px;
+    font-weight: 500;
+    margin-bottom: 3%;
+  }
 
-    .date-input-box{
-      margin-top: 5%;
-      position: relative;
-      width: 45%;
-      border-radius: 20px;
-      background: rgb(228, 228, 228);
-      font-size: 58px;
-      color: rgb(90, 90, 90);
-      border: none;
-    }
+  .line{
+    position: relative;
+    background-color: black;
+    width: 90%;
+    height: 1px;
+    left: 5%;
+    margin-bottom: 10%;
+  }
 
-    .time-input-box{
-      border: none;
-      margin-top: 5%;
-      position: relative;
-      margin-left: 5%;
-      width: 30%;
-      border-radius: 20px;
-      background: rgb(228, 228, 228);
-      font-size: 60px;
-      color: rgb(90, 90, 90);
-    }
-
-    .time-box-option{
-      font-size: 20px;
-    }
-
-    .rest-input-box{
-      border: none;
-      margin-top: 5%;
-      position: relative;
-      left: 10%;
-      width: 80%;
-      border-radius: 20px;
-      background: rgb(228, 228, 228);
-      font-size: 60px;
-      color: rgb(90, 90, 90);
-    }
-
-    .rest-box-option{
-      font-size: 20px;
-    }
-
-  .table-radio {
+  .input-box{
     margin-top: 5%;
     position: relative;
     left: 10%;
@@ -190,82 +122,269 @@ body {
     font-size: 60px;
     color: rgb(90, 90, 90);
   }
-  
-  .table-radio label {
-      display: block;
-      margin-bottom: 10px;
-  }
-  
-  .table-radio input[type="radio"] {
-      display: none;
-  }
-  
-  .table-radio input[type="radio"] + label {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-  }
-  
-  .table-radio input[type="radio"]:checked + label {
-      background-color: #007bff;
-      color: #ffffff;
-  }
 
-  .refund-price{
+  .name-input-box{
+    margin-top: 5%;
+    position: relative;
+    border: none;
+    width: 38%;
+    border-radius: 20px;
+    background: rgb(228, 228, 228);
     font-size: 60px;
-    text-align: center;
+    color: rgb(90, 90, 90);
+    margin-left: 2%;
+    margin-right: 2%;
   }
 
-/* order button */
-  .orderbutton{
-    width: 100%; 
-
+  .date-input-box{
+    margin-top: 5%;
+    position: relative;
+    width: 45%;
+    border-radius: 20px;
+    background: rgb(228, 228, 228);
+    font-size: 58px;
+    color: rgb(90, 90, 90);
+    border: none;
   }
-  .order-btn{
-    padding: 100px;
-    width: 100%;
+
+  .time-input-box{
+    border: none;
+    margin-top: 5%;
+    position: relative;
+    margin-left: 5%;
+    width: 30%;
+    border-radius: 20px;
+    background: rgb(228, 228, 228);
     font-size: 60px;
-    background-color: #daab1d;
-    color: white;
+    color: rgb(90, 90, 90);
   }
 
-  .order-btn:hover{
-    background-color:#daab1d ;
+  .time-box-option{
+    font-size: 20px;
   }
 
-
-  .bottom-box{
-    height: 700px;
-    width: 100%;
+  .rest-input-box{
+    border: none;
+    margin-top: 5%;
+    position: relative;
+    left: 10%;
+    width: 80%;
+    border-radius: 20px;
+    background: rgb(228, 228, 228);
+    font-size: 60px;
+    color: rgb(90, 90, 90);
   }
 
-button{
-  border: none;
-  background-color: white;
+  .rest-box-option{
+    font-size: 20px;
+  }
+
+.table-radio {
+  margin-top: 5%;
+  position: relative;
+  left: 10%;
+  width: 80%;
+  border-radius: 20px;
+  background: rgb(228, 228, 228);
+  font-size: 60px;
+  color: rgb(90, 90, 90);
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f8f9fa;
+.table-radio label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.table-radio input[type="radio"] {
+    display: none;
+}
+
+.table-radio input[type="radio"] + label {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.table-radio input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.refund-price{
+  font-size: 60px;
   text-align: center;
 }
 
+/* order button */
+.orderbutton{
+  width: 100%; 
+
+}
+.order-btn{
+  padding: 100px;
+  width: 100%;
+  font-size: 30px;
+  background-color: #daab1d;
+  color: white;
+}
+
+.order-btn:hover{
+  background-color:#daab1d ;
+}
+
+
+.bottom-box{
+  height: 700px;
+  width: 100%;
+}
+
+button{
+border: none;
+background-color: white;
+}
+
+.footer-btn {
+position: fixed;
+bottom: 0;
+width: 100%;
+background-color: #f8f9fa;
+text-align: center;
+}
+
 .order-counter{
-  font-size: 35px;
-  padding: 0px;
-  font-weight: bold;
-  color: rgb(51, 51, 51);
+font-size: 35px;
+padding: 0px;
+font-weight: bold;
+color: rgb(51, 51, 51);
 }
 
 /* media quirries */
 @media only screen and (min-width: 992px) {
-  .nav-item {
-    border-bottom: none;
+.nav-item {
+  border-bottom: none;
+}
+.navbar-collapse{
+  background-color: white;
+}
+}
+
+@media only screen and (min-width: 1660px) {
+  .footer-btn{
+    width: 20%;
+    font-size: 30px;
+    left: 40%;
+    top: 40%;
+    position: relative;
   }
-  .navbar-collapse{
-    background-color: white;
+
+  footer{
+    margin-top: 28%;
   }
+  .reset-box{
+    position: relative;
+    left: 30%;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 6px 2px rgba(0, 0, 0, 0.40);
+    width: 40%;
+    height: auto;
+    border-radius: 30px;
+    color: black;
+    padding-bottom: 20px;
+    margin-top: -220px;
+  }
+
+  .reset-title{
+    padding-top: 10%;
+    font-size: 60px;
+    font-weight: 200;
+    margin-bottom: 3%;
+  }
+
+  .line{
+    position: relative;
+    background-color: black;
+    width: 60%;
+    height: 1px;
+    left: 20%;
+    margin-bottom: 10%;
+  }
+
+  .input-box{
+    margin-top: 5%;
+    position: relative;
+    left: 10%;
+    width: 80%;
+    border-radius: 5px;
+    background: rgb(228, 228, 228);
+    font-size: 30px;
+    color: rgb(90, 90, 90);
+  }
+
+  .name-input-box{
+    margin-top: 5%;
+    position: relative;
+    border: none;
+    width: 38%;
+    border-radius: 5px;
+    background: rgb(228, 228, 228);
+    font-size: 30px;
+    color: rgb(90, 90, 90);
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-left: 10px;
+  }
+
+  .date-input-box{
+    margin-top: 5%;
+    position: relative;
+    width: 45%;
+    border-radius: 5px;
+    background: rgb(228, 228, 228);
+    font-size: 30px;
+    color: rgb(90, 90, 90);
+    border: none;
+    padding-left: 10px;
+  }
+
+  .time-input-box{
+    border: none;
+    margin-top: 5%;
+    position: relative;
+    margin-left: 5%;
+    width: 30%;
+    border-radius: 5px;
+    background: rgb(228, 228, 228);
+    font-size: 30px;
+    color: rgb(90, 90, 90);
+  }
+
+  .time-box-option{
+    font-size: 30px;
+  }
+
+  .rest-input-box{
+    border: none;
+    margin-top: 5%;
+    position: relative;
+    left: 10%;
+    width: 80%;
+    border-radius: 5px;
+    background: rgb(228, 228, 228);
+    font-size: 30px;
+    color: rgb(90, 90, 90);
+  }
+    /* navbar */
+    .navbar{
+      margin-top: 220px;
+    }
+
+    .book-sub{
+      width: 10px;
+    }
+    .reserve-con{
+      padding: -100%;
+    }
+    
+    
 }
