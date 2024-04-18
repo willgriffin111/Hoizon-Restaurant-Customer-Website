@@ -17,7 +17,7 @@ body {
     width: 100%;
   }
 
-
+z
   .navbar-brand{
     font-size: 70px;
     font-weight: bold;
@@ -399,7 +399,7 @@ button{
 @media only screen and (min-width: 1660px) {
 
   .navbar-brand{
-    font-size: 50px;
+    font-size: 70px;
     font-weight: 200;
     color: white
   }
@@ -490,6 +490,10 @@ button{
 
   .catagoryActive{
     margin-top: 10px;
+  }
+
+  .col{
+    width: 240px;
   }
 
   .menu-card img {
@@ -589,7 +593,7 @@ button{
   width: 480px;
   height: 780px;
   top: 235px;
-  left: 0;
+  left: 5%;
   z-index: 15;
   background: white;
   border-radius: 10px;
