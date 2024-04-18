@@ -329,6 +329,25 @@ button{
 
 @media only screen and (min-width: 1660px) {
 
+  .refund-price{
+    font-size: 35px;
+    margin-bottom: 3%;
+  }
+  
+  .refund-title{
+    text-align: center;
+    padding-top: 3%;
+    font-size: 40px;
+    font-weight: 300;
+    margin-bottom: 3%;
+  }
+  
+  .refund-text{
+    padding: 3%;
+    font-size: 35px;
+    margin-bottom: 3%;
+  }
+
   .navbar-brand{
     font-size: 70px;
     font-weight: 200;
@@ -436,7 +455,11 @@ ul{
     position: absolute;
     width: 100%;
     left: 0;
-    margin-top: 200px;
+    margin-top: 200px; 
+}
+
+.confirm-footer{
+  margin-top: 360px;
 }
 
 .footer-col{
@@ -489,6 +512,10 @@ ul{
   border-radius: 30px;
   color: black;
   padding-bottom: 50px;
+}
+
+.confirm-box{
+  margin-bottom: 50px;
 }
 
 
@@ -721,5 +748,7 @@ border-bottom: none;
 background-color: white;
 }
 }
+.book-sub{
+  width: 20%;
 }
-
+}
