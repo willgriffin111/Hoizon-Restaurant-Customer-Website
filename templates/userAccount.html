@@ -7,6 +7,11 @@
         </script>
         <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
         <script>
+          var errorMessage = "{{ error }}";
+          if (errorMessage != "") {
+            alert(errorMessage);
+          }
+
           function deleteCustomer() {
               var result = confirm("Are you sure you want to delete the account?");
               

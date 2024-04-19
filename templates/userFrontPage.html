@@ -317,7 +317,7 @@
 
 
         {% for menuitem in menutable %}
-
+        {% if menuitem[7] == True %}
       
           <div class="collapse menu-content" id="{{menuitem[2]|replace(' ', '_')}}{{menuitem[0]}}">
             <div class="menu-item-content-pop">
@@ -343,7 +343,7 @@
             <div class="outer-background"></div>
           </div>
         
-
+        {% endif %}
         {% endfor %}
     </div>
     

@@ -7,13 +7,9 @@
         </script>
         <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
         <script>
-          function riseCatagory(elementId) {
-            var element = document.getElementById(elementId);
-            if (element.classList.contains('catagoryActive')) {
-                element.classList.remove('catagoryActive');
-            } else {
-                element.classList.add('catagoryActive');
-            }
+          var errorMessage = "{{ error }}";
+          if (errorMessage != "") {
+            alert(errorMessage);
           }
         </script>
         <link rel="stylesheet" href="../static/PoliciesPage.css">

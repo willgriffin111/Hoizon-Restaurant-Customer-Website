@@ -47,6 +47,7 @@ def sessionsVarriables():
 #root for front page
 @app.route('/horizon', methods=['GET', 'POST'])
 def home():
+    error = ""
     print(session['menu_items'])
     print(session['isLoggedIn'])
     session['menuitemslength'] =  len(session['menu_items'])
@@ -80,17 +81,17 @@ def home():
                 conn.close()
                 gc.collect()  
                 print(menulist)                     
-                return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+                return render_template('userFrontPage.html', error=error,menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
             else:                        
-                print('Connection error')
-                return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+                error = "Connection error"
+                return render_template('userFrontPage.html', error=error,menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
         else:                    
-            print('Connection error')
-            return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+            error = "Connection error"
+            return render_template('userFrontPage.html', error=error,menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
                     
     except Exception as e: 
-        print(e)               
-        return render_template('userFrontPage.html',menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+        error = e               
+        return render_template('userFrontPage.html', error=error,menutable=menulist, menuitems=session['menu_items'], menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
     
 
 #root for getting the data when someone add something to order 
@@ -203,7 +204,7 @@ def register():
     else:
         flash(error, 'error')
         print('register fail 1')
-    return render_template("userRegister.html", menuitemslength=session['menuitemslength'], error_message=error, logged_in=session.get('isLoggedIn'))
+    return render_template("userRegister.html", menuitemslength=session['menuitemslength'], error=error, logged_in=session.get('isLoggedIn'))
 
 
 
@@ -235,6 +236,7 @@ def login_required(f):
 @app.route('/orders', methods=['GET', 'POST'])
 @login_required
 def orders():
+    error = ""
     #find length of menu items for cart counter
     session['menuitemslength'] = len(session['menu_items'])
     ordertotal = 0
@@ -359,19 +361,20 @@ def orders():
                             session['menu_items'] = []
                             session['menuitemslength'] = 0
                             #redirects to the confirmed order page
-                            return render_template('userOrderConfirm.html', isLoggedIn=session['isLoggedIn'], menuitemslength=session['menuitemslength'], ordertotal=billUpdatePrice, outOfStockItems=items_out_of_stock)
+                            return render_template('userOrderConfirm.html', error=error, isLoggedIn=session['isLoggedIn'], menuitemslength=session['menuitemslength'], ordertotal=billUpdatePrice, outOfStockItems=items_out_of_stock)
                         
                     except mysql.connector.Error as err:
                         print(f"Error: {err}")
                         print('DB Error')
+                        error = err
 
             except ValueError:
                 # Letting staff know about erroneous value
-                print('Table value selected has no number')
+                error = "Table value selected has no number"
         else:
-            return redirect(url_for('orders'))
-    else:
-        return render_template('userOrder.html',tablenumbers=tablenumbers, ordertotal=ordertotal, menuitems=session['menu_items'],menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+            error = "No items in cart"
+        
+    return render_template('userOrder.html', error=error,tablenumbers=tablenumbers, ordertotal=ordertotal, menuitems=session['menu_items'],menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
 
 #as it says it removes an item that has been slected from the cart
 @app.route('/remove_item', methods=['POST'])
@@ -390,6 +393,7 @@ def remove_item():
 @app.route('/reservations', methods=['GET', 'POST'])
 @login_required
 def reservationspage():
+    error = ""
     restaurantNames = orderfunctions.getRestaurantNames() #gets all the resturants for the reservation to choose from
     
     #generates all times
@@ -415,47 +419,48 @@ def reservationspage():
         
         #checking to make sure were not booking in the past
         combined_datetime = datetime.datetime.combine(datetime.datetime.strptime(date, '%Y-%m-%d').date(), datetime.datetime.strptime(time_str, "%H:%M").time())
-        if combined_datetime >= datetime.datetime.now():
+        if combined_datetime >= datetime.datetime.now(): 
+            if int(numpeople) >= 1:
+                #compileing all the form data so it can be used after table has been selected
+                session['reservationdata'] = {"name": name, "email": Email, "phonenum": Phonenum, "numpeople": numpeople, "date": date, "time": time_str, "restaurant": Restaurantid, "restaurantname": Restaurant[0]}
+                conn = dbfunc.getConnection()           
+                if conn != None:    #Checking if connection is None           
+                    if conn.is_connected(): #Checking if connection is established
+                        print('MySQL Connection is established')                          
+                        dbcursor = conn.cursor()    #Creating cursor object
+                        
+                        #grabbing all booked table ids for that time slot          
+                        dbcursor.execute('SELECT table_id FROM reservation WHERE restaurant_id = %s AND reservation_date = %s AND reservation_time = %s;', (Restaurantid, date, time,))     #Executing
+                        tableids = dbcursor.fetchall()
+                        
+                        #getting all tables that the resturant has so it can be check what tables are free
+                        dbcursor.execute('SELECT table_number, table_capacity, table_id FROM tables WHERE restaurant_id = %s;', (Restaurantid,))
+                        alltables = dbcursor.fetchall()
+                        
+                        # Extract booked table IDs into a set for faster lookup
+                        booked_table_ids = set(table_id for table_id, in tableids)
 
-            #compileing all the form data so it can be used after table has been selected
-            session['reservationdata'] = {"name": name, "email": Email, "phonenum": Phonenum, "numpeople": numpeople, "date": date, "time": time_str, "restaurant": Restaurantid, "restaurantname": Restaurant[0]}
-            conn = dbfunc.getConnection()           
-            if conn != None:    #Checking if connection is None           
-                if conn.is_connected(): #Checking if connection is established
-                    print('MySQL Connection is established')                          
-                    dbcursor = conn.cursor()    #Creating cursor object
-                    
-                    #grabbing all booked table ids for that time slot          
-                    dbcursor.execute('SELECT table_id FROM reservation WHERE restaurant_id = %s AND reservation_date = %s AND reservation_time = %s;', (Restaurantid, date, time,))     #Executing
-                    tableids = dbcursor.fetchall()
-                    
-                    #getting all tables that the resturant has so it can be check what tables are free
-                    dbcursor.execute('SELECT table_number, table_capacity, table_id FROM tables WHERE restaurant_id = %s;', (Restaurantid,))
-                    alltables = dbcursor.fetchall()
-                    
-                    # Extract booked table IDs into a set for faster lookup
-                    booked_table_ids = set(table_id for table_id, in tableids)
+                        # Initialize a list to store available table information
+                        available_tables = []
 
-                    # Initialize a list to store available table information
-                    available_tables = []
+                        # Iterate through all tables to check availability
+                        for table_number, table_capacity, table_id in alltables:
+                            # Check if the table is not already booked and has enough capacity
+                            if table_id not in booked_table_ids and table_capacity >= int(numpeople):
+                                available_tables.append((table_number, table_capacity, table_id))
 
-                    # Iterate through all tables to check availability
-                    for table_number, table_capacity, table_id in alltables:
-                        # Check if the table is not already booked and has enough capacity
-                        if table_id not in booked_table_ids and table_capacity >= int(numpeople):
-                            available_tables.append((table_number, table_capacity, table_id))
-
-                    print("Available Tables:", available_tables)
-                    dbcursor.close()
-                    conn.close()
-                    gc.collect() 
-                    print(session['reservationdata'])
-                    return render_template('userReservationsTables.html', available_tables=available_tables, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+                        print("Available Tables:", available_tables)
+                        dbcursor.close()
+                        conn.close()
+                        gc.collect() 
+                        print(session['reservationdata'])
+                        return render_template('userReservationsTables.html', error=error, available_tables=available_tables, menuitemslength=session['menuitemslength'], isLoggedIn=session['isLoggedIn'])
+            else:
+                error = "Number of people cannot be less than 1"
         else:
-            #need to display an error here saying "the date or time your trying to book has passed"
-            return render_template('userReservations.html', times=times,menuitemslength=session['menuitemslength'], Restaurants=restaurantNames, isLoggedIn=session['isLoggedIn'],)
-    else:
-        return render_template('userReservations.html', times=times,menuitemslength=session['menuitemslength'], Restaurants=restaurantNames, isLoggedIn=session['isLoggedIn'],)
+            error = "the date or time your trying to book has passed"
+    
+    return render_template('userReservations.html', error=error, times=times,menuitemslength=session['menuitemslength'], Restaurants=restaurantNames, isLoggedIn=session['isLoggedIn'],)
 
 #this is just the confirm after the table is chosen and then inserts into reservations
 @app.route('/confirmbooking', methods=['GET', 'POST'])
@@ -479,9 +484,7 @@ def confirmBooking():
                 gc.collect() 
                 print("Reservation created sucsessfully")
                 return render_template('userReservationsConfirm.html', reservationdata=session['reservationdata'], tablenum=table[0], menuitemslength=session['menuitemslength'],isLoggedIn=session['isLoggedIn'])
-    else:
-        return redirect(url_for('home'))
-
+    return redirect(url_for('home'))
 
 
 #idk where this came from it may be oscar but it may also be some acsidentially included code

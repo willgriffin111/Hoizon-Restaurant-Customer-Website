@@ -9,24 +9,10 @@
         <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
         <script src="https://kit.fontawesome.com/c43d240003.js" crossorigin="anonymous"></script>
         <script>
-          function removeItem(itemId) {
-            // Send an AJAX request to Flask to remove the item with the specified ID
-            axios.post('/remove_item', { id: itemId })
-                .then(response => {
-                    console.log('Item removed successfully:', response.data);
-                    // Reload the page after the item is removed
-                    location.reload();
-                })
-                .catch(error => {
-                    console.error('Error removing item:', error);
-                });
-        }
-        var alertMessage = "{{ ordermessage }}";
-
-        // Check if the alert message is not empty
-        if (alertMessage) {
-            // Trigger the alert with the Flask variable value
-        }
+          var errorMessage = "{{ error }}";
+          if (errorMessage != "") {
+            alert(errorMessage);
+          }
         </script>
 
         <style>
